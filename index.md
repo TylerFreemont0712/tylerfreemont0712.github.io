@@ -105,13 +105,11 @@ end
 
 <dl>
 <dt>Name</dt>
-<dd>Godzilla</dd>
+<dd>Tyler Freemont</dd>
 <dt>Born</dt>
-<dd>1952</dd>
+<dd>1992, July 12th</dd>
 <dt>Birthplace</dt>
-<dd>Japan</dd>
-<dt>Color</dt>
-<dd>Green</dd>
+<dd>United States, Oregon</dd>
 </dl>
 
 ```
