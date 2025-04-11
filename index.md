@@ -18,7 +18,7 @@ I'm an infrastructure engineer with a passion for AI technologies, currently bas
 ## Professional Experience
 
 ### Infrastructure Engineer
-**Rakuten Mobile** (via ネイバーズ株式会社) | Osaka, Japan | 2021-Present
+**Rakuten Mobile** (via ネイバーズ株式会社) | Osaka, Japan | 2023-Present
 
 - Manage and optimize critical infrastructure systems for one of Japan's leading telecommunications companies
 - Implement automation solutions using Python to streamline operational workflows
@@ -73,6 +73,5 @@ I'm passionate about the intersection of infrastructure and artificial intellige
 
 I'm always open to discussing new technologies, potential collaborations, or opportunities in the AI and infrastructure space.
 
-- [Email](#) <!-- Add your email -->
-- [LinkedIn](#) <!-- Add your LinkedIn -->
+- [Email](tfreemont0712@gmail.com)
 - [GitHub](https://github.com/tylerfreemont0712)
