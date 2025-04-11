@@ -7,7 +7,7 @@ title: Tyler Freemont - Infrastructure Engineer & AI Enthusiast
 
 ## Infrastructure Engineer & AI Enthusiast
 
-![Profile Photo](assets/profile-photo.jpg) <!-- You'll need to add your photo to an assets folder -->
+![Profile Photo](assets/images/profilepicture.png)
 
 I'm an infrastructure engineer with a passion for AI technologies, currently based in Osaka, Japan. With fluent Japanese language skills (JLPT N1) and a strong technical background, I bridge cultural and technological gaps in international environments.
 
