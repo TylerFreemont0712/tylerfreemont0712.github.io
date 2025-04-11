@@ -1,121 +1,78 @@
 ---
 layout: default
+title: Tyler Freemont - Infrastructure Engineer & AI Enthusiast
 ---
 
-Text can be **bold**, _italic_, ~~strikethrough~~ or `keyword`.
+# Tyler Freemont
 
-[Link to another page](./another-page.html).
+## Infrastructure Engineer & AI Enthusiast
 
-There should be whitespace between paragraphs.
+![Profile Photo](assets/profile-photo.jpg) <!-- You'll need to add your photo to an assets folder -->
 
-There should be whitespace between paragraphs. We recommend including a README, or a file with information about your project.
+I'm an infrastructure engineer with a passion for AI technologies, currently based in Osaka, Japan. With fluent Japanese language skills (JLPT N1) and a strong technical background, I bridge cultural and technological gaps in international environments.
 
-# Header 1
-
-This is a normal paragraph following a header. GitHub is a code hosting platform for version control and collaboration. It lets you and others work together on projects from anywhere.
-
-## Header 2
-
-> This is a blockquote following a header.
->
-> When something is important enough, you do it even if the odds are not in your favor.
-
-### Header 3
-
-```js
-// Javascript code with syntax highlighting.
-var fun = function lang(l) {
-  dateformat.i18n = require('./lang/' + l)
-  return true;
-}
-```
-
-```ruby
-# Ruby code with syntax highlighting
-GitHubPages::Dependencies.gems.each do |gem, version|
-  s.add_dependency(gem, "= #{version}")
-end
-```
-
-#### Header 4
-
-*   This is an unordered list following a header.
-*   This is an unordered list following a header.
-*   This is an unordered list following a header.
-
-##### Header 5
-
-1.  This is an ordered list following a header.
-2.  This is an ordered list following a header.
-3.  This is an ordered list following a header.
-
-###### Header 6
-
-| head1        | head two          | three |
-|:-------------|:------------------|:------|
-| ok           | good swedish fish | nice  |
-| out of stock | good and plenty   | nice  |
-| ok           | good `oreos`      | hmm   |
-| ok           | good `zoute` drop | yumm  |
-
-### There's a horizontal rule below this.
+[View My GitHub](https://github.com/tylerfreemont0712){: .btn} [Contact Me](mailto:your-email@example.com){: .btn}
 
 * * *
 
-### Here is an unordered list:
+## Professional Experience
 
-*   Item foo
-*   Item bar
-*   Item baz
-*   Item zip
+### Infrastructure Engineer
+**Rakuten Mobile** (via ネイバーズ株式会社) | Osaka, Japan | 2021-Present
 
-### And an ordered list:
+- Manage and optimize critical infrastructure systems for one of Japan's leading telecommunications companies
+- Implement automation solutions using Python to streamline operational workflows
+- Collaborate with cross-functional teams in a bilingual Japanese/English environment
+- Troubleshoot complex system issues and implement preventative measures
 
-1.  Item one
-1.  Item two
-1.  Item three
-1.  Item four
+* * *
 
-### And a nested list:
+## Technical Skills
 
-- level 1 item
-  - level 2 item
-  - level 2 item
-    - level 3 item
-    - level 3 item
-- level 1 item
-  - level 2 item
-  - level 2 item
-  - level 2 item
-- level 1 item
-  - level 2 item
-  - level 2 item
-- level 1 item
+- **Languages**: Python (primary), Bash, SQL
+- **Infrastructure**: Cloud platforms, Network configuration, System monitoring
+- **Tools**: Git, Linux/Unix environments
+- **Languages**: Japanese (JLPT N1, Business level), English (Native)
 
-### Small image
+* * *
 
-![Octocat](https://github.githubassets.com/images/icons/emoji/octocat.png)
+## Projects
 
-### Large image
+### Personal Productivity Planner
+A custom Python-based planning application I developed and use daily to optimize my workflow and track projects.
 
-![Branching](https://guides.github.com/activities/hello-world/branching.png)
+- Implemented task prioritization algorithms
+- Created data visualization for productivity metrics
+- Designed intuitive user interface for daily planning
+- [View on GitHub](#) <!-- Add your repo link when available -->
 
+* * *
 
-### Definition lists can be used with HTML syntax.
+## Education
 
-<dl>
-<dt>Name</dt>
-<dd>Tyler Freemont</dd>
-<dt>Born</dt>
-<dd>1992, July 12th</dd>
-<dt>Birthplace</dt>
-<dd>United States, Oregon</dd>
-</dl>
+- **Japanese Language and Literature**  
+  Portland State University
 
-```
-Long, single-line code blocks should not wrap. They should horizontally scroll if they are too long. This line should be long enough to demonstrate this.
-```
+- **JLPT N1 Certification**  
+  Highest level of Japanese Language Proficiency
 
-```
-The final element.
-```
+* * *
+
+## Career Focus
+
+I'm passionate about the intersection of infrastructure and artificial intelligence. My goal is to leverage my technical background and language skills to contribute to innovative AI projects, particularly in:
+
+- Machine learning operations (MLOps)
+- AI infrastructure optimization
+- Cross-cultural technology implementation
+- Intelligent automation systems
+
+* * *
+
+## Let's Connect
+
+I'm always open to discussing new technologies, potential collaborations, or opportunities in the AI and infrastructure space.
+
+- [Email](#) <!-- Add your email -->
+- [LinkedIn](#) <!-- Add your LinkedIn -->
+- [GitHub](https://github.com/tylerfreemont0712)
