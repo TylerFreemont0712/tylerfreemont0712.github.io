@@ -1,0 +1,169 @@
+.download-item {
+  background: var(--bg-tertiary);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 1.25rem;
+  transition: all 0.2s;
+}
+
+.download-item.active {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.1);
+}
+
+.download-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 1rem;
+}
+
+.download-info {
+  display: flex;
+  gap: 1rem;
+  flex: 1;
+}
+
+.status-icon {
+  flex-shrink: 0;
+  margin-top: 0.25rem;
+}
+
+.status-icon.success {
+  color: var(--success);
+}
+
+.status-icon.error {
+  color: var(--error);
+}
+
+.download-details {
+  flex: 1;
+  min-width: 0;
+}
+
+.download-title {
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-bottom: 0.25rem;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.download-uploader {
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+}
+
+.cancel-button {
+  background: transparent;
+  border: 1px solid var(--border);
+  color: var(--text-secondary);
+  border-radius: 6px;
+  padding: 0.5rem;
+  cursor: pointer;
+  transition: all 0.2s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.cancel-button:hover {
+  background: var(--error);
+  border-color: var(--error);
+  color: white;
+}
+
+.download-progress {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.progress-bar {
+  height: 8px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.progress-fill {
+  height: 100%;
+  border-radius: 4px;
+  transition: width 0.3s ease;
+}
+
+.progress-fill.queued {
+  background: var(--text-secondary);
+}
+
+.progress-fill.progress {
+  background: var(--accent);
+}
+
+.progress-fill.success {
+  background: var(--success);
+}
+
+.progress-fill.error {
+  background: var(--error);
+}
+
+.progress-info {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.progress-message {
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+}
+
+.progress-percentage {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.error-details,
+.success-details {
+  margin-top: 0.75rem;
+  padding: 0.75rem;
+  border-radius: 6px;
+  font-size: 0.85rem;
+}
+
+.error-details {
+  background: rgba(239, 68, 68, 0.1);
+  border: 1px solid var(--error);
+  color: var(--error);
+}
+
+.success-details {
+  background: rgba(16, 185, 129, 0.1);
+  border: 1px solid var(--success);
+  color: var(--success);
+}
+
+.error-details p,
+.success-details p {
+  margin: 0;
+  word-break: break-word;
+}
+
+@media (max-width: 768px) {
+  .download-item {
+    padding: 1rem;
+  }
+
+  .download-title {
+    font-size: 0.95rem;
+  }
+
+  .download-info {
+    gap: 0.75rem;
+  }
+}
