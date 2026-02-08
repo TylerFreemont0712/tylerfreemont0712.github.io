@@ -4,35 +4,132 @@
     <meta charset='utf-8'>
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Tyler Freemont - Infrastructure Engineer with 2.5 years of experience. Based in Osaka, Japan. Specializing in cloud infrastructure, automation, and AI.">
+    <meta name="keywords" content="infrastructure engineer, DevOps, Python, automation, cloud, AI, MLOps, Osaka, Japan">
+    <meta name="author" content="Tyler Freemont">
     <link rel="stylesheet" href="{{ '/assets/css/style.css?v=' | append: site.github.build_revision | relative_url }}">
     {% include head-custom.html %}
-
-{% seo %}
+    {% seo %}
   </head>
 
   <body>
-
-    <header>
-      <div class="container">
-        <a id="a-title" href="{{ '/' | relative_url }}">
-          <h1>{{ site.title | default: site.github.repository_name }}</h1>
+    <!-- Navigation -->
+    <nav class="navbar">
+      <div class="nav-container">
+        <a class="nav-brand" href="{{ '/' | relative_url }}">
+          <span class="terminal-prompt">&gt;_</span> Tyler Freemont
         </a>
-        <h2>{{ site.description | default: site.github.project_tagline }}</h2>
+        <button class="nav-toggle" aria-label="Toggle navigation">
+          <span></span><span></span><span></span>
+        </button>
+        <ul class="nav-links">
+          <li><a href="#about">About</a></li>
+          <li><a href="#experience">Experience</a></li>
+          <li><a href="#skills">Skills</a></li>
+          <li><a href="#projects">Projects</a></li>
+          <li><a href="#education">Education</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+      </div>
+    </nav>
 
-        <section id="downloads">
-          {% if site.show_downloads %}
-            <a href="{{ site.github.zip_url }}" class="btn">Download as .zip</a>
-            <a href="{{ site.github.tar_url }}" class="btn">Download as .tar.gz</a>
-          {% endif %}
-          <a href="{{ site.github.repository_url }}" class="btn btn-github"><span class="icon"></span>View on GitHub</a>
-        </section>
+    <!-- Hero Section -->
+    <header class="hero">
+      <div class="container">
+        <div class="hero-content">
+          <div class="hero-text">
+            <div class="typing-line">
+              <span class="terminal-prompt">&gt;</span>
+              <span class="typed-text">Hello, I'm</span>
+            </div>
+            <h1>{{ site.title | default: site.github.repository_name }}</h1>
+            <h2 class="hero-subtitle">{{ site.description | default: site.github.project_tagline }}</h2>
+            <div class="hero-cta">
+              <a href="#projects" class="btn btn-primary"><i class="fa-solid fa-code"></i> View Projects</a>
+              <a href="#contact" class="btn btn-outline"><i class="fa-solid fa-envelope"></i> Contact Me</a>
+              <a href="https://github.com/tylerfreemont0712" class="btn btn-github" target="_blank" rel="noopener"><i class="fa-brands fa-github"></i> GitHub</a>
+            </div>
+          </div>
+          <div class="hero-image">
+            <div class="profile-frame">
+              <img src="{{ '/assets/images/profilepicture.png' | relative_url }}" alt="Tyler Freemont" />
+            </div>
+            <div class="status-badge">
+              <span class="status-dot"></span> Based in Osaka, Japan
+            </div>
+          </div>
+        </div>
       </div>
     </header>
 
-    <div class="container">
+    <!-- Main Content -->
+    <main class="container">
       <section id="main_content">
         {{ content }}
       </section>
-    </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="site-footer">
+      <div class="container">
+        <div class="footer-content">
+          <div class="footer-brand">
+            <span class="terminal-prompt">&gt;_</span> Tyler Freemont
+            <p>Infrastructure Engineer & AI Enthusiast</p>
+          </div>
+          <div class="footer-links">
+            <a href="https://github.com/tylerfreemont0712" target="_blank" rel="noopener"><i class="fa-brands fa-github"></i></a>
+            <a href="mailto:tfreemont0712@gmail.com"><i class="fa-solid fa-envelope"></i></a>
+          </div>
+          <div class="footer-copy">
+            <p>&copy; 2025 Tyler Freemont. Built with Jekyll & GitHub Pages.</p>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+    <script>
+      // Mobile nav toggle
+      document.querySelector('.nav-toggle').addEventListener('click', function() {
+        document.querySelector('.nav-links').classList.toggle('active');
+        this.classList.toggle('active');
+      });
+
+      // Smooth scroll for nav links
+      document.querySelectorAll('a[href^="#"]').forEach(function(anchor) {
+        anchor.addEventListener('click', function(e) {
+          e.preventDefault();
+          var target = document.querySelector(this.getAttribute('href'));
+          if (target) {
+            target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            document.querySelector('.nav-links').classList.remove('active');
+            document.querySelector('.nav-toggle').classList.remove('active');
+          }
+        });
+      });
+
+      // Navbar background on scroll
+      window.addEventListener('scroll', function() {
+        var navbar = document.querySelector('.navbar');
+        if (window.scrollY > 50) {
+          navbar.classList.add('scrolled');
+        } else {
+          navbar.classList.remove('scrolled');
+        }
+      });
+
+      // Animate skill bars on scroll
+      var observer = new IntersectionObserver(function(entries) {
+        entries.forEach(function(entry) {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('animate');
+          }
+        });
+      }, { threshold: 0.1 });
+
+      document.querySelectorAll('.skill-bar-fill, .section-block, .project-card, .timeline-item').forEach(function(el) {
+        observer.observe(el);
+      });
+    </script>
   </body>
 </html>
