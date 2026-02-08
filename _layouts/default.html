@@ -13,122 +13,121 @@
   </head>
 
   <body>
-    <!-- Navigation -->
-    <nav class="navbar">
-      <div class="nav-container">
-        <a class="nav-brand" href="{{ '/' | relative_url }}">
-          <span class="terminal-prompt">&gt;_</span> Tyler Freemont
+    <!-- Scanline overlay -->
+    <div class="scanline-overlay"></div>
+
+    <!-- Grid background -->
+    <div class="grid-bg"></div>
+
+    <!-- Top System Bar -->
+    <nav class="system-bar">
+      <div class="sysbar-left">
+        <span class="sysbar-indicator"></span>
+        <span class="sysbar-host">tyler@osaka</span>
+        <span class="sysbar-sep">:</span>
+        <span class="sysbar-path">~/portfolio</span>
+      </div>
+      <div class="sysbar-center">
+        <a href="{{ '/' | relative_url }}" class="sysbar-tab {% if page.url == '/' %}active{% endif %}">
+          <i class="fa-solid fa-terminal"></i> main
+        </a>
+        <a href="{{ '/projects' | relative_url }}" class="sysbar-tab {% if page.url contains 'projects' %}active{% endif %}">
+          <i class="fa-solid fa-folder-tree"></i> projects
+        </a>
+      </div>
+      <div class="sysbar-right">
+        <span class="sysbar-clock" id="sysClock"></span>
+        <a href="https://github.com/tylerfreemont0712" target="_blank" rel="noopener" class="sysbar-icon" title="GitHub">
+          <i class="fa-brands fa-github"></i>
+        </a>
+        <a href="mailto:tfreemont0712@gmail.com" class="sysbar-icon" title="Email">
+          <i class="fa-solid fa-envelope"></i>
         </a>
         <button class="nav-toggle" aria-label="Toggle navigation">
           <span></span><span></span><span></span>
         </button>
-        <ul class="nav-links">
-          <li><a href="#about">About</a></li>
-          <li><a href="#experience">Experience</a></li>
-          <li><a href="#skills">Skills</a></li>
-          <li><a href="#projects">Projects</a></li>
-          <li><a href="#education">Education</a></li>
-          <li><a href="#contact">Contact</a></li>
-        </ul>
+      </div>
+      <!-- Mobile dropdown -->
+      <div class="mobile-nav">
+        <a href="{{ '/' | relative_url }}"><i class="fa-solid fa-terminal"></i> main</a>
+        <a href="{{ '/projects' | relative_url }}"><i class="fa-solid fa-folder-tree"></i> projects</a>
+        <a href="https://github.com/tylerfreemont0712" target="_blank" rel="noopener"><i class="fa-brands fa-github"></i> github</a>
+        <a href="mailto:tfreemont0712@gmail.com"><i class="fa-solid fa-envelope"></i> email</a>
       </div>
     </nav>
 
-    <!-- Hero Section -->
-    <header class="hero">
-      <div class="container">
-        <div class="hero-content">
-          <div class="hero-text">
-            <div class="typing-line">
-              <span class="terminal-prompt">&gt;</span>
-              <span class="typed-text">Hello, I'm</span>
-            </div>
-            <h1>{{ site.title | default: site.github.repository_name }}</h1>
-            <h2 class="hero-subtitle">{{ site.description | default: site.github.project_tagline }}</h2>
-            <div class="hero-cta">
-              <a href="#projects" class="btn btn-primary"><i class="fa-solid fa-code"></i> View Projects</a>
-              <a href="#contact" class="btn btn-outline"><i class="fa-solid fa-envelope"></i> Contact Me</a>
-              <a href="https://github.com/tylerfreemont0712" class="btn btn-github" target="_blank" rel="noopener"><i class="fa-brands fa-github"></i> GitHub</a>
-            </div>
-          </div>
-          <div class="hero-image">
-            <div class="profile-frame">
-              <img src="{{ '/assets/images/profilepicture.png' | relative_url }}" alt="Tyler Freemont" />
-            </div>
-            <div class="status-badge">
-              <span class="status-dot"></span> Based in Osaka, Japan
-            </div>
-          </div>
-        </div>
-      </div>
-    </header>
-
-    <!-- Main Content -->
-    <main class="container">
-      <section id="main_content">
-        {{ content }}
-      </section>
+    <!-- Main Content Area -->
+    <main class="dashboard">
+      {{ content }}
     </main>
 
-    <!-- Footer -->
-    <footer class="site-footer">
-      <div class="container">
-        <div class="footer-content">
-          <div class="footer-brand">
-            <span class="terminal-prompt">&gt;_</span> Tyler Freemont
-            <p>Infrastructure Engineer & AI Enthusiast</p>
-          </div>
-          <div class="footer-links">
-            <a href="https://github.com/tylerfreemont0712" target="_blank" rel="noopener"><i class="fa-brands fa-github"></i></a>
-            <a href="mailto:tfreemont0712@gmail.com"><i class="fa-solid fa-envelope"></i></a>
-          </div>
-          <div class="footer-copy">
-            <p>&copy; 2025 Tyler Freemont. Built with Jekyll & GitHub Pages.</p>
-          </div>
-        </div>
+    <!-- Bottom Status Bar -->
+    <footer class="status-bar">
+      <div class="statusbar-left">
+        <span class="status-led"></span>
+        <span>SYSTEMS NOMINAL</span>
+      </div>
+      <div class="statusbar-center">
+        <span>&copy; 2025 Tyler Freemont</span>
+        <span class="statusbar-sep">&bull;</span>
+        <span>Built with Jekyll & GitHub Pages</span>
+      </div>
+      <div class="statusbar-right">
+        <span>Osaka, JP</span>
+        <span class="statusbar-sep">&bull;</span>
+        <span>34.69&deg;N 135.50&deg;E</span>
       </div>
     </footer>
 
     <script>
+      // System clock
+      function updateClock() {
+        var now = new Date();
+        var h = String(now.getHours()).padStart(2, '0');
+        var m = String(now.getMinutes()).padStart(2, '0');
+        var s = String(now.getSeconds()).padStart(2, '0');
+        var el = document.getElementById('sysClock');
+        if (el) el.textContent = h + ':' + m + ':' + s;
+      }
+      updateClock();
+      setInterval(updateClock, 1000);
+
       // Mobile nav toggle
       document.querySelector('.nav-toggle').addEventListener('click', function() {
-        document.querySelector('.nav-links').classList.toggle('active');
+        document.querySelector('.mobile-nav').classList.toggle('active');
         this.classList.toggle('active');
       });
 
-      // Smooth scroll for nav links
-      document.querySelectorAll('a[href^="#"]').forEach(function(anchor) {
-        anchor.addEventListener('click', function(e) {
-          e.preventDefault();
-          var target = document.querySelector(this.getAttribute('href'));
-          if (target) {
-            target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-            document.querySelector('.nav-links').classList.remove('active');
-            document.querySelector('.nav-toggle').classList.remove('active');
-          }
-        });
-      });
-
-      // Navbar background on scroll
-      window.addEventListener('scroll', function() {
-        var navbar = document.querySelector('.navbar');
-        if (window.scrollY > 50) {
-          navbar.classList.add('scrolled');
-        } else {
-          navbar.classList.remove('scrolled');
-        }
-      });
-
-      // Animate skill bars on scroll
+      // Animate elements on scroll
       var observer = new IntersectionObserver(function(entries) {
         entries.forEach(function(entry) {
           if (entry.isIntersecting) {
-            entry.target.classList.add('animate');
+            entry.target.classList.add('visible');
           }
         });
-      }, { threshold: 0.1 });
+      }, { threshold: 0.08 });
 
-      document.querySelectorAll('.skill-bar-fill, .section-block, .project-card, .timeline-item').forEach(function(el) {
+      document.querySelectorAll('.pane, .gauge-fill, .timeline-entry, .proj-card').forEach(function(el) {
         observer.observe(el);
+      });
+
+      // Typing effect for terminal lines
+      document.querySelectorAll('.term-typed').forEach(function(el) {
+        var text = el.getAttribute('data-text');
+        if (!text) return;
+        el.textContent = '';
+        var i = 0;
+        var obs = new IntersectionObserver(function(entries) {
+          if (entries[0].isIntersecting) {
+            obs.disconnect();
+            var interval = setInterval(function() {
+              el.textContent += text[i];
+              i++;
+              if (i >= text.length) clearInterval(interval);
+            }, 30);
+          }
+        }, { threshold: 0.5 });
+        obs.observe(el);
       });
     </script>
   </body>
