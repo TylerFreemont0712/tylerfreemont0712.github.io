@@ -1,6 +1,6 @@
 ---
 layout: default
-title: Tyler Freemont - Infrastructure Engineer & AI Enthusiast
+title: Tyler Freemont - Software Engineer | Full-Stack Developer
 ---
 
 <!-- ═══════════ HERO ═══════════ -->
@@ -14,9 +14,9 @@ title: Tyler Freemont - Infrastructure Engineer & AI Enthusiast
       <div class="hero-terminal">
         <div class="term-line"><span class="term-prompt"></span><span class="term-cmd">whoami</span></div>
         <h1 class="hero-name">Tyler Freemont</h1>
-        <div class="hero-title">Infrastructure Engineer</div>
+        <div class="hero-title">Software Engineer</div>
         <div class="hero-summary">
-          <strong>2.5 years</strong> building and operating production infrastructure at <strong>Rakuten Mobile</strong> in Osaka, Japan. I keep critical telecom systems running, automate everything I can with <strong>Python</strong>, and bridge Japanese/English engineering teams with <strong>JLPT N1</strong> fluency. Currently exploring the intersection of <strong>AI and infrastructure</strong>.
+          Software engineer based in <strong>Osaka, Japan</strong> with a background in infrastructure automation and a drive toward <strong>full-stack and backend development</strong>. I build tools with <strong>Python</strong>, work with <strong>cloud platforms</strong>, and am expanding into <strong>C++</strong>, <strong>Rust</strong>, and <strong>IoT systems</strong>. Bilingual (<strong>JLPT N1</strong>) engineer bridging Japanese and English teams. Currently pursuing <strong>AWS Solutions Architect</strong> certification and freelancing as a QA specialist for <strong>LLM coding models</strong>.
         </div>
         <div class="hero-actions">
           <a href="./projects" class="btn btn-cyan"><i class="fa-solid fa-folder-tree"></i> View Projects</a>
@@ -49,24 +49,24 @@ title: Tyler Freemont - Infrastructure Engineer & AI Enthusiast
     </div>
     <div class="grid-2">
       <div class="stat-card">
-        <div class="stat-icon"><i class="fa-solid fa-server"></i></div>
-        <h4>Infrastructure & Operations</h4>
-        <p>2.5 years managing production infrastructure for Japan's 4th largest mobile carrier. High availability, incident response, and 24/7 operations at telecom scale.</p>
+        <div class="stat-icon"><i class="fa-solid fa-code"></i></div>
+        <h4>Software Development</h4>
+        <p>Building production tools and automation with Python. Transitioning into full-stack and backend development with hands-on experience in JavaScript, TypeScript, and growing proficiency in C++ and Rust.</p>
       </div>
       <div class="stat-card">
-        <div class="stat-icon"><i class="fa-solid fa-robot"></i></div>
-        <h4>Automation & AI</h4>
-        <p>Building Python automation to eliminate toil and exploring AI/ML operations. Passionate about intelligent systems that make infrastructure self-healing.</p>
+        <div class="stat-icon"><i class="fa-solid fa-microchip"></i></div>
+        <h4>IoT & Systems Programming</h4>
+        <p>Moving into embedded and IoT development with C++ and Rust. Combining infrastructure knowledge with low-level systems programming for connected devices and edge computing.</p>
       </div>
       <div class="stat-card">
         <div class="stat-icon"><i class="fa-solid fa-language"></i></div>
         <h4>Bilingual Engineering</h4>
-        <p>JLPT N1 certified (highest level) with native English. Daily bilingual operations translating complex technical requirements across Japanese and English teams.</p>
+        <p>JLPT N1 certified (highest level) with native English. Fluent in translating complex technical requirements across Japanese and English engineering teams in professional environments.</p>
       </div>
       <div class="stat-card">
-        <div class="stat-icon"><i class="fa-solid fa-shield-halved"></i></div>
-        <h4>Reliability Focus</h4>
-        <p>On-call rotations, incident management, root cause analysis. Building runbooks, monitoring, and preventive measures that keep systems up.</p>
+        <div class="stat-icon"><i class="fa-solid fa-brain"></i></div>
+        <h4>AI & LLM Quality Assurance</h4>
+        <p>Freelance QA for LLM coding and language models at Alignerr and Outlier. Evaluating AI-generated code for correctness, security, and best practices across multiple programming languages.</p>
       </div>
     </div>
   </div>
@@ -89,29 +89,112 @@ title: Tyler Freemont - Infrastructure Engineer & AI Enthusiast
         <span class="tl-date">Oct 2023 &mdash; Present</span>
       </div>
       <div class="tl-company">
-        Rakuten Mobile (via ネイバーズ株式会社) <span class="tl-loc">&bull; Osaka, Japan</span>
+        DAIKIN <span class="tl-loc">&bull; Osaka, Japan</span>
       </div>
       <ul class="tl-list">
-        <li>Manage and optimize critical production infrastructure serving millions of subscribers across Japan's telecom network</li>
-        <li>Design and deploy Python automation that streamlines operational workflows, cutting manual intervention and improving incident response time</li>
-        <li>Monitor distributed systems health and performance metrics, proactively resolving issues before customer impact</li>
-        <li>Collaborate across cross-functional teams in a bilingual Japanese/English environment, translating requirements across language and cultural barriers</li>
-        <li>Perform root cause analysis on complex multi-layer failures spanning network, server, and application stacks</li>
-        <li>Maintain and improve runbooks, SOPs, and infrastructure documentation for 24/7 operations teams</li>
-        <li>Coordinate incident response across multiple teams during on-call rotations</li>
-        <li>Evaluate and integrate new tooling to improve reliability and operational efficiency</li>
+        <li>Design and develop Python-based automation tools that streamline internal workflows, reducing manual processes and accelerating task completion across teams</li>
+        <li>Build CLI utilities and scripts to expedite repetitive infrastructure operations, focusing on clean code architecture and maintainability</li>
+        <li>Develop internal web-based dashboards and tooling interfaces to improve team productivity and data visibility</li>
+        <li>Write and maintain SQL queries and database scripts for operational reporting and data pipeline automation</li>
+        <li>Collaborate across engineering teams in a bilingual Japanese/English environment, translating complex technical requirements</li>
+        <li>Implement monitoring and alerting solutions, applying software engineering best practices to infrastructure challenges</li>
+        <li>Manage Linux-based server environments and automate deployment workflows using Bash and Python</li>
       </ul>
       <div class="tl-tags">
         <span class="tag">Python</span>
+        <span class="tag">JavaScript</span>
         <span class="tag">Linux</span>
         <span class="tag">Bash</span>
-        <span class="tag">Cloud Infrastructure</span>
-        <span class="tag">Network Ops</span>
-        <span class="tag">Monitoring</span>
-        <span class="tag">Incident Mgmt</span>
-        <span class="tag">Automation</span>
         <span class="tag">SQL</span>
         <span class="tag">Git</span>
+        <span class="tag">Docker</span>
+        <span class="tag">REST APIs</span>
+        <span class="tag">Automation</span>
+        <span class="tag">CI/CD</span>
+      </div>
+    </div>
+    <div class="timeline-entry">
+      <div class="tl-header">
+        <span class="tl-role">LLM QA Specialist (Freelance)</span>
+        <span class="tl-date">2024 &mdash; Present</span>
+      </div>
+      <div class="tl-company">
+        Alignerr &amp; Outlier <span class="tl-loc">&bull; Remote</span>
+      </div>
+      <ul class="tl-list">
+        <li>Evaluate and review AI-generated code across multiple programming languages including Python, JavaScript, C++, and Rust for correctness, efficiency, and adherence to best practices</li>
+        <li>Perform quality assurance on LLM coding model outputs, identifying bugs, security vulnerabilities, and logic errors in generated solutions</li>
+        <li>Assess LLM language model responses for accuracy, fluency, and contextual appropriateness in both English and Japanese</li>
+        <li>Provide structured feedback and annotations to improve model training data quality and downstream code generation performance</li>
+        <li>Develop deep familiarity with code patterns, anti-patterns, and edge cases across diverse programming paradigms</li>
+      </ul>
+      <div class="tl-tags">
+        <span class="tag">Python</span>
+        <span class="tag">JavaScript</span>
+        <span class="tag">C++</span>
+        <span class="tag">Rust</span>
+        <span class="tag">Code Review</span>
+        <span class="tag">LLM/AI</span>
+        <span class="tag">QA</span>
+        <span class="tag">NLP</span>
+      </div>
+    </div>
+    <div class="timeline-entry">
+      <div class="tl-header">
+        <span class="tl-role">High School English Teacher</span>
+        <span class="tl-date">Apr 2021 &mdash; Apr 2023</span>
+      </div>
+      <div class="tl-company">
+        Clark International High School <span class="tl-loc">&bull; Japan</span>
+      </div>
+      <ul class="tl-list">
+        <li>Designed and delivered English curriculum to high school students, developing strong presentation, planning, and communication skills transferable to technical team leadership</li>
+        <li>Created structured lesson plans and educational materials, building the same organizational and documentation skills applied in software development workflows</li>
+        <li>Managed classrooms of 30+ students, honing the ability to break down complex concepts into clear, digestible explanations&mdash;a core skill for technical documentation and code reviews</li>
+        <li>Collaborated with Japanese teaching staff to coordinate cross-departmental curriculum planning</li>
+      </ul>
+      <div class="tl-tags">
+        <span class="tag">Curriculum Design</span>
+        <span class="tag">Communication</span>
+        <span class="tag">Team Collaboration</span>
+        <span class="tag">Japanese</span>
+        <span class="tag">English</span>
+      </div>
+    </div>
+    <div class="timeline-entry">
+      <div class="tl-header">
+        <span class="tl-role">English Language Instructor</span>
+        <span class="tl-date">Apr 2020 &mdash; Apr 2021</span>
+      </div>
+      <div class="tl-company">
+        Borderlink <span class="tl-loc">&bull; Japan</span>
+      </div>
+      <ul class="tl-list">
+        <li>Taught English to students across multiple schools as an ALT (Assistant Language Teacher), adapting teaching methods to diverse learning environments</li>
+        <li>Developed bilingual communication skills in professional Japanese settings, building the foundation for working in Japan's tech industry</li>
+      </ul>
+      <div class="tl-tags">
+        <span class="tag">Teaching</span>
+        <span class="tag">Bilingual Communication</span>
+        <span class="tag">Adaptability</span>
+      </div>
+    </div>
+    <div class="timeline-entry">
+      <div class="tl-header">
+        <span class="tl-role">English Conversation Instructor</span>
+        <span class="tl-date">Apr 2019 &mdash; Apr 2020</span>
+      </div>
+      <div class="tl-company">
+        Nova <span class="tl-loc">&bull; Japan</span>
+      </div>
+      <ul class="tl-list">
+        <li>Conducted English conversation lessons for students of all levels, developing strong interpersonal and cross-cultural communication skills</li>
+        <li>Gained foundational professional experience in Japan, building Japanese language proficiency in real-world business contexts</li>
+      </ul>
+      <div class="tl-tags">
+        <span class="tag">Teaching</span>
+        <span class="tag">Japanese Language</span>
+        <span class="tag">Client-Facing</span>
       </div>
     </div>
   </div>
@@ -136,6 +219,10 @@ title: Tyler Freemont - Infrastructure Engineer & AI Enthusiast
           <div class="gauge-track"><div class="gauge-fill" style="width:90%"></div></div>
         </div>
         <div class="gauge">
+          <div class="gauge-header"><span class="gauge-name">JavaScript / TypeScript</span><span class="gauge-val">Intermediate</span></div>
+          <div class="gauge-track"><div class="gauge-fill" style="width:60%"></div></div>
+        </div>
+        <div class="gauge">
           <div class="gauge-header"><span class="gauge-name">Bash / Shell</span><span class="gauge-val">Advanced</span></div>
           <div class="gauge-track"><div class="gauge-fill" style="width:80%"></div></div>
         </div>
@@ -144,27 +231,54 @@ title: Tyler Freemont - Infrastructure Engineer & AI Enthusiast
           <div class="gauge-track"><div class="gauge-fill" style="width:65%"></div></div>
         </div>
         <div class="gauge">
-          <div class="gauge-header"><span class="gauge-name">JavaScript</span><span class="gauge-val">Working</span></div>
-          <div class="gauge-track"><div class="gauge-fill" style="width:50%"></div></div>
+          <div class="gauge-header"><span class="gauge-name">C++</span><span class="gauge-val">Learning</span></div>
+          <div class="gauge-track"><div class="gauge-fill" style="width:35%"></div></div>
+        </div>
+        <div class="gauge">
+          <div class="gauge-header"><span class="gauge-name">Rust</span><span class="gauge-val">Learning</span></div>
+          <div class="gauge-track"><div class="gauge-fill" style="width:30%"></div></div>
+        </div>
+        <div class="gauge">
+          <div class="gauge-header"><span class="gauge-name">HTML / CSS</span><span class="gauge-val">Intermediate</span></div>
+          <div class="gauge-track"><div class="gauge-fill" style="width:60%"></div></div>
         </div>
       </div>
       <div class="gauge-group">
-        <h4><i class="fa-solid fa-cloud"></i> Infrastructure</h4>
+        <h4><i class="fa-solid fa-layer-group"></i> Frameworks & Libraries</h4>
+        <div class="gauge">
+          <div class="gauge-header"><span class="gauge-name">Flask / Django</span><span class="gauge-val">Intermediate</span></div>
+          <div class="gauge-track"><div class="gauge-fill" style="width:60%"></div></div>
+        </div>
+        <div class="gauge">
+          <div class="gauge-header"><span class="gauge-name">React</span><span class="gauge-val">Learning</span></div>
+          <div class="gauge-track"><div class="gauge-fill" style="width:35%"></div></div>
+        </div>
+        <div class="gauge">
+          <div class="gauge-header"><span class="gauge-name">Node.js / Express</span><span class="gauge-val">Learning</span></div>
+          <div class="gauge-track"><div class="gauge-fill" style="width:35%"></div></div>
+        </div>
+        <div class="gauge">
+          <div class="gauge-header"><span class="gauge-name">REST APIs</span><span class="gauge-val">Intermediate</span></div>
+          <div class="gauge-track"><div class="gauge-fill" style="width:65%"></div></div>
+        </div>
+      </div>
+      <div class="gauge-group">
+        <h4><i class="fa-solid fa-cloud"></i> Infrastructure & DevOps</h4>
         <div class="gauge">
           <div class="gauge-header"><span class="gauge-name">Linux / Unix</span><span class="gauge-val">Advanced</span></div>
           <div class="gauge-track"><div class="gauge-fill" style="width:88%"></div></div>
         </div>
         <div class="gauge">
-          <div class="gauge-header"><span class="gauge-name">System Monitoring</span><span class="gauge-val">Advanced</span></div>
-          <div class="gauge-track"><div class="gauge-fill" style="width:82%"></div></div>
-        </div>
-        <div class="gauge">
-          <div class="gauge-header"><span class="gauge-name">Network Config</span><span class="gauge-val">Advanced</span></div>
-          <div class="gauge-track"><div class="gauge-fill" style="width:75%"></div></div>
-        </div>
-        <div class="gauge">
-          <div class="gauge-header"><span class="gauge-name">Cloud Platforms</span><span class="gauge-val">Intermediate</span></div>
+          <div class="gauge-header"><span class="gauge-name">Docker</span><span class="gauge-val">Intermediate</span></div>
           <div class="gauge-track"><div class="gauge-fill" style="width:65%"></div></div>
+        </div>
+        <div class="gauge">
+          <div class="gauge-header"><span class="gauge-name">AWS</span><span class="gauge-val">SAA (In Progress)</span></div>
+          <div class="gauge-track"><div class="gauge-fill" style="width:55%"></div></div>
+        </div>
+        <div class="gauge">
+          <div class="gauge-header"><span class="gauge-name">CI/CD Pipelines</span><span class="gauge-val">Intermediate</span></div>
+          <div class="gauge-track"><div class="gauge-fill" style="width:60%"></div></div>
         </div>
       </div>
       <div class="gauge-group">
@@ -172,14 +286,20 @@ title: Tyler Freemont - Infrastructure Engineer & AI Enthusiast
         <div class="tool-cloud">
           <span class="tool-tag">Git / GitHub</span>
           <span class="tool-tag">Docker</span>
-          <span class="tool-tag">CI/CD</span>
-          <span class="tool-tag">Vim / VS Code</span>
+          <span class="tool-tag">VS Code</span>
+          <span class="tool-tag">Vim</span>
+          <span class="tool-tag">PostgreSQL</span>
+          <span class="tool-tag">MySQL</span>
+          <span class="tool-tag">MongoDB</span>
+          <span class="tool-tag">Redis</span>
           <span class="tool-tag">Jira</span>
           <span class="tool-tag">Confluence</span>
+          <span class="tool-tag">Postman</span>
           <span class="tool-tag">SSH</span>
-          <span class="tool-tag">Log Analysis</span>
-          <span class="tool-tag">Perf Tuning</span>
-          <span class="tool-tag">Incident Response</span>
+          <span class="tool-tag">Webpack</span>
+          <span class="tool-tag">npm / yarn</span>
+          <span class="tool-tag">Pytest</span>
+          <span class="tool-tag">Jest</span>
         </div>
       </div>
       <div class="gauge-group">
@@ -263,7 +383,7 @@ title: Tyler Freemont - Infrastructure Engineer & AI Enthusiast
       <div class="sec-prompt"><span class="pr">$</span> <span class="cmd">cat</span> /etc/education.conf</div>
       <h2 class="sec-title">Education & Certifications</h2>
     </div>
-    <div class="grid-2">
+    <div class="grid-3">
       <div class="edu-card">
         <div class="edu-icon"><i class="fa-solid fa-graduation-cap"></i></div>
         <h4>Japanese Language & Literature</h4>
@@ -275,6 +395,12 @@ title: Tyler Freemont - Infrastructure Engineer & AI Enthusiast
         <h4>JLPT N1 Certification</h4>
         <div class="edu-school">Japanese Language Proficiency Test</div>
         <div class="edu-detail">Highest level of the globally recognized JLPT. Certifies ability to operate in business, technical, and academic Japanese across all domains.</div>
+      </div>
+      <div class="edu-card">
+        <div class="edu-icon"><i class="fa-brands fa-aws"></i></div>
+        <h4>AWS Solutions Architect &mdash; Associate</h4>
+        <div class="edu-school">Amazon Web Services &bull; Expected Feb 2026</div>
+        <div class="edu-detail">Currently studying for the SAA-C03 certification. Covers cloud architecture, compute, storage, networking, databases, and security best practices on AWS.</div>
       </div>
     </div>
   </div>
@@ -293,20 +419,20 @@ title: Tyler Freemont - Infrastructure Engineer & AI Enthusiast
     </div>
     <div class="grid-4">
       <div class="focus-tile">
-        <i class="fa-solid fa-brain"></i>
-        <h4>MLOps & AI Infra</h4>
+        <i class="fa-solid fa-laptop-code"></i>
+        <h4>Full-Stack Development</h4>
       </div>
       <div class="focus-tile">
-        <i class="fa-solid fa-gears"></i>
-        <h4>Intelligent Automation</h4>
+        <i class="fa-solid fa-server"></i>
+        <h4>Backend & APIs</h4>
       </div>
       <div class="focus-tile">
-        <i class="fa-solid fa-earth-asia"></i>
-        <h4>Cross-Cultural Tech</h4>
+        <i class="fa-solid fa-microchip"></i>
+        <h4>IoT & Embedded (C++ / Rust)</h4>
       </div>
       <div class="focus-tile">
-        <i class="fa-solid fa-chart-line"></i>
-        <h4>Scalable Systems</h4>
+        <i class="fa-brands fa-aws"></i>
+        <h4>Cloud Architecture</h4>
       </div>
     </div>
   </div>
@@ -325,7 +451,7 @@ title: Tyler Freemont - Infrastructure Engineer & AI Enthusiast
         <h2 class="sec-title">Let's Connect</h2>
       </div>
       <p class="contact-text">
-        Open to new opportunities, collaborations, and conversations about infrastructure, AI, and cross-cultural technology work.
+        Open to new opportunities in full-stack development, backend engineering, and IoT. Always interested in collaborations and conversations about software, open source, and building things that matter.
       </p>
       <div class="contact-row">
         <a href="mailto:tfreemont0712@gmail.com" class="contact-btn">
