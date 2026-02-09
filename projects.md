@@ -15,7 +15,7 @@ permalink: /projects
       <div class="sec-prompt"><span class="pr">$</span> <span class="cmd">find</span> ~/projects -type d -maxdepth 1 | <span class="cmd">sort</span></div>
       <h2 class="sec-title">All Projects</h2>
       <p style="color:#8899aa; margin-top:8px; font-size:14px;">
-        7 repositories &mdash; 4 original builds, 2 open source contributions, 1 portfolio site.
+        6 repositories &mdash; 3 original builds, 2 open source contributions, 1 portfolio site.
         <a href="./" style="margin-left:12px; font-size:12px;"><i class="fa-solid fa-arrow-left"></i> Back to Main</a>
       </p>
     </div>
@@ -34,31 +34,30 @@ permalink: /projects
       <h2 class="sec-title">Original Projects</h2>
     </div>
 
-    <!-- StandaloneYTDL -->
+    <!-- PersonalDashboard -->
     <div class="proj-detail-card">
       <div class="proj-detail-bar">
         <div class="proj-detail-title">
-          <i class="fa-solid fa-folder-open"></i> StandaloneYTDL
+          <i class="fa-solid fa-gauge-high"></i> PersonalDashboard
         </div>
         <div class="proj-detail-links">
-          <a href="https://github.com/TylerFreemont0712/StandaloneYTDL" target="_blank" rel="noopener"><i class="fa-brands fa-github"></i> View Source</a>
+          <a href="https://github.com/TylerFreemont0712/PersonalDashboard" target="_blank" rel="noopener"><i class="fa-brands fa-github"></i> View Source</a>
         </div>
       </div>
       <div class="proj-detail-body">
         <div class="proj-detail-desc">
-          <p>A standalone, self-contained Python application for downloading YouTube content. Built with a focus on reliability and a clean user interface.</p>
+          <p>A Python-based personal dashboard application for organizing and managing daily life. Built to streamline everyday tasks and surface useful information at a glance.</p>
           <h4>Key Features</h4>
           <ul>
-            <li>Standalone executable &mdash; no external dependencies required at runtime</li>
-            <li>Clean download pipeline with error handling and retry logic</li>
-            <li>User-friendly interface for selecting format and quality</li>
-            <li>Built entirely in Python with modern packaging practices</li>
+            <li>Centralized dashboard for daily task and information management</li>
+            <li>Clean Python architecture with a focus on usability</li>
+            <li>Modular design for adding new data sources and widgets</li>
           </ul>
           <h4>What I Learned</h4>
           <ul>
-            <li>Python packaging and distribution (building standalone apps)</li>
-            <li>Working with external APIs and media stream protocols</li>
-            <li>Error handling patterns for unreliable network operations</li>
+            <li>Designing user-facing applications with Python</li>
+            <li>Data aggregation and presentation patterns</li>
+            <li>Building maintainable, modular application architecture</li>
           </ul>
         </div>
         <div class="proj-detail-meta">
@@ -72,7 +71,7 @@ permalink: /projects
     <div class="proj-detail-card">
       <div class="proj-detail-bar">
         <div class="proj-detail-title">
-          <i class="fa-solid fa-globe"></i> YTDownload
+          <i class="fa-solid fa-download"></i> YTDownload
         </div>
         <div class="proj-detail-links">
           <a href="https://github.com/TylerFreemont0712/YTDownload" target="_blank" rel="noopener"><i class="fa-brands fa-github"></i> View Source</a>
@@ -80,22 +79,22 @@ permalink: /projects
       </div>
       <div class="proj-detail-body">
         <div class="proj-detail-desc">
-          <p>A web-based YouTube download interface built with JavaScript. Takes the same problem as StandaloneYTDL but approaches it from a full-stack web perspective.</p>
+          <p>A Python application for downloading YouTube content. Focused on providing a reliable and straightforward media download experience.</p>
           <h4>Key Features</h4>
           <ul>
-            <li>Browser-based UI for media downloading</li>
-            <li>JavaScript frontend with backend download logic</li>
-            <li>Demonstrates full-stack development approach</li>
+            <li>YouTube media downloading for music and video</li>
+            <li>Clean download pipeline with error handling</li>
+            <li>User-friendly interface for format and quality selection</li>
           </ul>
           <h4>What I Learned</h4>
           <ul>
-            <li>JavaScript fundamentals and web API integration</li>
-            <li>Frontend/backend separation of concerns</li>
-            <li>Comparing different tech stacks for the same problem domain</li>
+            <li>Working with external APIs and media stream protocols</li>
+            <li>Error handling patterns for network operations</li>
+            <li>Python packaging and distribution practices</li>
           </ul>
         </div>
         <div class="proj-detail-meta">
-          <span class="meta-chip lang"><span class="lang-dot javascript"></span> JavaScript</span>
+          <span class="meta-chip lang"><span class="lang-dot python"></span> Python</span>
           <span class="meta-chip type-original">Original</span>
         </div>
       </div>
@@ -126,38 +125,6 @@ permalink: /projects
             <li>Event-driven programming and game loop design</li>
             <li>Managing mutable state in a real-time application</li>
             <li>Python GUI libraries and rendering</li>
-          </ul>
-        </div>
-        <div class="proj-detail-meta">
-          <span class="meta-chip lang"><span class="lang-dot python"></span> Python</span>
-          <span class="meta-chip type-original">Original</span>
-        </div>
-      </div>
-    </div>
-
-    <!-- Downloader -->
-    <div class="proj-detail-card">
-      <div class="proj-detail-bar">
-        <div class="proj-detail-title">
-          <i class="fa-solid fa-download"></i> Downloader
-        </div>
-        <div class="proj-detail-links">
-          <a href="https://github.com/TylerFreemont0712/Downloader" target="_blank" rel="noopener"><i class="fa-brands fa-github"></i> View Source</a>
-        </div>
-      </div>
-      <div class="proj-detail-body">
-        <div class="proj-detail-desc">
-          <p>A general-purpose YouTube download program for music and media. This was my first iteration solving the media download problem, before evolving into StandaloneYTDL and YTDownload.</p>
-          <h4>Key Features</h4>
-          <ul>
-            <li>YouTube media downloading for music and video</li>
-            <li>Command-line interface</li>
-            <li>Foundation that evolved into more polished tools</li>
-          </ul>
-          <h4>Evolution</h4>
-          <ul>
-            <li>This project shows iterative development &mdash; the same problem solved with increasing sophistication across Downloader &rarr; StandaloneYTDL &rarr; YTDownload</li>
-            <li>Each version improved architecture, UX, and reliability</li>
           </ul>
         </div>
         <div class="proj-detail-meta">
