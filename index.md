@@ -331,11 +331,11 @@ title: Tyler Freemont - Software Engineer | Full-Stack Developer
     <div class="grid-3">
       <div class="proj-card">
         <div class="proj-top">
-          <i class="fa-solid fa-folder-open proj-icon"></i>
-          <a href="https://github.com/TylerFreemont0712/StandaloneYTDL" target="_blank" rel="noopener" class="proj-ghlink"><i class="fa-brands fa-github"></i></a>
+          <i class="fa-solid fa-gauge-high proj-icon"></i>
+          <a href="https://github.com/TylerFreemont0712/PersonalDashboard" target="_blank" rel="noopener" class="proj-ghlink"><i class="fa-brands fa-github"></i></a>
         </div>
-        <h3 class="proj-name"><a href="https://github.com/TylerFreemont0712/StandaloneYTDL" target="_blank" rel="noopener">StandaloneYTDL</a></h3>
-        <p class="proj-desc">Self-contained Python YouTube downloader with clean interface and reliable download pipeline.</p>
+        <h3 class="proj-name"><a href="https://github.com/TylerFreemont0712/PersonalDashboard" target="_blank" rel="noopener">PersonalDashboard</a></h3>
+        <p class="proj-desc">Python dashboard for organizing daily life. Centralized task management and information at a glance.</p>
         <div class="proj-footer">
           <span class="proj-lang"><span class="lang-dot python"></span> Python</span>
           <span class="proj-badge original">Original</span>
@@ -367,7 +367,7 @@ title: Tyler Freemont - Software Engineer | Full-Stack Developer
       </div>
     </div>
     <div style="text-align:center; margin-top:24px;">
-      <a href="./projects" class="btn btn-cyan"><i class="fa-solid fa-arrow-right"></i> View All 7 Projects</a>
+      <a href="./projects" class="btn btn-cyan"><i class="fa-solid fa-arrow-right"></i> View All 6 Projects</a>
     </div>
   </div>
 </div>
