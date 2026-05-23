@@ -15,10 +15,97 @@ permalink: /projects
       <div class="sec-prompt"><span class="pr">$</span> <span class="cmd">find</span> ~/projects -type d -maxdepth 1 | <span class="cmd">sort</span></div>
       <h2 class="sec-title">All Projects</h2>
       <p style="color:#8899aa; margin-top:8px; font-size:14px;">
-        6 repositories &mdash; 3 original builds, 2 open source contributions, 1 portfolio site.
+        AI &amp; LLM systems, original builds, and open source contributions.
         <a href="./" style="margin-left:12px; font-size:12px;"><i class="fa-solid fa-arrow-left"></i> Back to Main</a>
       </p>
     </div>
+  </div>
+</div>
+
+<!-- ═══════════ AI / LLM PROJECTS ═══════════ -->
+<div class="pane">
+  <div class="pane-title-bar">
+    <div class="pane-dots"><span></span><span></span><span></span></div>
+    <div class="pane-label"><i class="fa-solid fa-brain"></i> ai-systems</div>
+  </div>
+  <div class="pane-body">
+    <div class="sec-head">
+      <div class="sec-prompt"><span class="pr">$</span> <span class="cmd">ls</span> ~/projects/ai/</div>
+      <h2 class="sec-title">AI &amp; LLM Systems</h2>
+    </div>
+
+    <!-- LLM Council -->
+    <div class="proj-detail-card">
+      <div class="proj-detail-bar">
+        <div class="proj-detail-title">
+          <i class="fa-solid fa-diagram-project"></i> LLM Council &mdash; Multi-Agent Autonomous Game Builder
+        </div>
+        <div class="proj-detail-links">
+          <a href="https://github.com/tylerfreemont0712" target="_blank" rel="noopener"><i class="fa-brands fa-github"></i> GitHub Profile</a>
+        </div>
+      </div>
+      <div class="proj-detail-body">
+        <div class="proj-detail-desc">
+          <p>A Python application that orchestrates multiple specialized AI agents via a shared tool module to autonomously build HTML5 Canvas browser games. Designed around structured inter-agent communication and runtime tool generation.</p>
+          <h4>Key Features</h4>
+          <ul>
+            <li>Multi-agent orchestration with specialized roles and a shared tool module</li>
+            <li>Filesystem access, web search, and asset downloading as first-class agent capabilities</li>
+            <li>Hot-reloading and structured inter-agent communication protocols</li>
+            <li>AST-level code validation for autonomous code correctness</li>
+            <li>Runtime tool generation for adaptive workflow management</li>
+          </ul>
+          <h4>Technologies</h4>
+          <ul>
+            <li>Python with multi-agent orchestration patterns</li>
+            <li>LangChain-style tool calling and agent loops</li>
+            <li>HTML5 Canvas as the game build target</li>
+            <li>AST-based static analysis for generated code validation</li>
+          </ul>
+        </div>
+        <div class="proj-detail-meta">
+          <span class="meta-chip lang"><span class="lang-dot python"></span> Python</span>
+          <span class="meta-chip type-original">Active</span>
+          <span class="meta-chip">Multi-Agent</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- LocalSync -->
+    <div class="proj-detail-card">
+      <div class="proj-detail-bar">
+        <div class="proj-detail-title">
+          <i class="fa-solid fa-list-check"></i> LocalSync &mdash; Desktop Productivity App
+        </div>
+        <div class="proj-detail-links">
+          <a href="https://github.com/tylerfreemont0712" target="_blank" rel="noopener"><i class="fa-brands fa-github"></i> GitHub Profile</a>
+        </div>
+      </div>
+      <div class="proj-detail-body">
+        <div class="proj-detail-desc">
+          <p>A PyQt6 desktop application for personal task and goal management. Backed by SQLite and built around AI-assisted workflow features to streamline daily planning.</p>
+          <h4>Key Features</h4>
+          <ul>
+            <li>Cross-platform PyQt6 desktop UI</li>
+            <li>SQLite-backed local task and goal management</li>
+            <li>AI-assisted workflow features for prioritization and planning</li>
+            <li>Designed for fully local, privacy-respecting operation</li>
+          </ul>
+          <h4>Technologies</h4>
+          <ul>
+            <li>Python with PyQt6 for native desktop UI</li>
+            <li>SQLite for local persistence</li>
+            <li>Local LLM integration for AI-assisted features</li>
+          </ul>
+        </div>
+        <div class="proj-detail-meta">
+          <span class="meta-chip lang"><span class="lang-dot python"></span> Python</span>
+          <span class="meta-chip type-original">Active</span>
+          <span class="meta-chip">PyQt6</span>
+        </div>
+      </div>
+    </div>
+
   </div>
 </div>
 
@@ -161,11 +248,11 @@ permalink: /projects
       </div>
       <div class="proj-detail-body">
         <div class="proj-detail-desc">
-          <p>A document preparation toolkit for generative AI applications. Converts documents into formats optimized for LLM ingestion and processing.</p>
+          <p>A document preparation toolkit for generative AI applications. Converts documents into formats optimized for LLM ingestion and processing &mdash; directly relevant to RAG pipelines.</p>
           <h4>Why I'm Contributing</h4>
           <ul>
-            <li>Directly relevant to my interest in AI infrastructure and MLOps</li>
-            <li>Learning document processing pipelines that feed into LLM workflows</li>
+            <li>Core to RAG pipeline work I'm doing professionally</li>
+            <li>Learning document processing patterns that feed into LLM workflows</li>
             <li>Understanding how to prepare data at scale for AI systems</li>
             <li>Contributing to tools that bridge traditional infrastructure with AI</li>
           </ul>
@@ -245,7 +332,7 @@ permalink: /projects
       </div>
       <div class="proj-detail-body">
         <div class="proj-detail-desc">
-          <p>The site you're looking at right now. A portfolio website built as an infrastructure engineer's "mission control dashboard" &mdash; because your personal site should reflect who you are.</p>
+          <p>The site you're looking at right now. A portfolio website built as a "mission control dashboard" for AI systems work &mdash; because your personal site should reflect who you are.</p>
           <h4>Design Concept</h4>
           <ul>
             <li>Mission Control / monitoring dashboard aesthetic</li>
@@ -253,7 +340,7 @@ permalink: /projects
             <li>Pane windows with title bars mimicking tmux/terminal splits</li>
             <li>System bar navigation styled as a server status display</li>
             <li>Subtle scanline overlay and grid background effects</li>
-            <li>Animated skill gauges, scroll-triggered transitions</li>
+            <li>Animated skill gauges and scroll-triggered transitions</li>
           </ul>
           <h4>Tech Stack</h4>
           <ul>
