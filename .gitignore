@@ -1,5 +1,9 @@
-_site
-.sass-cache
-Gemfile.lock
-*.gem
-.jekyll-cache
+# OS / editor cruft
+.DS_Store
+Thumbs.db
+*.swp
+.idea/
+.vscode/
+
+# Local dev servers / logs
+*.log

@@ -1,0 +1,603 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="teal">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>Tyler Freemont — Software Engineer · AI Systems · Local LLM Infrastructure</title>
+  <meta name="description" content="Tyler Freemont — software engineer in Osaka, Japan building local LLM infrastructure, MCP servers, RAG pipelines and multi-agent systems in Python, TypeScript and C++. AI Systems at MiraX. Bilingual EN / JLPT N1 JP.">
+  <meta name="keywords" content="Tyler Freemont, software engineer, AI systems, local LLM, llama.cpp, Ollama, MCP servers, RAG, LangChain, multi-agent, agentic workflows, Python, C++, TypeScript, RLHF, infrastructure automation, Osaka, Japan, JLPT N1, AWS">
+  <meta name="author" content="Tyler Freemont">
+  <meta name="theme-color" content="#0a0d14">
+  <link rel="canonical" href="https://tylerfreemont0712.github.io/">
+
+  <!-- Open Graph / Twitter -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Tyler Freemont — Software Engineer · AI Systems · Local LLM Infrastructure">
+  <meta property="og:description" content="Building local LLM infrastructure, MCP servers, RAG pipelines and multi-agent systems. Osaka, Japan. Bilingual EN / JLPT N1.">
+  <meta property="og:url" content="https://tylerfreemont0712.github.io/">
+  <meta property="og:image" content="https://tylerfreemont0712.github.io/assets/images/profilepicture.png">
+  <meta property="og:site_name" content="Tyler Freemont">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Tyler Freemont — Software Engineer · AI Systems">
+  <meta name="twitter:description" content="Local LLM infrastructure, MCP servers, RAG and multi-agent systems. Osaka, Japan.">
+  <meta name="twitter:image" content="https://tylerfreemont0712.github.io/assets/images/profilepicture.png">
+
+  <!-- Icons / manifest -->
+  <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+  <link rel="manifest" href="site.webmanifest">
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="assets/css/site.css">
+  <!-- If JS is unavailable, never let the boot overlay cover the page -->
+  <noscript><style>#boot{display:none!important}</style></noscript>
+
+  <!-- Structured data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "Tyler Freemont",
+    "jobTitle": "Software Engineer, AI Systems",
+    "email": "mailto:tfreemont0712@gmail.com",
+    "url": "https://tylerfreemont0712.github.io/",
+    "image": "https://tylerfreemont0712.github.io/assets/images/profilepicture.png",
+    "address": { "@type": "PostalAddress", "addressLocality": "Osaka", "addressCountry": "JP" },
+    "worksFor": { "@type": "Organization", "name": "MiraX" },
+    "knowsLanguage": ["English", "Japanese"],
+    "sameAs": ["https://github.com/tylerfreemont0712"],
+    "knowsAbout": ["Local LLM infrastructure", "MCP servers", "RAG", "Multi-agent systems", "LangChain", "Python", "C++", "TypeScript", "Infrastructure automation", "AWS"]
+  }
+  </script>
+</head>
+
+<body>
+  <!-- ══════════ BOOT SEQUENCE ══════════ -->
+  <div id="boot" class="boot" aria-hidden="true">
+    <div class="boot-inner">
+      <pre class="boot-log" id="bootLog"></pre>
+      <button class="boot-skip" id="bootSkip">press any key to skip&nbsp;›</button>
+    </div>
+  </div>
+
+  <!-- ══════════ BACKGROUND ══════════ -->
+  <div class="bg-aurora" aria-hidden="true"></div>
+  <div class="bg-grid" aria-hidden="true"></div>
+  <div class="scroll-progress" id="scrollProgress" aria-hidden="true"></div>
+
+  <!-- ══════════ NAV ══════════ -->
+  <header class="nav" id="nav">
+    <a href="#top" class="brand" aria-label="Home">
+      <span class="brand-prompt">tyler@osaka</span><span class="brand-sep">:</span><span class="brand-path">~</span><span class="brand-caret">$</span>
+    </a>
+
+    <nav class="nav-links" aria-label="Primary">
+      <a href="#about"      data-en="about"      data-ja="概要">about</a>
+      <a href="#work"       data-en="work"       data-ja="経歴">work</a>
+      <a href="#skills"     data-en="skills"     data-ja="技術">skills</a>
+      <a href="#projects"   data-en="projects"   data-ja="制作物">projects</a>
+      <a href="#education"  data-en="education"  data-ja="学歴">education</a>
+      <a href="#contact"    data-en="contact"    data-ja="連絡">contact</a>
+    </nav>
+
+    <div class="nav-tools">
+      <button class="lang-toggle" id="langToggle" title="Switch language" aria-label="Switch language">
+        <span class="lang-en">EN</span><span class="lang-div">/</span><span class="lang-ja">日本語</span>
+      </button>
+      <button class="icon-btn theme-cycle" id="themeCycle" title="Change accent color" aria-label="Change accent color">
+        <svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><circle cx="12" cy="12" r="8" fill="currentColor"/></svg>
+      </button>
+      <a class="icon-btn" href="https://github.com/tylerfreemont0712" target="_blank" rel="noopener" title="GitHub" aria-label="GitHub">
+        <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true" fill="currentColor"><path d="M12 .5A11.5 11.5 0 0 0 .5 12a11.5 11.5 0 0 0 7.86 10.92c.58.1.79-.25.79-.56v-2c-3.2.7-3.88-1.37-3.88-1.37-.53-1.34-1.3-1.7-1.3-1.7-1.05-.72.08-.71.08-.71 1.17.08 1.78 1.2 1.78 1.2 1.04 1.78 2.73 1.27 3.4.97.1-.75.4-1.27.73-1.56-2.56-.29-5.26-1.28-5.26-5.7 0-1.26.45-2.29 1.2-3.1-.12-.29-.52-1.46.11-3.05 0 0 .98-.31 3.2 1.18a11.1 11.1 0 0 1 5.83 0c2.22-1.49 3.2-1.18 3.2-1.18.63 1.59.23 2.76.11 3.05.75.81 1.2 1.84 1.2 3.1 0 4.43-2.7 5.41-5.27 5.69.41.36.78 1.06.78 2.14v3.17c0 .31.21.67.8.56A11.5 11.5 0 0 0 23.5 12 11.5 11.5 0 0 0 12 .5Z"/></svg>
+      </a>
+      <a class="icon-btn" href="mailto:tfreemont0712@gmail.com" title="Email" aria-label="Email">
+        <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m4 7 8 6 8-6"/></svg>
+      </a>
+      <button class="menu-btn" id="menuBtn" aria-label="Menu" aria-expanded="false"><span></span><span></span><span></span></button>
+    </div>
+  </header>
+
+  <div class="mobile-menu" id="mobileMenu">
+    <a href="#about">about</a>
+    <a href="#work">work</a>
+    <a href="#skills">skills</a>
+    <a href="#projects">projects</a>
+    <a href="#education">education</a>
+    <a href="#contact">contact</a>
+  </div>
+
+  <main>
+    <!-- ══════════ HERO ══════════ -->
+    <section class="hero" id="top">
+      <div class="hero-grid">
+        <div class="hero-left">
+          <div class="hero-tag" data-en="// software engineer · ai systems" data-ja="// ソフトウェアエンジニア・AIシステム">// software engineer · ai systems</div>
+          <h1 class="hero-name">Tyler&nbsp;Freemont</h1>
+          <p class="hero-role">
+            <span class="r-accent">Local LLM infrastructure</span>,
+            <span class="r-accent">agentic systems</span> &amp;
+            <span class="r-accent">infrastructure automation</span>
+            <span class="r-loc" data-en="— Osaka, Japan" data-ja="— 大阪・日本">— Osaka, Japan</span>
+          </p>
+          <p class="hero-summary" data-en="I build self-hosted LLM pipelines, MCP servers, RAG and multi-agent tooling in Python, TypeScript and C++ — on top of a background in network automation, Linux and AWS. Currently shipping AI systems at MiraX, and evaluating frontier models for code &amp; math (RLHF). Native English, JLPT N1 Japanese." data-ja="Python・TypeScript・C++ で、ローカル LLM パイプライン、MCP サーバー、RAG、マルチエージェント基盤を構築。ネットワーク自動化・Linux・AWS のインフラ経験がベース。現在 MiraX で AI システムを開発し、コード・数学領域のフロンティアモデル評価（RLHF）も担当。英語ネイティブ・日本語能力試験 N1。">
+            I build self-hosted LLM pipelines, MCP servers, RAG and multi-agent tooling in Python, TypeScript and C++ — on top of a background in network automation, Linux and AWS. Currently shipping AI systems at <strong>MiraX</strong>, and evaluating frontier models for code &amp; math (RLHF). Native English, JLPT&nbsp;N1 Japanese.
+          </p>
+
+          <div class="hero-cta">
+            <a href="#projects" class="btn btn-primary" data-en="View projects" data-ja="制作物を見る">View projects</a>
+            <a href="#contact" class="btn btn-ghost" data-en="Get in touch" data-ja="連絡する">Get in touch</a>
+          </div>
+
+          <div class="hero-stats">
+            <div class="hstat"><span class="hstat-num">5+</span><span class="hstat-lbl" data-en="yrs building" data-ja="開発年数">yrs building</span></div>
+            <div class="hstat"><span class="hstat-num">N1</span><span class="hstat-lbl" data-en="JLPT Japanese" data-ja="日本語 N1">JLPT Japanese</span></div>
+            <div class="hstat"><span class="hstat-num">2×</span><span class="hstat-lbl" data-en="AWS certified" data-ja="AWS 認定">AWS certified</span></div>
+            <div class="hstat"><span class="hstat-num">∞</span><span class="hstat-lbl" data-en="tokens evaluated" data-ja="評価トークン">tokens evaluated</span></div>
+          </div>
+        </div>
+
+        <!-- Interactive terminal -->
+        <div class="hero-right">
+          <div class="avatar">
+            <img src="assets/images/profilepicture.png" alt="Portrait of Tyler Freemont" width="96" height="96" loading="eager">
+            <span class="avatar-status" title="Open to work"></span>
+          </div>
+
+          <div class="term" id="term">
+            <div class="term-bar">
+              <span class="term-dots"><i></i><i></i><i></i></span>
+              <span class="term-title">tyler@osaka: ~/portfolio</span>
+              <span class="term-net">● live</span>
+            </div>
+            <div class="term-screen" id="termScreen" tabindex="0" role="region" aria-label="Interactive terminal. Type help and press Enter.">
+              <div class="term-out" id="termOut"></div>
+              <div class="term-input-line">
+                <span class="term-ps">tyler@osaka<span class="muted">:</span><span class="path">~</span>$</span>
+                <span class="term-input" id="termInput"></span>
+                <span class="term-cursor" id="termCursor">▋</span>
+              </div>
+            </div>
+            <div class="term-hint" data-en="type a command — try help, neofetch or lang ja" data-ja="コマンドを入力 — help / neofetch / lang en を試して">type a command — try <code>help</code>, <code>neofetch</code> or <code>lang&nbsp;ja</code></div>
+          </div>
+        </div>
+      </div>
+
+      <a href="#about" class="scroll-cue" aria-label="Scroll down">
+        <span data-en="scroll" data-ja="スクロール">scroll</span>
+        <svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+      </a>
+    </section>
+
+    <!-- ══════════ ABOUT ══════════ -->
+    <section class="section" id="about">
+      <div class="sec-head">
+        <span class="sec-index">01</span>
+        <h2 class="sec-title" data-en="System overview" data-ja="概要">System overview</h2>
+        <span class="sec-rule"></span>
+      </div>
+
+      <div class="about-grid">
+        <div class="about-lead">
+          <p data-en="I’m a software engineer who moved into AI systems from an infrastructure background — so I think about LLMs the way I think about networks: reliability, observability, and keeping data where it belongs. Most of my work lives close to the metal: getting frontier-quality models running on local hardware, wiring them into tools and agents, and making them dependable enough to ship." data-ja="インフラ出身の AI システムエンジニアです。だからこそ LLM をネットワークと同じ視点 — 信頼性・可観測性・データの所在 — で捉えています。仕事の多くはハードウェアに近い領域。ローカル環境でフロンティア級モデルを動かし、ツールやエージェントに接続し、実運用に耐える形にすることが中心です。">
+            I’m a software engineer who moved into AI systems from an infrastructure background — so I think about LLMs the way I think about networks: reliability, observability, and keeping data where it belongs. Most of my work lives close to the metal: getting frontier-quality models running on local hardware, wiring them into tools and agents, and making them dependable enough to ship.
+          </p>
+          <p data-en="Day to day I work across a bilingual Japanese / English engineering environment in Osaka — translating not just language, but intent, between teams and systems." data-ja="日々は大阪で、日本語・英語のバイリンガル環境で開発しています。言葉だけでなく、チームとシステムの間で「意図」を翻訳することも仕事のうちです。">
+            Day to day I work across a bilingual Japanese / English engineering environment in Osaka — translating not just language, but intent, between teams and systems.
+          </p>
+        </div>
+
+        <div class="about-cards">
+          <article class="mini-card">
+            <div class="mini-ico">◆</div>
+            <h3 data-en="Local LLM systems" data-ja="ローカル LLM">Local LLM systems</h3>
+            <p data-en="Self-hosted inference with Ollama &amp; llama.cpp behind custom API endpoints. Benchmarking Qwen, DeepSeek, Gemma &amp; gpt-oss for secure enterprise use." data-ja="Ollama・llama.cpp による自前 API 経由のセルフホスト推論。Qwen / DeepSeek / Gemma / gpt-oss をベンチマークし、企業向けに安全活用。">Self-hosted inference with Ollama &amp; llama.cpp behind custom API endpoints. Benchmarking Qwen, DeepSeek, Gemma &amp; gpt-oss for secure enterprise use.</p>
+          </article>
+          <article class="mini-card">
+            <div class="mini-ico">⬡</div>
+            <h3 data-en="Agents &amp; MCP" data-ja="エージェント・MCP">Agents &amp; MCP</h3>
+            <p data-en="Model Context Protocol servers, multi-agent orchestration, RAG and tool-calling with LangChain — including bilingual document &amp; web-search tools." data-ja="MCP サーバー、マルチエージェント連携、RAG、LangChain によるツール呼び出し。日英対応の文書・Web 検索ツールも構築。">Model Context Protocol servers, multi-agent orchestration, RAG and tool-calling with LangChain — including bilingual document &amp; web-search tools.</p>
+          </article>
+          <article class="mini-card">
+            <div class="mini-ico">▤</div>
+            <h3 data-en="Infra automation" data-ja="インフラ自動化">Infra automation</h3>
+            <p data-en="Python network automation for enterprise clients like Rakuten Mobile &amp; Daikin — fault detection, auto-recovery and config tooling that cut manual work." data-ja="楽天モバイル・ダイキン等向けの Python ネットワーク自動化。障害検知・自動復旧・構成管理で手作業を削減。">Python network automation for enterprise clients like Rakuten Mobile &amp; Daikin — fault detection, auto-recovery and config tooling that cut manual work.</p>
+          </article>
+          <article class="mini-card">
+            <div class="mini-ico">語</div>
+            <h3 data-en="Bilingual EN ↔ JP" data-ja="日英バイリンガル">Bilingual EN ↔ JP</h3>
+            <p data-en="Native English, JLPT N1 Japanese. Former technical translator — fluent moving complex requirements between Japanese and English teams." data-ja="英語ネイティブ・日本語 N1。元技術翻訳者として、複雑な要件を日英チーム間で正確に橋渡し。">Native English, JLPT N1 Japanese. Former technical translator — fluent moving complex requirements between Japanese and English teams.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ══════════ WORK ══════════ -->
+    <section class="section" id="work">
+      <div class="sec-head">
+        <span class="sec-index">02</span>
+        <h2 class="sec-title" data-en="Work history" data-ja="経歴">Work history</h2>
+        <span class="sec-rule"></span>
+      </div>
+
+      <ol class="timeline">
+        <li class="tl-item">
+          <div class="tl-marker"></div>
+          <div class="tl-card">
+            <div class="tl-top">
+              <h3 class="tl-role">Software Engineer, AI Systems</h3>
+              <span class="tl-date">Mar 2026 — Present</span>
+            </div>
+            <div class="tl-org">MiraX <span class="tl-loc">· Osaka, Japan (Remote)</span></div>
+            <ul class="tl-points">
+              <li>Build localized LLM infrastructure with Ollama &amp; llama.cpp behind custom API endpoints — cutting dependence on external providers and keeping enterprise data in-house.</li>
+              <li>Design and harden MCP servers that give internal agents tool access, including a company-document server with Japanese filesystem / Unicode handling and a bilingual web-search service.</li>
+              <li>Build RAG pipelines, tool-calling and multi-agent workflows with LangChain for an enterprise SaaS platform spanning video conferencing, translation and records management.</li>
+              <li>Benchmark &amp; integrate local models (Qwen, DeepSeek, Gemma, gpt-oss) and run internal evaluation for production AI features across Python, C++, C#, TypeScript and JavaScript.</li>
+            </ul>
+            <div class="tl-tags"><span>Python</span><span>C++</span><span>TypeScript</span><span>Ollama</span><span>llama.cpp</span><span>MCP</span><span>LangChain</span><span>RAG</span></div>
+          </div>
+        </li>
+
+        <li class="tl-item">
+          <div class="tl-marker"></div>
+          <div class="tl-card">
+            <div class="tl-top">
+              <h3 class="tl-role">AI Evaluation Specialist — Code &amp; Math</h3>
+              <span class="tl-date">Jan 2024 — Present</span>
+            </div>
+            <div class="tl-org">Outlier / Alignerr <span class="tl-loc">· Remote (Freelance)</span></div>
+            <ul class="tl-points">
+              <li>Evaluate and rank LLM outputs for correctness, reasoning quality and instruction-following across Python, JavaScript, C++ and general computer-science tasks.</li>
+              <li>Produce RLHF preference data and detailed written technical justifications used directly in frontier-model training.</li>
+              <li>Review code completions, debugging and algorithm implementations to a professional engineering standard; assess multi-step reasoning, agentic outputs and tool-use behavior.</li>
+            </ul>
+            <div class="tl-tags"><span>RLHF</span><span>LLM Evaluation</span><span>Python</span><span>C++</span><span>Reasoning</span><span>Agentic</span></div>
+          </div>
+        </li>
+
+        <li class="tl-item">
+          <div class="tl-marker"></div>
+          <div class="tl-card">
+            <div class="tl-top">
+              <h3 class="tl-role">Software / Infrastructure Engineer</h3>
+              <span class="tl-date">Sep 2023 — Feb 2026</span>
+            </div>
+            <div class="tl-org">Neighbors Inc. <span class="tl-loc">· Osaka, Japan</span></div>
+            <ul class="tl-points">
+              <li>Built Python automation tooling and internal services for enterprise network clients including Rakuten Mobile and Daikin.</li>
+              <li>Designed fault-detection and auto-recovery services that improved infrastructure reliability and uptime.</li>
+              <li>Developed configuration-management tooling that removed significant manual operational work; maintained deployment pipelines and worked with network engineers on topology design.</li>
+            </ul>
+            <div class="tl-tags"><span>Python</span><span>Linux</span><span>Network Automation</span><span>TCP/IP</span><span>CI/CD</span><span>Fault Detection</span></div>
+          </div>
+        </li>
+
+        <li class="tl-item">
+          <div class="tl-marker"></div>
+          <div class="tl-card">
+            <div class="tl-top">
+              <h3 class="tl-role">EN ↔ JP Technical Translator</h3>
+              <span class="tl-date">Apr 2022 — Dec 2023</span>
+            </div>
+            <div class="tl-org">Freelance <span class="tl-loc">· Osaka, Japan</span></div>
+            <ul class="tl-points">
+              <li>Translated IT and infrastructure documentation between English and Japanese and supported multinational engineering teams on technical specifications and system design.</li>
+            </ul>
+            <div class="tl-tags"><span>Technical Translation</span><span>Japanese</span><span>IT Docs</span></div>
+          </div>
+        </li>
+
+        <li class="tl-item">
+          <div class="tl-marker"></div>
+          <div class="tl-card">
+            <div class="tl-top">
+              <h3 class="tl-role">English Instructor</h3>
+              <span class="tl-date">Jan 2021 — Apr 2023</span>
+            </div>
+            <div class="tl-org">Soshi Gakuen High School <span class="tl-loc">· Osaka, Japan</span></div>
+            <ul class="tl-points">
+              <li>Designed and delivered English curriculum for students across a range of proficiency levels; built the cross-cultural communication skills I now use across bilingual engineering teams.</li>
+            </ul>
+            <div class="tl-tags"><span>Curriculum</span><span>Communication</span><span>Bilingual</span></div>
+          </div>
+        </li>
+      </ol>
+    </section>
+
+    <!-- ══════════ SKILLS ══════════ -->
+    <section class="section" id="skills">
+      <div class="sec-head">
+        <span class="sec-index">03</span>
+        <h2 class="sec-title" data-en="Skills &amp; stack" data-ja="技術スタック">Skills &amp; stack</h2>
+        <span class="sec-rule"></span>
+      </div>
+
+      <div class="skills-grid">
+        <div class="skill-col">
+          <h3 class="skill-h"><span class="dot"></span> AI / LLM systems</h3>
+          <div class="meter"><div class="meter-top"><span>Local LLM deploy · Ollama / llama.cpp</span><span class="meter-tag">primary</span></div><div class="meter-track"><i data-w="92"></i></div></div>
+          <div class="meter"><div class="meter-top"><span>MCP servers · tool-calling</span><span class="meter-tag">advanced</span></div><div class="meter-track"><i data-w="86"></i></div></div>
+          <div class="meter"><div class="meter-top"><span>RAG &amp; multi-agent · LangChain</span><span class="meter-tag">advanced</span></div><div class="meter-track"><i data-w="84"></i></div></div>
+          <div class="meter"><div class="meter-top"><span>Model evaluation · RLHF</span><span class="meter-tag">advanced</span></div><div class="meter-track"><i data-w="88"></i></div></div>
+        </div>
+
+        <div class="skill-col">
+          <h3 class="skill-h"><span class="dot"></span> Languages</h3>
+          <div class="meter"><div class="meter-top"><span>Python</span><span class="meter-tag">primary</span></div><div class="meter-track"><i data-w="93"></i></div></div>
+          <div class="meter"><div class="meter-top"><span>TypeScript / JavaScript</span><span class="meter-tag">advanced</span></div><div class="meter-track"><i data-w="78"></i></div></div>
+          <div class="meter"><div class="meter-top"><span>C++</span><span class="meter-tag">advanced</span></div><div class="meter-track"><i data-w="75"></i></div></div>
+          <div class="meter"><div class="meter-top"><span>C#</span><span class="meter-tag">working</span></div><div class="meter-track"><i data-w="62"></i></div></div>
+          <div class="meter"><div class="meter-top"><span>Go · Rust</span><span class="meter-tag">working</span></div><div class="meter-track"><i data-w="52"></i></div></div>
+        </div>
+
+        <div class="skill-col">
+          <h3 class="skill-h"><span class="dot"></span> Infra / backend</h3>
+          <div class="meter"><div class="meter-top"><span>Linux / Unix</span><span class="meter-tag">advanced</span></div><div class="meter-track"><i data-w="90"></i></div></div>
+          <div class="meter"><div class="meter-top"><span>Network automation · TCP/IP</span><span class="meter-tag">advanced</span></div><div class="meter-track"><i data-w="82"></i></div></div>
+          <div class="meter"><div class="meter-top"><span>Docker · CI/CD · REST APIs</span><span class="meter-tag">advanced</span></div><div class="meter-track"><i data-w="80"></i></div></div>
+          <div class="meter"><div class="meter-top"><span>AWS (Dev + SAA certified)</span><span class="meter-tag">certified</span></div><div class="meter-track"><i data-w="80"></i></div></div>
+        </div>
+
+        <div class="skill-col">
+          <h3 class="skill-h"><span class="dot"></span> Apps &amp; languages spoken</h3>
+          <div class="meter"><div class="meter-top"><span>PyQt6 desktop apps</span><span class="meter-tag">advanced</span></div><div class="meter-track"><i data-w="82"></i></div></div>
+          <div class="meter"><div class="meter-top"><span>React · HTML5 Canvas</span><span class="meter-tag">working</span></div><div class="meter-track"><i data-w="68"></i></div></div>
+          <div class="meter"><div class="meter-top"><span>English</span><span class="meter-tag">native</span></div><div class="meter-track"><i data-w="100"></i></div></div>
+          <div class="meter"><div class="meter-top"><span>日本語 Japanese</span><span class="meter-tag">JLPT N1</span></div><div class="meter-track"><i data-w="95"></i></div></div>
+        </div>
+      </div>
+
+      <div class="toolbelt" id="toolbelt">
+        <span>Ollama</span><span>llama.cpp</span><span>LangChain</span><span>MCP</span><span>Whisper</span><span>ComfyUI</span><span>Docker</span><span>Linux</span><span>AWS</span><span>Git</span><span>PostgreSQL</span><span>SQLite</span><span>Redis</span><span>PyQt6</span><span>Pytest</span><span>REST</span><span>Ansible</span><span>Terraform</span>
+      </div>
+    </section>
+
+    <!-- ══════════ PROJECTS ══════════ -->
+    <section class="section" id="projects">
+      <div class="sec-head">
+        <span class="sec-index">04</span>
+        <h2 class="sec-title" data-en="Selected projects" data-ja="制作物">Selected projects</h2>
+        <span class="sec-rule"></span>
+      </div>
+
+      <div class="proj-filters" id="projFilters" role="tablist">
+        <button class="chip active" data-filter="all" data-en="all" data-ja="すべて">all</button>
+        <button class="chip" data-filter="ai" data-en="ai · llm" data-ja="AI・LLM">ai · llm</button>
+        <button class="chip" data-filter="tools" data-en="tools &amp; apps" data-ja="ツール">tools &amp; apps</button>
+        <button class="chip" data-filter="oss" data-en="open source" data-ja="OSS">open source</button>
+      </div>
+
+      <div class="proj-grid" id="projGrid">
+
+        <!-- LLM Council (featured) -->
+        <article class="proj feat" data-cat="ai">
+          <div class="proj-head">
+            <span class="proj-kind">multi-agent</span>
+            <span class="proj-lang"><i class="ld python"></i>Python</span>
+          </div>
+          <h3 class="proj-name">LLM Council</h3>
+          <p class="proj-desc">A council of specialized AI agents that coordinate through a shared tool module to autonomously build HTML5 Canvas browser games — with filesystem access, web search, asset downloading, hot-reloading, structured inter-agent messaging, <strong>AST-level code validation</strong> and runtime tool generation.</p>
+          <div class="proj-tags"><span>Multi-agent</span><span>Tool-calling</span><span>AST validation</span></div>
+          <div class="proj-foot">
+            <a href="https://github.com/tylerfreemont0712" target="_blank" rel="noopener">profile ↗</a>
+            <span class="proj-badge">personal</span>
+          </div>
+        </article>
+
+        <!-- Local LLM Desktop Toolkit -->
+        <article class="proj feat" data-cat="ai tools">
+          <div class="proj-head">
+            <span class="proj-kind">local inference</span>
+            <span class="proj-lang"><i class="ld python"></i>Python</span>
+          </div>
+          <h3 class="proj-name">Local LLM Desktop Toolkit</h3>
+          <p class="proj-desc">A PyQt6 launcher and tooling suite for running <strong>llama.cpp</strong> and Whisper servers locally — paired with a WASAPI loopback audio recorder and live transcription. Spread across <code>llama-launcher</code>, <code>LammaStart</code> &amp; <code>ServerStarter</code>.</p>
+          <div class="proj-tags"><span>PyQt6</span><span>llama.cpp</span><span>Whisper</span><span>WASAPI</span></div>
+          <div class="proj-foot">
+            <a href="https://github.com/TylerFreemont0712/llama-launcher" target="_blank" rel="noopener">llama-launcher ↗</a>
+            <a href="https://github.com/TylerFreemont0712/ServerStarter" target="_blank" rel="noopener">ServerStarter ↗</a>
+          </div>
+        </article>
+
+        <!-- LocalSync -->
+        <article class="proj" data-cat="ai tools">
+          <div class="proj-head">
+            <span class="proj-kind">productivity</span>
+            <span class="proj-lang"><i class="ld python"></i>Python</span>
+          </div>
+          <h3 class="proj-name">LocalSync</h3>
+          <p class="proj-desc">A PyQt6 desktop app to locally sync notes, to-dos and finances — SQLite-backed and fully offline, with an AI-driven step-by-step tutoring panel.</p>
+          <div class="proj-tags"><span>PyQt6</span><span>SQLite</span><span>Local AI</span></div>
+          <div class="proj-foot">
+            <a href="https://github.com/TylerFreemont0712/LocalSyncOrganization" target="_blank" rel="noopener">source ↗</a>
+          </div>
+        </article>
+
+        <!-- OrchCheck -->
+        <article class="proj" data-cat="ai tools">
+          <div class="proj-head">
+            <span class="proj-kind">orchestration</span>
+            <span class="proj-lang"><i class="ld py"></i>Service</span>
+          </div>
+          <h3 class="proj-name">OrchCheck</h3>
+          <p class="proj-desc">An orchestration service for coordinating and health-checking background jobs and model services — keeping local inference and agent workflows observable and recoverable.</p>
+          <div class="proj-tags"><span>Orchestration</span><span>Monitoring</span><span>Services</span></div>
+          <div class="proj-foot">
+            <a href="https://github.com/TylerFreemont0712/OrchCheck" target="_blank" rel="noopener">source ↗</a>
+          </div>
+        </article>
+
+        <!-- Dashboard / PersonalDashboard -->
+        <article class="proj" data-cat="tools">
+          <div class="proj-head">
+            <span class="proj-kind">desktop app</span>
+            <span class="proj-lang"><i class="ld python"></i>Python</span>
+          </div>
+          <h3 class="proj-name">Personal Dashboard</h3>
+          <p class="proj-desc">A Python dashboard for daily life — aggregating tasks and information into one glanceable surface, with a modular widget architecture for adding new data sources.</p>
+          <div class="proj-tags"><span>Python</span><span>Modular</span><span>UI</span></div>
+          <div class="proj-foot">
+            <a href="https://github.com/TylerFreemont0712/PersonalDashboard" target="_blank" rel="noopener">source ↗</a>
+          </div>
+        </article>
+
+        <!-- YTDownload -->
+        <article class="proj" data-cat="tools">
+          <div class="proj-head">
+            <span class="proj-kind">media tool</span>
+            <span class="proj-lang"><i class="ld python"></i>Python</span>
+          </div>
+          <h3 class="proj-name">YTDownload</h3>
+          <p class="proj-desc">A reliable YouTube media downloader with a clean pipeline, format / quality selection and robust error handling for network operations.</p>
+          <div class="proj-tags"><span>Python</span><span>Media</span><span>CLI/GUI</span></div>
+          <div class="proj-foot">
+            <a href="https://github.com/TylerFreemont0712/YTDownload" target="_blank" rel="noopener">source ↗</a>
+          </div>
+        </article>
+
+        <!-- SnakeGame -->
+        <article class="proj" data-cat="tools">
+          <div class="proj-head">
+            <span class="proj-kind">game</span>
+            <span class="proj-lang"><i class="ld python"></i>Python</span>
+          </div>
+          <h3 class="proj-name">SnakeGame</h3>
+          <p class="proj-desc">A clean implementation of classic Snake — a focused study in game loops, real-time state management, collision detection and readable Python structure.</p>
+          <div class="proj-tags"><span>Game loop</span><span>State</span><span>Python</span></div>
+          <div class="proj-foot">
+            <a href="https://github.com/TylerFreemont0712/SnakeGame" target="_blank" rel="noopener">source ↗</a>
+          </div>
+        </article>
+
+        <!-- docling (OSS) -->
+        <article class="proj" data-cat="ai oss">
+          <div class="proj-head">
+            <span class="proj-kind">open source</span>
+            <span class="proj-lang"><i class="ld python"></i>Python</span>
+          </div>
+          <h3 class="proj-name">Docling</h3>
+          <p class="proj-desc">Contributing to the document-preparation toolkit that gets documents ready for generative AI — directly relevant to the RAG ingestion pipelines I build professionally.</p>
+          <div class="proj-tags"><span>RAG</span><span>Doc processing</span><span>Gen AI</span></div>
+          <div class="proj-foot">
+            <a href="https://github.com/TylerFreemont0712/docling" target="_blank" rel="noopener">fork ↗</a>
+            <span class="proj-badge oss">OSS</span>
+          </div>
+        </article>
+
+        <!-- cardio (OSS) -->
+        <article class="proj" data-cat="oss tools">
+          <div class="proj-head">
+            <span class="proj-kind">open source</span>
+            <span class="proj-lang"><i class="ld jupyter"></i>Jupyter</span>
+          </div>
+          <h3 class="proj-name">Cardio</h3>
+          <p class="proj-desc">Contributing to a community-driven roguelike deck-building card game in Python — a study in complex game architecture, state machines and event-driven systems.</p>
+          <div class="proj-tags"><span>Game arch</span><span>State machines</span><span>Community</span></div>
+          <div class="proj-foot">
+            <a href="https://github.com/TylerFreemont0712/cardio" target="_blank" rel="noopener">fork ↗</a>
+            <span class="proj-badge oss">OSS</span>
+          </div>
+        </article>
+
+        <!-- Mangio-RVC-GUI (OSS) -->
+        <article class="proj" data-cat="oss ai">
+          <div class="proj-head">
+            <span class="proj-kind">open source</span>
+            <span class="proj-lang"><i class="ld python"></i>Python</span>
+          </div>
+          <h3 class="proj-name">Mangio-RVC-GUI</h3>
+          <p class="proj-desc">Working with a GUI front-end for RVC voice-conversion models — hands-on with local audio ML tooling, inference UIs and model management.</p>
+          <div class="proj-tags"><span>Audio ML</span><span>Inference UI</span><span>Python</span></div>
+          <div class="proj-foot">
+            <a href="https://github.com/TylerFreemont0712/Mangio-RVC-GUI" target="_blank" rel="noopener">fork ↗</a>
+            <span class="proj-badge oss">OSS</span>
+          </div>
+        </article>
+
+      </div>
+
+      <p class="proj-more">
+        <a href="https://github.com/tylerfreemont0712?tab=repositories" target="_blank" rel="noopener" data-en="See all repositories on GitHub ↗" data-ja="GitHub で全リポジトリを見る ↗">See all repositories on GitHub ↗</a>
+      </p>
+    </section>
+
+    <!-- ══════════ EDUCATION ══════════ -->
+    <section class="section" id="education">
+      <div class="sec-head">
+        <span class="sec-index">05</span>
+        <h2 class="sec-title" data-en="Education &amp; credentials" data-ja="学歴・資格">Education &amp; credentials</h2>
+        <span class="sec-rule"></span>
+      </div>
+
+      <div class="edu-wrap">
+        <div class="edu-col">
+          <h3 class="edu-h" data-en="Education" data-ja="学歴">Education</h3>
+          <div class="edu-item">
+            <h4>B.A. Japanese Language &amp; Culture / Communications</h4>
+            <span class="edu-org">Portland State University · Portland, Oregon</span>
+          </div>
+          <div class="edu-item">
+            <h4>Japanese Language &amp; Culture <span class="edu-note">(Exchange)</span></h4>
+            <span class="edu-org">Doshisha University · Kyoto, Japan</span>
+          </div>
+          <div class="edu-item">
+            <h4>Mathematics · C++ · Programming Fundamentals</h4>
+            <span class="edu-org">Clackamas Community College · Oregon</span>
+          </div>
+        </div>
+
+        <div class="edu-col">
+          <h3 class="edu-h" data-en="Certifications" data-ja="資格">Certifications</h3>
+          <div class="cert"><span class="cert-mark">AWS</span><div><h4>Certified Developer — Associate</h4><span class="edu-org">Amazon Web Services</span></div></div>
+          <div class="cert"><span class="cert-mark">AWS</span><div><h4>Certified Solutions Architect — Associate</h4><span class="edu-org">Amazon Web Services</span></div></div>
+          <div class="cert"><span class="cert-mark">G</span><div><h4>IT Support Professional Certificate</h4><span class="edu-org">Google</span></div></div>
+          <div class="cert"><span class="cert-mark">N1</span><div><h4>JLPT N1 — Highest level</h4><span class="edu-org">Japanese Language Proficiency Test</span></div></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ══════════ CONTACT ══════════ -->
+    <section class="section contact" id="contact">
+      <div class="sec-head">
+        <span class="sec-index">06</span>
+        <h2 class="sec-title" data-en="Get in touch" data-ja="連絡先">Get in touch</h2>
+        <span class="sec-rule"></span>
+      </div>
+
+      <div class="contact-card">
+        <p class="contact-lead" data-en="Open to conversations about local LLM systems, agentic AI, MCP architecture and enterprise AI infrastructure — and to collaborations across bilingual engineering teams." data-ja="ローカル LLM、エージェント AI、MCP アーキテクチャ、エンタープライズ AI 基盤について、いつでもお話しできます。日英バイリンガルでの協業も歓迎です。">
+          Open to conversations about local LLM systems, agentic AI, MCP architecture and enterprise AI infrastructure — and to collaborations across bilingual engineering teams.
+        </p>
+        <div class="contact-actions">
+          <a class="btn btn-primary" href="mailto:tfreemont0712@gmail.com">
+            <svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m4 7 8 6 8-6"/></svg>
+            tfreemont0712@gmail.com
+          </a>
+          <a class="btn btn-ghost" href="https://github.com/tylerfreemont0712" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true" fill="currentColor"><path d="M12 .5A11.5 11.5 0 0 0 .5 12a11.5 11.5 0 0 0 7.86 10.92c.58.1.79-.25.79-.56v-2c-3.2.7-3.88-1.37-3.88-1.37-.53-1.34-1.3-1.7-1.3-1.7-1.05-.72.08-.71.08-.71 1.17.08 1.78 1.2 1.78 1.2 1.04 1.78 2.73 1.27 3.4.97.1-.75.4-1.27.73-1.56-2.56-.29-5.26-1.28-5.26-5.7 0-1.26.45-2.29 1.2-3.1-.12-.29-.52-1.46.11-3.05 0 0 .98-.31 3.2 1.18a11.1 11.1 0 0 1 5.83 0c2.22-1.49 3.2-1.18 3.2-1.18.63 1.59.23 2.76.11 3.05.75.81 1.2 1.84 1.2 3.1 0 4.43-2.7 5.41-5.27 5.69.41.36.78 1.06.78 2.14v3.17c0 .31.21.67.8.56A11.5 11.5 0 0 0 23.5 12 11.5 11.5 0 0 0 12 .5Z"/></svg>
+            github.com/tylerfreemont0712
+          </a>
+        </div>
+        <div class="contact-meta">
+          <span data-en="Osaka, Japan · 34.69°N 135.50°E" data-ja="大阪・日本 · 34.69°N 135.50°E">Osaka, Japan · 34.69°N 135.50°E</span>
+          <span class="dot-sep">·</span>
+          <span data-en="English / 日本語 (JLPT N1)" data-ja="英語 / 日本語（JLPT N1）">English / 日本語 (JLPT N1)</span>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <span class="foot-status"><i></i> systems nominal</span>
+    <span class="foot-mid">© <span id="year">2026</span> Tyler Freemont — built from scratch, no framework</span>
+    <span class="foot-loc">Osaka, JP</span>
+  </footer>
+
+  <script src="assets/js/site.js"></script>
+</body>
+</html>
