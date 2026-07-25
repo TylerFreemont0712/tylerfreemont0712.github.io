@@ -1,0 +1,103 @@
+# ══════════════════════════════════════════════════════════════
+# Canonical facts for the site. Every page reads from here.
+# Nothing in this file may be a guess — if it is not verified,
+# leave it blank and the templates will omit it rather than
+# render an unsupported claim.
+#
+# Fields marked NEEDS-CONFIRMATION are blocked on answers to the
+# Phase 1 question list and are deliberately left empty.
+# ══════════════════════════════════════════════════════════════
+
+name: Tyler Freemont
+name_ja: タイラー・フリーモント
+
+# Résumé wording (§2.2). Source of truth = résumé, not the old site copy.
+title: Software Engineer, AI Systems
+
+# §4 landing spec, item 1 — one-line positioning.
+positioning: >-
+  AI systems engineer — local LLM infrastructure, MCP servers, RAG.
+  Osaka, Japan.
+
+# §4 landing spec, item 2 — the three-part credibility line.
+# Rendered as three discrete chips so each reads on its own.
+credibility:
+  - label: Native English + JLPT N1
+    icon: language
+    detail: Bilingual across Japanese and English engineering teams
+  - label: AWS certified
+    icon: aws
+    detail: Developer – Associate · Solutions Architect – Associate
+  - label: No visa sponsorship required
+    icon: passport
+    detail: Spouse-of-Japanese-national visa — no work restrictions
+
+# §4 landing spec, item 3 — availability.
+availability:
+  open: true
+  statement: Available now — full-time or 業務委託
+  statement_ja: 即日就業可能 — 正社員・業務委託ともに相談可能
+  from: ""
+  days_per_week: ""
+
+# Verified figures. Sourced from profile/master-profile.yaml in the résumé
+# build; nothing here may be rounded up or estimated.
+#   neighbors_hours_saved is deliberately absent — it is still TODO in the
+#   master profile, so no hours claim is rendered anywhere on the site.
+figures:
+  neighbors_nodes: "10,000+"
+  mcp_servers_production: "3"
+
+location:
+  city: Osaka
+  region: Japan
+  city_ja: 大阪
+
+contact:
+  email: tfreemont0712@gmail.com
+  github: https://github.com/TylerFreemont0712
+  github_handle: TylerFreemont0712
+
+# ──────────────────────────────────────────────────────────────
+# Résumé variants (§4). Built by D:\001-tyler\JobApplication.
+#
+# `file` stays empty until the PDF is committed to assets/resume/,
+# and the /resume page renders only variants that have a file — so
+# nothing can link to a 404. `source` records which build artefact
+# each one comes from, making Phase 4 a copy step.
+#
+# ⚠ HOLD: the 2026-07-25 build still emits the literal string
+# "TODO" for MCP_SERVER_COUNT, MCP_USERS and NEIGHBORS_HOURS_SAVED.
+# Do not publish these PDFs until the master profile is filled in
+# and rebuilt.
+#
+# `default: true` marks the one the header button serves.
+# ──────────────────────────────────────────────────────────────
+resume:
+  variants:
+    - id: japan-fulltime
+      label: Japan full-time
+      label_ja: 日本・正社員向け
+      description: Primary résumé for Japan-based AI and LLM engineering roles.
+      source: Tyler_Freemont_Resume_AI_Japan.pdf
+      file: ""
+      default: true
+    - id: ai-evaluation
+      label: AI evaluation
+      label_ja: AI評価業務向け
+      description: Weighted toward frontier-model evaluation and RLHF work.
+      source: Tyler_Freemont_Resume_AI_Evaluation.pdf
+      file: ""
+    - id: contracting
+      label: Contracting / 業務委託
+      label_ja: 業務委託向け
+      description: One page, for freelance agents and direct clients.
+      source: Tyler_Freemont_Resume_Contract.pdf
+      file: ""
+    - id: shokumu-keirekisho
+      label: 職務経歴書
+      label_ja: 職務経歴書
+      description: Japanese-format career history for agents and Japanese employers.
+      source: Tyler_Freemont_職務経歴書.pdf
+      file: ""
+      lang: ja
