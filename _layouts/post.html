@@ -3,9 +3,62 @@ layout: default
 ---
 
 {%- comment -%}
-  Article layout for /writing. Sets lang on the prose itself so a Japanese
-  article is announced correctly even though the site chrome is English.
+  Article layout. `lang` is set on the prose itself so a Japanese article is
+  announced correctly even though some site chrome stays English.
+
+  Reading time is computed differently per language: number_of_words is
+  meaningless for Japanese, which has no inter-word spaces and would score a
+  whole paragraph as one "word". Japanese uses characters instead, at roughly
+  500/min against 200 words/min for English.
 {%- endcomment -%}
+
+{%- assign p = site.data.profile -%}
+{%- if page.lang == "ja" -%}
+  {%- assign chars = content | strip_html | size -%}
+  {%- assign mins = chars | divided_by: 500 | plus: 1 -%}
+  {%- assign t_read = mins | append: "分で読めます" -%}
+  {%- assign t_all = "技術記事の一覧" -%}
+  {%- assign t_reply = "メールで返信" -%}
+  {%- assign t_newer = "新しい記事" -%}
+  {%- assign t_older = "古い記事" -%}
+  {%- assign t_tags = "タグ" -%}
+  {%- assign all_url = "/ja/writing" -%}
+{%- else -%}
+  {%- assign words = content | number_of_words -%}
+  {%- assign mins = words | divided_by: 200 | plus: 1 -%}
+  {%- assign t_read = mins | append: " min read" -%}
+  {%- assign t_all = "All writing" -%}
+  {%- assign t_reply = "Reply by email" -%}
+  {%- assign t_newer = "Newer" -%}
+  {%- assign t_older = "Older" -%}
+  {%- assign t_tags = "Tags" -%}
+  {%- assign all_url = "/writing" -%}
+{%- endif -%}
+
+{%- comment -%} Prev/next within the same language only. {%- endcomment -%}
+{%- assign siblings = site.posts | where: "lang", page.lang -%}
+{%- assign idx = -1 -%}
+{%- for s in siblings -%}
+  {%- if s.url == page.url -%}{%- assign idx = forloop.index0 -%}{%- endif -%}
+{%- endfor -%}
+{%- assign newer_i = idx | minus: 1 -%}
+{%- assign older_i = idx | plus: 1 -%}
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": {{ page.title | jsonify }},
+  "description": {{ page.description | strip_newlines | strip | jsonify }},
+  "inLanguage": {{ page.lang | default: "en" | jsonify }},
+  "datePublished": {{ page.date | date_to_xmlschema | jsonify }},
+  "dateModified": {{ page.date | date_to_xmlschema | jsonify }},
+  "mainEntityOfPage": { "@type": "WebPage", "@id": {{ page.url | absolute_url | jsonify }} },
+  "author": { "@type": "Person", "name": {{ p.name | jsonify }}, "url": {{ site.url | jsonify }} },
+  "publisher": { "@type": "Person", "name": {{ p.name | jsonify }} },
+  "keywords": {{ page.tags | join: ", " | jsonify }}
+}
+</script>
 
 <article class="pane reveal post" {% if page.lang %}lang="{{ page.lang }}"{% endif %}>
   <div class="pane-title-bar">
@@ -16,19 +69,45 @@ layout: default
     <header class="post-head">
       <h1>{{ page.title }}</h1>
       <p class="post-meta">
-        <time datetime="{{ page.date | date_to_xmlschema }}">{{ page.date | date: "%-d %B %Y" }}</time>
-        {%- if page.lang == 'ja' %} · <span class="badge">日本語</span>{% endif %}
-        {%- if page.tags and page.tags != empty %} · {{ page.tags | join: " · " }}{% endif %}
+        <time datetime="{{ page.date | date_to_xmlschema }}">
+          {%- if page.lang == "ja" -%}
+            {{ page.date | date: "%Y年%-m月%-d日" }}
+          {%- else -%}
+            {{ page.date | date: "%-d %B %Y" }}
+          {%- endif -%}
+        </time>
+        <span aria-hidden="true">·</span>
+        <span>{{ t_read }}</span>
       </p>
+      {%- if page.tags and page.tags != empty %}
+      <ul class="post-tags" aria-label="{{ t_tags }}">
+        {%- for tag in page.tags %}<li>{{ tag }}</li>{% endfor %}
+      </ul>
+      {%- endif %}
     </header>
 
     <div class="post-body">
       {{ content }}
     </div>
 
+    <nav class="post-nav" aria-label="{{ t_all }}">
+      {%- if newer_i >= 0 %}
+      <a class="post-nav-link" href="{{ siblings[newer_i].url | relative_url }}">
+        <span class="post-nav-dir">← {{ t_newer }}</span>
+        <span class="post-nav-title">{{ siblings[newer_i].title }}</span>
+      </a>
+      {%- else %}<span></span>{% endif %}
+      {%- if older_i < siblings.size %}
+      <a class="post-nav-link post-nav-older" href="{{ siblings[older_i].url | relative_url }}">
+        <span class="post-nav-dir">{{ t_older }} →</span>
+        <span class="post-nav-title">{{ siblings[older_i].title }}</span>
+      </a>
+      {%- endif %}
+    </nav>
+
     <footer class="post-foot">
-      <a href="{{ '/writing' | relative_url }}">← All writing</a>
-      <a href="mailto:{{ site.data.profile.contact.email }}">Reply by email</a>
+      <a href="{{ all_url | relative_url }}">{{ t_all }}</a>
+      <a href="mailto:{{ p.contact.email }}?subject={{ page.title | uri_escape }}">{{ t_reply }}</a>
     </footer>
   </div>
 </article>

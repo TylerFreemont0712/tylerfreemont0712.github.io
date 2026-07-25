@@ -12,13 +12,56 @@
     <script>document.documentElement.className += ' js';</script>
 
     {%- comment -%}
-      Title is written here rather than left to jekyll-seo-tag so the
-      separator and the fallback ("Name · Title") are controlled; seo-tag is
-      passed title=false to stop it emitting a second one. Description,
-      canonical and Open Graph tags all come from {% seo %}.
+      Social and canonical meta are written here rather than delegated to
+      jekyll-seo-tag. The plugin silently dropped og:image (it does not read a
+      top-level site.image the way we assumed) and emitted a bare "@" for
+      twitter:site, so a link pasted into Slack or LinkedIn had no card at all.
+      These tags are the whole point of the OG image, so they are explicit.
+
+      seo_tag is no longer included; jekyll-sitemap still is.
     {%- endcomment -%}
-    <title>{% if page.title %}{{ page.title }} · {{ site.data.profile.name }}{% else %}{{ site.data.profile.name }} · {{ site.data.profile.title }}{% endif %}</title>
-    <meta name="author" content="{{ site.data.profile.name }}">
+    {%- assign p = site.data.profile -%}
+    {%- if page.lang == "ja" -%}
+      {%- assign og_locale = "ja_JP" -%}
+      {%- assign og_name = p.name | append: "（" | append: p.name_ja | append: "）" -%}
+      {%- assign default_title = p.name | append: " · " | append: p.title_ja -%}
+    {%- else -%}
+      {%- assign og_locale = "en_US" -%}
+      {%- assign og_name = p.name -%}
+      {%- assign default_title = p.name | append: " · " | append: p.title -%}
+    {%- endif -%}
+    {%- if page.title -%}
+      {%- assign full_title = page.title | append: " · " | append: p.name -%}
+    {%- else -%}
+      {%- assign full_title = default_title -%}
+    {%- endif -%}
+    {%- assign desc = page.description | default: site.description | strip_newlines | strip -%}
+    {%- assign og_img = "/assets/og-image.png" | absolute_url -%}
+
+    <title>{{ full_title }}</title>
+    <meta name="description" content="{{ desc | escape }}">
+    <meta name="author" content="{{ p.name }}">
+    <link rel="canonical" href="{{ page.url | absolute_url }}">
+
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="{{ og_name }}">
+    <meta property="og:title" content="{{ full_title | escape }}">
+    <meta property="og:description" content="{{ desc | escape }}">
+    <meta property="og:url" content="{{ page.url | absolute_url }}">
+    <meta property="og:locale" content="{{ og_locale }}">
+    {%- if page.alt_url %}
+    <meta property="og:locale:alternate" content="{% if page.lang == 'ja' %}en_US{% else %}ja_JP{% endif %}">
+    {%- endif %}
+    <meta property="og:image" content="{{ og_img }}">
+    <meta property="og:image:type" content="image/png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:image:alt" content="{{ p.name }} — {{ p.title }}. Native English and JLPT N1, AWS certified, no visa sponsorship required. Osaka, Japan.">
+
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="{{ full_title | escape }}">
+    <meta name="twitter:description" content="{{ desc | escape }}">
+    <meta name="twitter:image" content="{{ og_img }}">
 
     {%- comment -%}
       hreflang pairs. x-default points at the English page: it is the fallback
@@ -38,7 +81,6 @@
 
     <link rel="stylesheet" href="{{ '/assets/css/style.css?v=' | append: site.github.build_revision | relative_url }}">
     {% include head-custom.html %}
-    {% seo title=false %}
 
     <script type="application/ld+json">
     {

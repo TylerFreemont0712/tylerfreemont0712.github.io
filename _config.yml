@@ -10,16 +10,26 @@ lang: en
 
 theme: jekyll-theme-hacker
 
-# Consumed by jekyll-seo-tag for og:image / twitter:image. 1200x630 card
-# carrying the title, positioning and the three credibility points, so a
-# link pasted into Slack or LinkedIn makes the pitch on its own.
-image: /assets/og-image.png
-twitter:
-  card: summary_large_image
+# The 1200x630 social card lives at /assets/og-image.png and is wired up
+# explicitly in _layouts/default.html. It is not configured here: we tried
+# `image:` plus a `twitter:` block for jekyll-seo-tag and the plugin ignored
+# both, shipping pages with no og:image and a bare "@" for twitter:site.
 
 plugins:
-  - jekyll-seo-tag
   - jekyll-sitemap
+  - jekyll-feed
+
+# jekyll-feed defaults to /feed.xml. Posts carry lang: en or ja; the feed
+# includes both, which is correct for a bilingual author.
+feed:
+  path: feed.xml
+
+defaults:
+  - scope:
+      type: posts
+    values:
+      layout: post
+      lang: en
 
 sass:
   style: compressed
