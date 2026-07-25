@@ -66,10 +66,9 @@ contact:
 # nothing can link to a 404. `source` records which build artefact
 # each one comes from, making Phase 4 a copy step.
 #
-# ⚠ HOLD: the 2026-07-25 build still emits the literal string
-# "TODO" for MCP_SERVER_COUNT, MCP_USERS and NEIGHBORS_HOURS_SAVED.
-# Do not publish these PDFs until the master profile is filled in
-# and rebuilt.
+# Rebuilt 2026-07-25 with MCP_SERVER_COUNT=3 and MCP_USERS filled;
+# the unquantified hours clause was cut from the source rather than
+# guessed. All four verified free of literal "TODO" text.
 #
 # `default: true` marks the one the header button serves.
 # ──────────────────────────────────────────────────────────────
@@ -80,24 +79,28 @@ resume:
       label_ja: 日本・正社員向け
       description: Primary résumé for Japan-based AI and LLM engineering roles.
       source: Tyler_Freemont_Resume_AI_Japan.pdf
-      file: ""
+      file: /assets/resume/tyler-freemont-resume-japan-fulltime.pdf
+      pages: 2
       default: true
     - id: ai-evaluation
       label: AI evaluation
       label_ja: AI評価業務向け
       description: Weighted toward frontier-model evaluation and RLHF work.
       source: Tyler_Freemont_Resume_AI_Evaluation.pdf
-      file: ""
+      file: /assets/resume/tyler-freemont-resume-ai-evaluation.pdf
+      pages: 2
     - id: contracting
       label: Contracting / 業務委託
       label_ja: 業務委託向け
       description: One page, for freelance agents and direct clients.
       source: Tyler_Freemont_Resume_Contract.pdf
-      file: ""
+      file: /assets/resume/tyler-freemont-resume-contract.pdf
+      pages: 1
     - id: shokumu-keirekisho
       label: 職務経歴書
       label_ja: 職務経歴書
       description: Japanese-format career history for agents and Japanese employers.
       source: Tyler_Freemont_職務経歴書.pdf
-      file: ""
+      file: /assets/resume/tyler-freemont-shokumu-keirekisho.pdf
+      pages: 3
       lang: ja

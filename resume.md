@@ -42,7 +42,8 @@ description: >-
         </div>
         {%- if v.file != "" %}
         <a class="btn btn-primary" href="{{ v.file | relative_url }}" download>
-          <i class="fa-solid fa-file-arrow-down" aria-hidden="true"></i> PDF
+          <i class="fa-solid fa-file-arrow-down" aria-hidden="true"></i>
+          PDF{% if v.pages %} · {{ v.pages }} page{% if v.pages > 1 %}s{% endif %}{% endif %}
         </a>
         {%- else %}
         <span class="btn btn-disabled" aria-disabled="true">Preparing</span>
