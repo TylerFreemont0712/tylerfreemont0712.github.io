@@ -327,14 +327,6 @@ img { max-width: 100%; }
 .pane {
   @include pane-frame;
   margin-bottom: 24px;
-  opacity: 0;
-  transform: translateY(20px);
-  transition: opacity 0.5s ease, transform 0.5s ease;
-
-  &.visible {
-    opacity: 1;
-    transform: translateY(0);
-  }
 }
 
 .pane-title-bar {
@@ -734,14 +726,6 @@ img { max-width: 100%; }
   position: relative;
   padding-left: 32px;
   margin-bottom: 32px;
-  opacity: 0;
-  transform: translateX(-16px);
-  transition: all 0.5s ease;
-
-  &.visible {
-    opacity: 1;
-    transform: translateX(0);
-  }
 
   &::before {
     content: '';
@@ -933,14 +917,7 @@ img { max-width: 100%; }
   padding: 20px;
   display: flex;
   flex-direction: column;
-  transition: all 0.3s;
-  opacity: 0;
-  transform: translateY(16px);
-
-  &.visible {
-    opacity: 1;
-    transform: translateY(0);
-  }
+  transition: border-color 0.3s, background 0.3s;
 
   &:hover {
     border-color: $border-bright;
@@ -1477,3 +1454,7 @@ hr {
 // SECTION BLOCK spacer (for index page sections)
 // ============================================================
 .section-gap { margin-bottom: 24px; }
+
+// Phase 2 components. Imported last so it overrides the older
+// theme components it replaces.
+@import "components";
