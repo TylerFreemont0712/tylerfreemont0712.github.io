@@ -1,5 +1,26 @@
 title: Tyler Freemont
-description: Software Engineer · AI Systems · Local LLM Infrastructure · Agentic Workflows · Osaka, Japan
-show_downloads: false
-google_analytics:
+description: >-
+  Software Engineer, AI Systems — local LLM infrastructure, MCP servers and RAG
+  pipelines. Osaka, Japan. Native English, JLPT N1, AWS certified, no visa
+  sponsorship required.
+
+url: https://tylerfreemont0712.github.io
+baseurl: ""
+lang: en
+
 theme: jekyll-theme-hacker
+
+plugins:
+  - jekyll-seo-tag
+  - jekyll-sitemap
+
+sass:
+  style: compressed
+
+# Nothing here should ship to the built site.
+exclude:
+  - Gemfile
+  - Gemfile.lock
+  - LICENSE
+  - README.md
+  - vendor
