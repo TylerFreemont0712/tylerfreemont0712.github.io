@@ -1,0 +1,26 @@
+{%- assign p = site.data.profile -%}
+<footer class="site-footer">
+  <div class="footer-cta">
+    <h2>Hiring, or looking for a contractor?</h2>
+    <p>
+      {{ p.availability.statement }}{% if p.availability.from != "" %} from {{ p.availability.from }}{% endif %}.
+      No visa sponsorship required — I can start without immigration paperwork.
+    </p>
+    <div class="footer-actions">
+      <a href="mailto:{{ p.contact.email }}" class="btn btn-primary">
+        <i class="fa-solid fa-envelope" aria-hidden="true"></i> {{ p.contact.email }}
+      </a>
+      <a href="{{ '/resume' | relative_url }}" class="btn btn-ghost">
+        <i class="fa-solid fa-file-arrow-down" aria-hidden="true"></i> Résumé
+      </a>
+    </div>
+  </div>
+
+  <div class="footer-meta">
+    <span>&copy; {{ site.time | date: "%Y" }} {{ p.name }}</span>
+    <span class="footer-sep" aria-hidden="true">·</span>
+    <span>{{ p.location.city }}, {{ p.location.region }}</span>
+    <span class="footer-sep" aria-hidden="true">·</span>
+    <a href="{{ p.contact.github }}/tylerfreemont0712.github.io" target="_blank" rel="noopener">Source</a>
+  </div>
+</footer>

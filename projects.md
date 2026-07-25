@@ -1,369 +1,262 @@
 ---
 layout: default
-title: Projects - Tyler Freemont
+title: Projects
+nav: projects
 permalink: /projects
+description: >-
+  Projects by Tyler Freemont — self-hosted AI workspaces, multi-agent code
+  generation, local-network sync tooling, and llama.cpp server tooling.
 ---
 
-<!-- ═══════════ PROJECTS PAGE HEADER ═══════════ -->
-<div class="pane">
+<section class="pane reveal" aria-labelledby="proj-h">
   <div class="pane-title-bar">
-    <div class="pane-dots"><span></span><span></span><span></span></div>
-    <div class="pane-label"><i class="fa-solid fa-folder-tree"></i> ~/tyler/projects</div>
+    <div class="pane-dots" aria-hidden="true"><span></span><span></span><span></span></div>
+    <div class="pane-label">~/tyler/projects</div>
   </div>
   <div class="pane-body">
-    <div class="projects-page-header">
-      <div class="sec-prompt"><span class="pr">$</span> <span class="cmd">find</span> ~/projects -type d -maxdepth 1 | <span class="cmd">sort</span></div>
-      <h2 class="sec-title">All Projects</h2>
-      <p style="color:#8899aa; margin-top:8px; font-size:14px;">
-        AI &amp; LLM systems, original builds, and open source contributions.
-        <a href="./" style="margin-left:12px; font-size:12px;"><i class="fa-solid fa-arrow-left"></i> Back to Main</a>
+    <div class="sec-head">
+      <p class="sec-prompt" aria-hidden="true"><span class="pr">$</span> <span class="cmd">find</span> ~/projects -maxdepth 1 -type d</p>
+      <h1 class="sec-title" id="proj-h">Projects</h1>
+      <p class="sec-note">Deepest work first. Each entry says what the problem was,
+        how it is built, and what is genuinely hard about it.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════ AIOS ═══════════ -->
+<article class="pane reveal case" id="aios" aria-labelledby="aios-h">
+  <div class="pane-title-bar">
+    <div class="pane-dots" aria-hidden="true"><span></span><span></span><span></span></div>
+    <div class="pane-label">case-study · aios</div>
+  </div>
+  <div class="pane-body">
+    <header class="case-head">
+      <h2 class="case-title" id="aios-h">AIOS</h2>
+      <p class="case-tagline">A self-hosted AI workspace that serves a whole local
+        network from one machine.</p>
+      <p class="case-links">
+        <a href="{{ site.data.profile.contact.github }}/AIOS-v1" class="btn btn-primary" target="_blank" rel="noopener">
+          <i class="fa-brands fa-github" aria-hidden="true"></i> Source
+        </a>
+      </p>
+    </header>
+
+    <div class="case-body">
+      <h3>Problem</h3>
+      <p>
+        Using capable models at home or in a small office means either sending
+        everything to a third-party API or running a separate tool per task — one app
+        for chat, another for coding, another for notes, none of them aware of each
+        other, and all of them tied to the one machine with the GPU. I wanted a single
+        place that runs on the box with the hardware and is usable from any other
+        device on the network, with local models as the default and cloud providers as
+        an opt-in rather than a requirement.
+      </p>
+
+      <h3>Approach</h3>
+      <p>
+        A Node server on port 7777 serves a web desktop to the LAN and holds the
+        long-lived state. Local models run under llama.cpp and Ollama behind a routing
+        layer that cloud providers plug into on equal terms, so switching where
+        inference happens is a per-conversation choice, not an architectural one. On
+        top of that sit discrete apps — chat, a coding agent, project management, an
+        Obsidian-backed vault, a mindmap editor, a file editor and real terminals —
+        which keep running when you navigate away, so an agent run or a shell session
+        survives switching apps.
+      </p>
+
+      <h3>Hard part</h3>
+      <p>
+        The coding agent is the part with real teeth. It explores a project with
+        <code>list_dir</code>, <code>glob</code>, <code>grep</code> and
+        <code>read_file</code>, then changes it with <code>write_file</code> and
+        <code>edit_file</code>, runs <code>bash</code>, and reaches the network with
+        <code>web_search</code> — which means a model's output is being handed real
+        write access to a real filesystem and a real shell. The interesting design
+        pressure is that smaller local models follow tool schemas far less reliably
+        than frontier models do, so the tool layer has to be strict about what it
+        accepts and specific about how it fails, rather than assuming well-formed
+        calls. Terminals add a second problem: they need genuine PTY behaviour to run
+        interactive programs, which means native support at install time and keeping
+        sessions alive independently of whichever browser tab is currently attached.
+      </p>
+
+      <h3>Outcome</h3>
+      <p>
+        It is what I use daily, and it works from a tablet on the same network via a
+        pairing token in the LAN URL. Honest limitations: it is built for a trusted
+        home or small-office network and the pairing token is not a substitute for
+        real authentication on a hostile network; agent quality tracks the model you
+        point it at, so a small local model is noticeably worse at multi-step edits
+        than a frontier one; and it is a single-user-at-a-time design.
+      </p>
+
+      <ul class="case-stack">
+        <li>JavaScript</li><li>Node</li><li>llama.cpp</li><li>Ollama</li>
+        <li>xterm.js</li><li>CodeMirror</li>
+      </ul>
+    </div>
+  </div>
+</article>
+
+<!-- ═══════════ LLM COUNCIL ═══════════ -->
+<article class="pane reveal case" id="llm-council" aria-labelledby="council-h">
+  <div class="pane-title-bar">
+    <div class="pane-dots" aria-hidden="true"><span></span><span></span><span></span></div>
+    <div class="pane-label">case-study · llm-council</div>
+  </div>
+  <div class="pane-body">
+    <header class="case-head">
+      <h2 class="case-title" id="council-h">LLM Council</h2>
+      <p class="case-tagline">Multi-agent system that builds working browser games
+        end to end, with generated code validated before it is trusted.</p>
+    </header>
+
+    <div class="case-body">
+      <h3>Problem</h3>
+      <p>
+        A single model asked to build a whole application produces code that looks
+        plausible and fails on contact. The failure is rarely syntax — it is a
+        function called with the wrong arity, a name that was never defined, an
+        import of something that does not exist. Catching that by running the code and
+        reading the traceback is slow, and in a browser game a lot of breakage is
+        silent.
+      </p>
+
+      <h3>Approach</h3>
+      <p>
+        Specialised agents with distinct roles coordinate through a shared tool module
+        rather than by passing prose to each other, and that module — not the
+        individual agents — owns filesystem access, web search and asset downloading.
+        Structured inter-agent messages keep handoffs machine-checkable, and
+        hot-reloading closes the loop from generated change to visible result.
+      </p>
+
+      <h3>Hard part</h3>
+      <p>
+        Two decisions carry the system. The first is validating generated code at the
+        <strong>AST level</strong> instead of executing it to find out whether it
+        works: parse the output, walk the tree, and check that names resolve and calls
+        match definitions before anything is written to disk. That catches the class of
+        error models actually make, without paying for a run — the trade-off being
+        that it verifies structural correctness, not behaviour, so it narrows what
+        reaches execution rather than replacing testing. The second is
+        <strong>runtime tool generation</strong>: rather than shipping a fixed tool
+        list, the system creates tools as tasks demand them, which keeps the schema
+        surface small enough for a model to use reliably but means each new tool has to
+        be validated at the moment it is defined.
+      </p>
+
+      <ul class="case-stack">
+        <li>Python</li><li>Multi-agent orchestration</li><li>AST analysis</li>
+        <li>HTML5 Canvas</li>
+      </ul>
+
+      <p class="case-note">
+        <strong>Note:</strong> the source for this project is not currently public, so
+        this page is written to stand on its own rather than linking to a repository.
       </p>
     </div>
   </div>
-</div>
+</article>
 
-<!-- ═══════════ AI / LLM PROJECTS ═══════════ -->
-<div class="pane">
+<!-- ═══════════ LOCALSYNC ═══════════ -->
+<article class="pane reveal case" id="localsync" aria-labelledby="ls-h">
   <div class="pane-title-bar">
-    <div class="pane-dots"><span></span><span></span><span></span></div>
-    <div class="pane-label"><i class="fa-solid fa-brain"></i> ai-systems</div>
+    <div class="pane-dots" aria-hidden="true"><span></span><span></span><span></span></div>
+    <div class="pane-label">case-study · localsync</div>
+  </div>
+  <div class="pane-body">
+    <header class="case-head">
+      <h2 class="case-title" id="ls-h">LocalSync</h2>
+      <p class="case-tagline">Notes, calendar and finances synced across machines on a
+        local network, with no cloud service in the middle.</p>
+      <p class="case-links">
+        <a href="{{ site.data.profile.contact.github }}/LocalSyncOrganization" class="btn btn-primary" target="_blank" rel="noopener">
+          <i class="fa-brands fa-github" aria-hidden="true"></i> Source
+        </a>
+      </p>
+    </header>
+
+    <div class="case-body">
+      <h3>Problem</h3>
+      <p>
+        Keeping personal notes, a calendar and financial records consistent across
+        several machines normally means handing all three to a hosted service. I
+        wanted the same convenience with the data staying on my own hardware, and I
+        already kept notes in an Obsidian vault I did not want to migrate away from.
+      </p>
+
+      <h3>Approach</h3>
+      <p>
+        A PyQt6 desktop application over SQLite, with peers discovering each other by
+        scanning the local subnet and syncing directly rather than through a server. A
+        filesystem watcher on the Obsidian vault keeps the app and the raw markdown
+        files in agreement in near-real time, in both directions, so the vault stays
+        the source of truth for notes.
+      </p>
+
+      <h3>Hard part</h3>
+      <p>
+        Watching a directory that a human also edits is where the real difficulty sits.
+        A deletion has to be distinguished from a rename, an edit made in Obsidian has
+        to not fight an edit made in the app, and a burst of filesystem events from a
+        single save has to collapse into one update instead of a stampede. Getting
+        deletion sync to be safe — propagating genuine deletes without a transient
+        event destroying a note — took several iterations.
+      </p>
+
+      <p>
+        Alongside sync it carries the things I actually wanted a local app for: task and
+        goal management over the same SQLite store, expense and receipt tracking, and an
+        AI-driven step-by-step tutoring panel that works against a local model.
+      </p>
+
+      <ul class="case-stack">
+        <li>Python</li><li>PyQt6</li><li>SQLite</li><li>Filesystem watching</li>
+        <li>LAN peer discovery</li>
+      </ul>
+    </div>
+  </div>
+</article>
+
+<!-- ═══════════ OTHER PROJECTS ═══════════ -->
+<section class="pane reveal" aria-labelledby="other-h">
+  <div class="pane-title-bar">
+    <div class="pane-dots" aria-hidden="true"><span></span><span></span><span></span></div>
+    <div class="pane-label">other-projects</div>
   </div>
   <div class="pane-body">
     <div class="sec-head">
-      <div class="sec-prompt"><span class="pr">$</span> <span class="cmd">ls</span> ~/projects/ai/</div>
-      <h2 class="sec-title">AI &amp; LLM Systems</h2>
+      <p class="sec-prompt" aria-hidden="true"><span class="pr">$</span> <span class="cmd">ls</span> ~/projects/misc/</p>
+      <h2 class="sec-title" id="other-h">Other projects</h2>
     </div>
 
-    <!-- LLM Council -->
-    <div class="proj-detail-card">
-      <div class="proj-detail-bar">
-        <div class="proj-detail-title">
-          <i class="fa-solid fa-diagram-project"></i> LLM Council &mdash; Multi-Agent Autonomous Game Builder
-        </div>
-        <div class="proj-detail-links">
-          <a href="https://github.com/tylerfreemont0712" target="_blank" rel="noopener"><i class="fa-brands fa-github"></i> GitHub Profile</a>
-        </div>
-      </div>
-      <div class="proj-detail-body">
-        <div class="proj-detail-desc">
-          <p>A Python application that orchestrates multiple specialized AI agents via a shared tool module to autonomously build HTML5 Canvas browser games. Designed around structured inter-agent communication and runtime tool generation.</p>
-          <h4>Key Features</h4>
-          <ul>
-            <li>Multi-agent orchestration with specialized roles and a shared tool module</li>
-            <li>Filesystem access, web search, and asset downloading as first-class agent capabilities</li>
-            <li>Hot-reloading and structured inter-agent communication protocols</li>
-            <li>AST-level code validation for autonomous code correctness</li>
-            <li>Runtime tool generation for adaptive workflow management</li>
-          </ul>
-          <h4>Technologies</h4>
-          <ul>
-            <li>Python with multi-agent orchestration patterns</li>
-            <li>LangChain-style tool calling and agent loops</li>
-            <li>HTML5 Canvas as the game build target</li>
-            <li>AST-based static analysis for generated code validation</li>
-          </ul>
-        </div>
-        <div class="proj-detail-meta">
-          <span class="meta-chip lang"><span class="lang-dot python"></span> Python</span>
-          <span class="meta-chip type-original">Active</span>
-          <span class="meta-chip">Multi-Agent</span>
-        </div>
-      </div>
-    </div>
-
-    <!-- LocalSync -->
-    <div class="proj-detail-card">
-      <div class="proj-detail-bar">
-        <div class="proj-detail-title">
-          <i class="fa-solid fa-list-check"></i> LocalSync &mdash; Desktop Productivity App
-        </div>
-        <div class="proj-detail-links">
-          <a href="https://github.com/tylerfreemont0712" target="_blank" rel="noopener"><i class="fa-brands fa-github"></i> GitHub Profile</a>
-        </div>
-      </div>
-      <div class="proj-detail-body">
-        <div class="proj-detail-desc">
-          <p>A PyQt6 desktop application for personal task and goal management. Backed by SQLite and built around AI-assisted workflow features to streamline daily planning.</p>
-          <h4>Key Features</h4>
-          <ul>
-            <li>Cross-platform PyQt6 desktop UI</li>
-            <li>SQLite-backed local task and goal management</li>
-            <li>AI-assisted workflow features for prioritization and planning</li>
-            <li>Designed for fully local, privacy-respecting operation</li>
-          </ul>
-          <h4>Technologies</h4>
-          <ul>
-            <li>Python with PyQt6 for native desktop UI</li>
-            <li>SQLite for local persistence</li>
-            <li>Local LLM integration for AI-assisted features</li>
-          </ul>
-        </div>
-        <div class="proj-detail-meta">
-          <span class="meta-chip lang"><span class="lang-dot python"></span> Python</span>
-          <span class="meta-chip type-original">Active</span>
-          <span class="meta-chip">PyQt6</span>
-        </div>
-      </div>
-    </div>
-
+    <ul class="mini-list">
+      <li>
+        <h3><a href="{{ site.data.profile.contact.github }}/llama-launcher" target="_blank" rel="noopener">Local LLM Desktop Toolkit</a></h3>
+        <p>Launcher and management tooling for running llama.cpp servers locally — a
+          wizard instead of remembering flags — paired with a WASAPI loopback audio
+          recorder and a Whisper transcription pipeline.</p>
+        <p class="mini-stack">Python · PyQt6 · llama.cpp · Whisper</p>
+      </li>
+      <li>
+        <h3><a href="{{ site.data.profile.contact.github }}/PersonalDashboard" target="_blank" rel="noopener">PersonalDashboard</a></h3>
+        <p>Python dashboard aggregating daily information — the earlier iteration of
+          the ideas that became LocalSync.</p>
+        <p class="mini-stack">Python · PyQt6</p>
+      </li>
+      <li>
+        <h3><a href="{{ site.data.profile.contact.github }}/YTDownload" target="_blank" rel="noopener">YTDownload</a></h3>
+        <p>Media downloader with format and quality selection.</p>
+        <p class="mini-stack">Python</p>
+      </li>
+      <li>
+        <h3><a href="{{ site.data.profile.contact.github }}/SnakeGame" target="_blank" rel="noopener">SnakeGame</a></h3>
+        <p>Practice project — game loop, state management, collision detection.</p>
+        <p class="mini-stack">Python</p>
+      </li>
+    </ul>
   </div>
-</div>
+</section>
 
-<!-- ═══════════ ORIGINAL PROJECTS ═══════════ -->
-<div class="pane">
-  <div class="pane-title-bar">
-    <div class="pane-dots"><span></span><span></span><span></span></div>
-    <div class="pane-label"><i class="fa-solid fa-hammer"></i> original-builds</div>
-  </div>
-  <div class="pane-body">
-    <div class="sec-head">
-      <div class="sec-prompt"><span class="pr">$</span> <span class="cmd">ls</span> ~/projects/original/</div>
-      <h2 class="sec-title">Original Projects</h2>
-    </div>
-
-    <!-- PersonalDashboard -->
-    <div class="proj-detail-card">
-      <div class="proj-detail-bar">
-        <div class="proj-detail-title">
-          <i class="fa-solid fa-gauge-high"></i> PersonalDashboard
-        </div>
-        <div class="proj-detail-links">
-          <a href="https://github.com/TylerFreemont0712/PersonalDashboard" target="_blank" rel="noopener"><i class="fa-brands fa-github"></i> View Source</a>
-        </div>
-      </div>
-      <div class="proj-detail-body">
-        <div class="proj-detail-desc">
-          <p>A Python-based personal dashboard application for organizing and managing daily life. Built to streamline everyday tasks and surface useful information at a glance.</p>
-          <h4>Key Features</h4>
-          <ul>
-            <li>Centralized dashboard for daily task and information management</li>
-            <li>Clean Python architecture with a focus on usability</li>
-            <li>Modular design for adding new data sources and widgets</li>
-          </ul>
-          <h4>What I Learned</h4>
-          <ul>
-            <li>Designing user-facing applications with Python</li>
-            <li>Data aggregation and presentation patterns</li>
-            <li>Building maintainable, modular application architecture</li>
-          </ul>
-        </div>
-        <div class="proj-detail-meta">
-          <span class="meta-chip lang"><span class="lang-dot python"></span> Python</span>
-          <span class="meta-chip type-original">Original</span>
-        </div>
-      </div>
-    </div>
-
-    <!-- YTDownload -->
-    <div class="proj-detail-card">
-      <div class="proj-detail-bar">
-        <div class="proj-detail-title">
-          <i class="fa-solid fa-download"></i> YTDownload
-        </div>
-        <div class="proj-detail-links">
-          <a href="https://github.com/TylerFreemont0712/YTDownload" target="_blank" rel="noopener"><i class="fa-brands fa-github"></i> View Source</a>
-        </div>
-      </div>
-      <div class="proj-detail-body">
-        <div class="proj-detail-desc">
-          <p>A Python application for downloading YouTube content. Focused on providing a reliable and straightforward media download experience.</p>
-          <h4>Key Features</h4>
-          <ul>
-            <li>YouTube media downloading for music and video</li>
-            <li>Clean download pipeline with error handling</li>
-            <li>User-friendly interface for format and quality selection</li>
-          </ul>
-          <h4>What I Learned</h4>
-          <ul>
-            <li>Working with external APIs and media stream protocols</li>
-            <li>Error handling patterns for network operations</li>
-            <li>Python packaging and distribution practices</li>
-          </ul>
-        </div>
-        <div class="proj-detail-meta">
-          <span class="meta-chip lang"><span class="lang-dot python"></span> Python</span>
-          <span class="meta-chip type-original">Original</span>
-        </div>
-      </div>
-    </div>
-
-    <!-- SnakeGame -->
-    <div class="proj-detail-card">
-      <div class="proj-detail-bar">
-        <div class="proj-detail-title">
-          <i class="fa-solid fa-gamepad"></i> SnakeGame
-        </div>
-        <div class="proj-detail-links">
-          <a href="https://github.com/TylerFreemont0712/SnakeGame" target="_blank" rel="noopener"><i class="fa-brands fa-github"></i> View Source</a>
-        </div>
-      </div>
-      <div class="proj-detail-body">
-        <div class="proj-detail-desc">
-          <p>A classic Snake game implementation in Python. A focused practice project for exploring game development patterns and clean Python architecture.</p>
-          <h4>Key Features</h4>
-          <ul>
-            <li>Game loop with frame-rate control</li>
-            <li>State management for game entities</li>
-            <li>Collision detection and scoring system</li>
-            <li>Clean, readable Python code structure</li>
-          </ul>
-          <h4>What I Learned</h4>
-          <ul>
-            <li>Event-driven programming and game loop design</li>
-            <li>Managing mutable state in a real-time application</li>
-            <li>Python GUI libraries and rendering</li>
-          </ul>
-        </div>
-        <div class="proj-detail-meta">
-          <span class="meta-chip lang"><span class="lang-dot python"></span> Python</span>
-          <span class="meta-chip type-original">Original</span>
-        </div>
-      </div>
-    </div>
-
-  </div>
-</div>
-
-<!-- ═══════════ OPEN SOURCE CONTRIBUTIONS ═══════════ -->
-<div class="pane">
-  <div class="pane-title-bar">
-    <div class="pane-dots"><span></span><span></span><span></span></div>
-    <div class="pane-label"><i class="fa-solid fa-code-branch"></i> open-source</div>
-  </div>
-  <div class="pane-body">
-    <div class="sec-head">
-      <div class="sec-prompt"><span class="pr">$</span> <span class="cmd">ls</span> ~/projects/forks/</div>
-      <h2 class="sec-title">Open Source Contributions</h2>
-    </div>
-
-    <!-- Docling -->
-    <div class="proj-detail-card">
-      <div class="proj-detail-bar">
-        <div class="proj-detail-title">
-          <i class="fa-solid fa-file-lines"></i> Docling
-        </div>
-        <div class="proj-detail-links">
-          <a href="https://github.com/TylerFreemont0712/docling" target="_blank" rel="noopener"><i class="fa-brands fa-github"></i> View Fork</a>
-        </div>
-      </div>
-      <div class="proj-detail-body">
-        <div class="proj-detail-desc">
-          <p>A document preparation toolkit for generative AI applications. Converts documents into formats optimized for LLM ingestion and processing &mdash; directly relevant to RAG pipelines.</p>
-          <h4>Why I'm Contributing</h4>
-          <ul>
-            <li>Core to RAG pipeline work I'm doing professionally</li>
-            <li>Learning document processing patterns that feed into LLM workflows</li>
-            <li>Understanding how to prepare data at scale for AI systems</li>
-            <li>Contributing to tools that bridge traditional infrastructure with AI</li>
-          </ul>
-          <h4>Technologies</h4>
-          <ul>
-            <li>Python-based document processing</li>
-            <li>LLM integration patterns</li>
-            <li>Data pipeline architecture</li>
-          </ul>
-        </div>
-        <div class="proj-detail-meta">
-          <span class="meta-chip lang"><span class="lang-dot python"></span> Python</span>
-          <span class="meta-chip type-oss">OSS Contribution</span>
-          <span class="meta-chip license">MIT License</span>
-        </div>
-      </div>
-    </div>
-
-    <!-- Cardio -->
-    <div class="proj-detail-card">
-      <div class="proj-detail-bar">
-        <div class="proj-detail-title">
-          <i class="fa-solid fa-heart"></i> Cardio
-        </div>
-        <div class="proj-detail-links">
-          <a href="https://github.com/TylerFreemont0712/cardio" target="_blank" rel="noopener"><i class="fa-brands fa-github"></i> View Fork</a>
-        </div>
-      </div>
-      <div class="proj-detail-body">
-        <div class="proj-detail-desc">
-          <p>An open-source, community-driven roguelike deck-building card game written in Python. A well-architected game project with an active community.</p>
-          <h4>Why I'm Contributing</h4>
-          <ul>
-            <li>Study complex game architecture patterns in Python</li>
-            <li>Learn community-driven open source development practices</li>
-            <li>Explore state machine design and event-driven systems</li>
-            <li>Contribute to an active community project with real users</li>
-          </ul>
-          <h4>Technologies</h4>
-          <ul>
-            <li>Python game architecture</li>
-            <li>Jupyter Notebooks for prototyping and documentation</li>
-            <li>Complex state management and game logic</li>
-          </ul>
-        </div>
-        <div class="proj-detail-meta">
-          <span class="meta-chip lang"><span class="lang-dot jupyter"></span> Jupyter</span>
-          <span class="meta-chip type-oss">OSS Contribution</span>
-          <span class="meta-chip license">GPLv3</span>
-        </div>
-      </div>
-    </div>
-
-  </div>
-</div>
-
-<!-- ═══════════ PORTFOLIO SITE ═══════════ -->
-<div class="pane">
-  <div class="pane-title-bar">
-    <div class="pane-dots"><span></span><span></span><span></span></div>
-    <div class="pane-label"><i class="fa-solid fa-palette"></i> meta</div>
-  </div>
-  <div class="pane-body">
-    <div class="sec-head">
-      <div class="sec-prompt"><span class="pr">$</span> <span class="cmd">ls</span> ~/projects/portfolio/</div>
-      <h2 class="sec-title">This Site</h2>
-    </div>
-
-    <div class="proj-detail-card">
-      <div class="proj-detail-bar">
-        <div class="proj-detail-title">
-          <i class="fa-solid fa-globe"></i> tylerfreemont0712.github.io
-        </div>
-        <div class="proj-detail-links">
-          <a href="https://github.com/TylerFreemont0712/tylerfreemont0712.github.io" target="_blank" rel="noopener"><i class="fa-brands fa-github"></i> View Source</a>
-        </div>
-      </div>
-      <div class="proj-detail-body">
-        <div class="proj-detail-desc">
-          <p>The site you're looking at right now. A portfolio website built as a "mission control dashboard" for AI systems work &mdash; because your personal site should reflect who you are.</p>
-          <h4>Design Concept</h4>
-          <ul>
-            <li>Mission Control / monitoring dashboard aesthetic</li>
-            <li>Terminal-style section headers (<code>$ cat about.txt</code>)</li>
-            <li>Pane windows with title bars mimicking tmux/terminal splits</li>
-            <li>System bar navigation styled as a server status display</li>
-            <li>Subtle scanline overlay and grid background effects</li>
-            <li>Animated skill gauges and scroll-triggered transitions</li>
-          </ul>
-          <h4>Tech Stack</h4>
-          <ul>
-            <li>Jekyll static site generator on GitHub Pages</li>
-            <li>Custom SCSS theme (1,300+ lines, built from scratch)</li>
-            <li>Responsive design with mobile-first breakpoints</li>
-            <li>Vanilla JavaScript for animations (no frameworks)</li>
-            <li>Font Awesome icons + JetBrains Mono / Inter typography</li>
-          </ul>
-        </div>
-        <div class="proj-detail-meta">
-          <span class="meta-chip lang"><span class="lang-dot scss"></span> SCSS / Jekyll</span>
-          <span class="meta-chip type-portfolio">Portfolio</span>
-          <span class="meta-chip license">CC0-1.0</span>
-        </div>
-      </div>
-    </div>
-
-  </div>
-</div>
-
-<!-- ═══════════ BACK NAV ═══════════ -->
-<div style="text-align:center; margin: 24px 0 0;">
-  <a href="./" class="btn btn-cyan"><i class="fa-solid fa-arrow-left"></i> Back to Main</a>
-  <a href="https://github.com/tylerfreemont0712" target="_blank" rel="noopener" class="btn btn-ghost"><i class="fa-brands fa-github"></i> View All on GitHub</a>
-</div>

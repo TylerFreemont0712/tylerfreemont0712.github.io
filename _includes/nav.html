@@ -1,0 +1,67 @@
+{%- comment -%}
+  Top system bar. Deliberately JS-free: the nav is a wrapping flex row
+  rather than a hamburger toggle, so it works with scripting disabled
+  and needs no ARIA state management.
+
+  The résumé button serves the default PDF directly once one exists in
+  assets/resume/; until then it points at the /resume hub so it never
+  resolves to a 404.
+{%- endcomment -%}
+
+{%- assign resume_file = "" -%}
+{%- for v in site.data.profile.resume.variants -%}
+  {%- if v.default and v.file != "" -%}{%- assign resume_file = v.file -%}{%- endif -%}
+{%- endfor -%}
+{%- if resume_file != "" -%}
+  {%- assign resume_href = resume_file | relative_url -%}
+{%- else -%}
+  {%- assign resume_href = "/resume" | relative_url -%}
+{%- endif -%}
+
+<a class="skip-link" href="#main">Skip to content</a>
+
+<nav class="system-bar" aria-label="Primary">
+  <div class="sysbar-left">
+    <span class="sysbar-indicator" aria-hidden="true"></span>
+    <span class="sysbar-host">tyler@osaka</span>
+  </div>
+
+  <ul class="sysbar-tabs">
+    <li>
+      <a href="{{ '/' | relative_url }}"
+         class="sysbar-tab{% if page.url == '/' %} active{% endif %}"
+         {% if page.url == '/' %}aria-current="page"{% endif %}>Home</a>
+    </li>
+    <li>
+      <a href="{{ '/projects' | relative_url }}"
+         class="sysbar-tab{% if page.nav == 'projects' %} active{% endif %}"
+         {% if page.nav == 'projects' %}aria-current="page"{% endif %}>Projects</a>
+    </li>
+    <li>
+      <a href="{{ '/experience' | relative_url }}"
+         class="sysbar-tab{% if page.nav == 'experience' %} active{% endif %}"
+         {% if page.nav == 'experience' %}aria-current="page"{% endif %}>Experience</a>
+    </li>
+    <li>
+      <a href="{{ '/writing' | relative_url }}"
+         class="sysbar-tab{% if page.nav == 'writing' %} active{% endif %}"
+         {% if page.nav == 'writing' %}aria-current="page"{% endif %}>Writing</a>
+    </li>
+  </ul>
+
+  <div class="sysbar-right">
+    <a href="{{ resume_href }}" class="sysbar-cta">
+      <i class="fa-solid fa-file-arrow-down" aria-hidden="true"></i>
+      <span>Résumé</span>
+    </a>
+    <a href="{{ site.data.profile.contact.github }}" target="_blank" rel="noopener"
+       class="sysbar-icon" title="GitHub">
+      <i class="fa-brands fa-github" aria-hidden="true"></i>
+      <span class="sr-only">GitHub</span>
+    </a>
+    <a href="mailto:{{ site.data.profile.contact.email }}" class="sysbar-icon" title="Email">
+      <i class="fa-solid fa-envelope" aria-hidden="true"></i>
+      <span class="sr-only">Email Tyler</span>
+    </a>
+  </div>
+</nav>
