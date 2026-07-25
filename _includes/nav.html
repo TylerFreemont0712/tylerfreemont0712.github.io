@@ -1,0 +1,96 @@
+{%- comment -%}
+  Top system bar. Deliberately JS-free: the nav is a wrapping flex row rather
+  than a hamburger toggle, so it works with scripting disabled and needs no
+  ARIA state management.
+
+  The language toggle is a plain link to the counterpart page (page.alt_url in
+  front matter). It does NOT auto-redirect on a stored preference: that traps
+  people who deliberately chose the other language, breaks the back button, and
+  confuses crawlers. The preference is remembered and surfaced as a dismissible
+  notice instead — see _includes/lang-notice.html.
+{%- endcomment -%}
+
+{%- assign p = site.data.profile -%}
+{%- assign ja = false -%}
+{%- if page.lang == "ja" -%}{%- assign ja = true -%}{%- endif -%}
+
+{%- comment -%} Résumé button: 職務経歴書 for JA readers, Japan full-time for EN. {%- endcomment -%}
+{%- assign resume_file = "" -%}
+{%- for v in p.resume.variants -%}
+  {%- if ja -%}
+    {%- if v.id == "shokumu-keirekisho" and v.file != "" -%}{%- assign resume_file = v.file -%}{%- endif -%}
+  {%- else -%}
+    {%- if v.default and v.file != "" -%}{%- assign resume_file = v.file -%}{%- endif -%}
+  {%- endif -%}
+{%- endfor -%}
+
+{%- if ja -%}
+  {%- assign base = "/ja" -%}
+  {%- assign t_skip = "本文へskip" -%}
+  {%- assign t_home = "ホーム" -%}
+  {%- assign t_proj = "実績" -%}
+  {%- assign t_exp = "経歴" -%}
+  {%- assign t_res = "職務経歴書" -%}
+  {%- assign t_toggle = "English" -%}
+  {%- assign t_toggle_full = "Switch to English" -%}
+{%- else -%}
+  {%- assign base = "" -%}
+  {%- assign t_skip = "Skip to content" -%}
+  {%- assign t_home = "Home" -%}
+  {%- assign t_proj = "Projects" -%}
+  {%- assign t_exp = "Experience" -%}
+  {%- assign t_res = "Résumé" -%}
+  {%- assign t_toggle = "日本語" -%}
+  {%- assign t_toggle_full = "日本語版を表示" -%}
+{%- endif -%}
+
+{%- if resume_file != "" -%}
+  {%- assign resume_href = resume_file | relative_url -%}
+{%- else -%}
+  {%- assign resume_href = base | append: "/resume" | relative_url -%}
+{%- endif -%}
+
+<a class="skip-link" href="#main">{{ t_skip }}</a>
+
+<nav class="system-bar" aria-label="{% if ja %}メインナビゲーション{% else %}Primary{% endif %}">
+  <div class="sysbar-left">
+    <span class="sysbar-indicator" aria-hidden="true"></span>
+    <span class="sysbar-host">tyler@osaka</span>
+  </div>
+
+  <ul class="sysbar-tabs">
+    <li><a href="{{ base | append: '/' | relative_url }}"
+           class="sysbar-tab{% if page.nav == 'home' %} active{% endif %}"
+           {% if page.nav == 'home' %}aria-current="page"{% endif %}>{{ t_home }}</a></li>
+    <li><a href="{{ base | append: '/projects' | relative_url }}"
+           class="sysbar-tab{% if page.nav == 'projects' %} active{% endif %}"
+           {% if page.nav == 'projects' %}aria-current="page"{% endif %}>{{ t_proj }}</a></li>
+    <li><a href="{{ base | append: '/experience' | relative_url }}"
+           class="sysbar-tab{% if page.nav == 'experience' %} active{% endif %}"
+           {% if page.nav == 'experience' %}aria-current="page"{% endif %}>{{ t_exp }}</a></li>
+    <li><a href="{{ base | append: '/writing' | relative_url }}"
+           class="sysbar-tab{% if page.nav == 'writing' %} active{% endif %}"
+           {% if page.nav == 'writing' %}aria-current="page"{% endif %}>{% if ja %}技術記事{% else %}Writing{% endif %}</a></li>
+  </ul>
+
+  <div class="sysbar-right">
+    {%- if page.alt_url %}
+    <a href="{{ page.alt_url | relative_url }}" class="lang-toggle"
+       lang="{% if ja %}en{% else %}ja{% endif %}"
+       hreflang="{% if ja %}en{% else %}ja{% endif %}"
+       title="{{ t_toggle_full }}" data-lang-choice="{% if ja %}en{% else %}ja{% endif %}">
+      {{ t_toggle }}
+    </a>
+    {%- endif %}
+    <a href="{{ resume_href }}" class="sysbar-cta">
+      {% include icon.html name="download" %}<span>{{ t_res }}</span>
+    </a>
+    <a href="{{ p.contact.github }}" target="_blank" rel="noopener" class="sysbar-icon" title="GitHub">
+      {% include icon.html name="github" %}<span class="sr-only">GitHub</span>
+    </a>
+    <a href="mailto:{{ p.contact.email }}" class="sysbar-icon"
+       title="{% if ja %}メール{% else %}Email{% endif %}">
+      {% include icon.html name="envelope" %}<span class="sr-only">{% if ja %}メールを送る{% else %}Email Tyler{% endif %}</span>
+    </a>
+  </div>
+</nav>

@@ -2,13 +2,33 @@
 layout: default
 ---
 
-<small>{{ page.date | date: "%-d %B %Y" }}</small>
-<h1>{{ page.title }}</h1>
+{%- comment -%}
+  Article layout for /writing. Sets lang on the prose itself so a Japanese
+  article is announced correctly even though the site chrome is English.
+{%- endcomment -%}
 
-<p class="view">by {{ page.author | default: site.author }}</p>
+<article class="pane reveal post" {% if page.lang %}lang="{{ page.lang }}"{% endif %}>
+  <div class="pane-title-bar">
+    <div class="pane-dots" aria-hidden="true"><span></span><span></span><span></span></div>
+    <div class="pane-label">writing</div>
+  </div>
+  <div class="pane-body">
+    <header class="post-head">
+      <h1>{{ page.title }}</h1>
+      <p class="post-meta">
+        <time datetime="{{ page.date | date_to_xmlschema }}">{{ page.date | date: "%-d %B %Y" }}</time>
+        {%- if page.lang == 'ja' %} · <span class="badge">日本語</span>{% endif %}
+        {%- if page.tags and page.tags != empty %} · {{ page.tags | join: " · " }}{% endif %}
+      </p>
+    </header>
 
-{{content}}
+    <div class="post-body">
+      {{ content }}
+    </div>
 
-{% if page.tags %}
-  <small>tags: <em>{{ page.tags | join: "</em> - <em>" }}</em></small>
-{% endif %}
+    <footer class="post-foot">
+      <a href="{{ '/writing' | relative_url }}">← All writing</a>
+      <a href="mailto:{{ site.data.profile.contact.email }}">Reply by email</a>
+    </footer>
+  </div>
+</article>

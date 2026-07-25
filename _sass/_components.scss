@@ -1,0 +1,1125 @@
+// ============================================================
+// PHASE 2 COMPONENTS
+// Evidence-first information architecture. Loaded last so these
+// rules win over the older theme components they replace.
+// ============================================================
+
+// ------------------------------------------------------------
+// REVEAL ON SCROLL — progressive enhancement only.
+//
+// The hidden state is scoped to html.js, which is set by an inline
+// script in <head>. With scripting disabled the class is never
+// added, nothing is ever hidden, and the page reads normally.
+// Previously .pane itself carried opacity: 0, so a no-JS visitor
+// got a blank page.
+// ------------------------------------------------------------
+.js .reveal {
+  opacity: 0;
+  transform: translateY(16px);
+  transition: opacity 0.5s ease, transform 0.5s ease;
+
+  &.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  .js .reveal {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+// ------------------------------------------------------------
+// JAPANESE TYPOGRAPHY
+//
+// Neither Inter nor JetBrains Mono ships CJK glyphs, so :lang(ja) needs a
+// stack that reaches a real Japanese face. Japanese also wants looser
+// leading than Latin at the same size, and must not break mid-word at
+// arbitrary points — hence word-break: normal with line-break: strict,
+// which keeps 禁則処理 (no leading 。or closing bracket on a new line).
+// ------------------------------------------------------------
+$font-ja: 'Inter', -apple-system, BlinkMacSystemFont, 'Hiragino Kaku Gothic ProN',
+          'Hiragino Sans', 'Yu Gothic UI', 'Yu Gothic', 'Meiryo', sans-serif;
+
+:lang(ja) {
+  font-family: $font-ja;
+  line-height: 1.85;
+  line-break: strict;
+  word-break: normal;
+  overflow-wrap: anywhere;
+}
+
+:lang(ja) .arch-svg text,
+:lang(ja) .hero-name,
+:lang(ja) .case-title,
+:lang(ja) .sec-title,
+:lang(ja) .tl-role {
+  font-family: $font-ja;
+}
+
+// Latin runs inside Japanese prose keep the mono face, which is what makes
+// llama.cpp and MCP read as identifiers rather than words.
+:lang(ja) code,
+:lang(ja) .proj-stack,
+:lang(ja) .mini-stack,
+:lang(ja) .case-stack,
+:lang(ja) .prof {
+  font-family: $font-mono;
+}
+
+:lang(ja) .hero-positioning,
+:lang(ja) .cap-card p,
+:lang(ja) .case-body p {
+  line-height: 1.9;
+}
+
+// Slightly tighter than the Latin measure: CJK characters are wider, so the
+// same character count is a longer line.
+:lang(ja) .case-body p { max-width: 46em; }
+:lang(ja) .sec-note,
+:lang(ja) .empty-state { max-width: 44em; }
+
+.name-ja {
+  display: inline-block;
+  margin-left: 2px;
+  color: $text-2;
+  font-size: 0.44em;
+  font-weight: 500;
+  vertical-align: 0.34em;
+}
+
+// ------------------------------------------------------------
+// LANGUAGE TOGGLE + RETURNING-VISITOR NOTICE
+// ------------------------------------------------------------
+.lang-toggle {
+  padding: 5px 11px;
+  border: 1px solid $border-bright;
+  border-radius: 4px;
+  color: $text-2;
+  font-family: $font-mono;
+  font-size: 11.5px;
+  font-weight: 600;
+  letter-spacing: 0.4px;
+  white-space: nowrap;
+  text-decoration: none;
+  transition: border-color 0.2s, color 0.2s;
+
+  &:hover,
+  &:focus {
+    border-color: $cyan;
+    color: $cyan;
+    text-decoration: none;
+  }
+}
+
+.lang-notice {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px;
+  max-width: 1200px;
+  margin: 12px auto 0;
+  padding: 11px 16px;
+  border: 1px solid $border-bright;
+  border-left: 3px solid $cyan;
+  border-radius: 5px;
+  background: rgba(0, 229, 255, 0.06);
+
+  &[hidden] { display: none; }
+
+  p {
+    flex: 1 1 auto;
+    margin: 0;
+    color: $text-1;
+    font-size: 13.5px;
+  }
+
+  @include respond(1248px) { margin: 12px 24px 0; }
+  @include respond(768px)  { margin: 12px 12px 0; }
+}
+
+.btn-sm {
+  padding: 5px 12px;
+  font-size: 12px;
+}
+
+.lang-notice-x {
+  flex: none;
+  width: 28px;
+  height: 28px;
+  border: 1px solid transparent;
+  border-radius: 4px;
+  background: none;
+  color: $text-2;
+  font-size: 19px;
+  line-height: 1;
+  cursor: pointer;
+
+  &:hover { border-color: $border-bright; color: $text-1; }
+}
+
+.lang-tag {
+  display: inline-block;
+  padding: 1px 7px;
+  border: 1px solid $border-bright;
+  border-radius: 3px;
+  color: $text-3;
+  font-family: $font-mono;
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  vertical-align: 2px;
+}
+
+// ------------------------------------------------------------
+// CONDITIONS LIST (/ja/ — 希望条件)
+// ------------------------------------------------------------
+.cond-list {
+  display: grid;
+  grid-template-columns: max-content 1fr;
+  gap: 0;
+  margin: 0;
+
+  dt {
+    padding: 12px 20px 12px 0;
+    border-top: 1px solid rgba(26, 39, 68, 0.7);
+    color: $cyan;
+    font-family: $font-mono;
+    font-size: 13px;
+    font-weight: 600;
+    white-space: nowrap;
+  }
+
+  dd {
+    padding: 12px 0;
+    margin: 0;
+    border-top: 1px solid rgba(26, 39, 68, 0.7);
+    color: $text-1;
+    font-size: 14.5px;
+
+    strong { color: $green; }
+  }
+
+  dt:first-of-type,
+  dt:first-of-type + dd { border-top: 0; }
+
+  @include respond(600px) {
+    grid-template-columns: 1fr;
+
+    dt { padding-bottom: 2px; }
+    dd { padding-top: 0; border-top: 0; }
+  }
+}
+
+// ------------------------------------------------------------
+// INLINE SVG ICONS (_includes/icon.html)
+// ------------------------------------------------------------
+.icon {
+  width: 1em;
+  height: 1em;
+  flex: none;
+  vertical-align: -0.13em;
+}
+
+.sysbar-cta .icon,
+.btn .icon { margin-right: 2px; }
+
+// ------------------------------------------------------------
+// ACCESSIBILITY PRIMITIVES
+// ------------------------------------------------------------
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.skip-link {
+  position: absolute;
+  left: -9999px;
+  top: 0;
+  z-index: 100;
+
+  &:focus {
+    left: 8px;
+    top: 8px;
+    padding: 10px 16px;
+    background: $cyan;
+    color: $void;
+    font-family: $font-mono;
+    font-weight: 700;
+    border-radius: 4px;
+  }
+}
+
+// Visible keyboard focus everywhere. 3:1 against the dark panels.
+a:focus-visible,
+button:focus-visible,
+[tabindex]:focus-visible {
+  outline: 2px solid $cyan;
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+// ------------------------------------------------------------
+// SYSTEM BAR — JS-free, wraps instead of collapsing to a toggle
+//
+// The sticky/wrapping behaviour it needs is set on .system-bar itself in
+// jekyll-theme-hacker.scss rather than overridden here, so there is only
+// one source of truth for the bar's layout.
+// ------------------------------------------------------------
+.sysbar-tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+
+  li { margin: 0; }
+}
+
+.sysbar-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 6px 14px;
+  border: 1px solid $cyan;
+  border-radius: 4px;
+  background: rgba(0, 229, 255, 0.1);
+  color: $cyan;
+  font-family: $font-mono;
+  font-size: 12px;
+  font-weight: 600;
+  text-decoration: none;
+  white-space: nowrap;
+  transition: background 0.2s, color 0.2s;
+
+  &:hover,
+  &:focus {
+    background: $cyan;
+    color: $void;
+    text-decoration: none;
+  }
+
+  @include respond(560px) {
+    span { display: none; }
+    padding: 6px 10px;
+  }
+}
+
+// ------------------------------------------------------------
+// HERO — above the fold, in the order the brief fixes
+// ------------------------------------------------------------
+.hero {
+  padding: 40px 0 8px;
+
+  @include respond(768px) { padding: 24px 0 4px; }
+}
+
+.hero-eyebrow {
+  margin: 0 0 6px;
+  color: $cyan;
+  font-family: $font-mono;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 1.4px;
+  text-transform: uppercase;
+}
+
+.hero-name {
+  margin: 0 0 10px;
+  color: $text-1;
+  font-family: $font-mono;
+  font-size: 46px;
+  font-weight: 700;
+  line-height: 1.05;
+  letter-spacing: -1px;
+
+  @include respond(768px) { font-size: 33px; }
+}
+
+.hero-positioning {
+  max-width: 62ch;
+  margin: 0 0 22px;
+  color: $text-1;
+  font-size: 19px;
+  line-height: 1.5;
+
+  @include respond(768px) { font-size: 16.5px; }
+}
+
+// --- three-part credibility line ---
+.cred-line {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  list-style: none;
+  margin: 0 0 20px;
+  padding: 0;
+}
+
+.cred-chip {
+  flex: 1 1 210px;
+  padding: 11px 14px;
+  border: 1px solid $border-bright;
+  border-left: 3px solid $green;
+  border-radius: 4px;
+  background: rgba(57, 255, 20, 0.05);
+}
+
+.cred-label {
+  display: block;
+  color: $green;
+  font-family: $font-mono;
+  font-size: 13.5px;
+  font-weight: 700;
+  line-height: 1.3;
+}
+
+.cred-detail {
+  display: block;
+  margin-top: 3px;
+  color: $text-2;
+  font-size: 12.5px;
+  line-height: 1.4;
+}
+
+// --- availability ---
+.availability {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 0 0 24px;
+  padding: 10px 15px;
+  border: 1px solid rgba(57, 255, 20, 0.35);
+  border-radius: 4px;
+  background: rgba(57, 255, 20, 0.07);
+}
+
+.avail-dot {
+  flex: none;
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: $green;
+  box-shadow: 0 0 6px $green;
+  animation: pulse-led 2.4s ease-in-out infinite;
+}
+
+.avail-text {
+  color: $text-1;
+  font-family: $font-mono;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+// --- visual proof ---
+.hero-proof {
+  margin: 30px 0 0;
+}
+
+.diagram-frame {
+  padding: 16px;
+  border: 1px solid $border;
+  border-radius: 6px;
+  background: $void;
+  overflow-x: auto;
+}
+
+.arch-svg {
+  display: block;
+  width: 100%;
+  min-width: 560px;
+  height: auto;
+}
+
+.hero-proof figcaption {
+  margin-top: 10px;
+  color: $text-2;
+  font-size: 13px;
+  line-height: 1.5;
+
+  strong { color: $text-1; }
+
+  a {
+    font-family: $font-mono;
+    font-size: 12.5px;
+  }
+}
+
+// ------------------------------------------------------------
+// BUTTONS — primary action
+// ------------------------------------------------------------
+.btn-primary {
+  border-color: $cyan;
+  background: $cyan;
+  color: $void;
+  font-weight: 700;
+
+  &:hover,
+  &:focus {
+    background: lighten($cyan, 12%);
+    border-color: lighten($cyan, 12%);
+    color: $void;
+  }
+}
+
+.btn-disabled {
+  border-color: $border;
+  background: transparent;
+  color: $text-3;
+  cursor: not-allowed;
+}
+
+// ------------------------------------------------------------
+// SECTION HELPERS
+// ------------------------------------------------------------
+.sec-note {
+  max-width: 72ch;
+  margin: 8px 0 0;
+  color: $text-2;
+  font-size: 14px;
+  line-height: 1.6;
+
+  strong { color: $text-1; }
+}
+
+.sec-more {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin: 26px 0 0;
+}
+
+.sub-h {
+  margin: 26px 0 12px;
+  color: $cyan;
+  font-family: $font-mono;
+  font-size: 12.5px;
+  font-weight: 600;
+  letter-spacing: 1.2px;
+  text-transform: uppercase;
+}
+
+// ------------------------------------------------------------
+// CAPABILITY CARDS (landing)
+// ------------------------------------------------------------
+.cap-card {
+  padding: 20px;
+  border: 1px solid $border;
+  border-radius: 6px;
+  background: $panel;
+
+  h3 {
+    margin: 0 0 10px;
+    color: $cyan;
+    font-family: $font-mono;
+    font-size: 15.5px;
+    font-weight: 600;
+  }
+
+  p {
+    margin: 0;
+    color: $text-2;
+    font-size: 14px;
+    line-height: 1.62;
+  }
+
+  strong { color: $text-1; }
+}
+
+.cap-evidence {
+  margin-top: 12px !important;
+  padding-top: 10px;
+  border-top: 1px solid $border;
+  font-family: $font-mono;
+  font-size: 12.5px !important;
+}
+
+// ------------------------------------------------------------
+// PROJECT CARDS (landing)
+// ------------------------------------------------------------
+.proj-stack {
+  margin: 12px 0 0;
+  color: $text-3;
+  font-family: $font-mono;
+  font-size: 12px;
+}
+
+.proj-links {
+  display: flex;
+  gap: 14px;
+  margin: 12px 0 0;
+  padding-top: 12px;
+  border-top: 1px solid $border;
+  font-family: $font-mono;
+  font-size: 12.5px;
+}
+
+// ------------------------------------------------------------
+// CASE STUDIES
+// ------------------------------------------------------------
+.case {
+  scroll-margin-top: 70px;
+}
+
+.case-head {
+  padding-bottom: 18px;
+  margin-bottom: 20px;
+  border-bottom: 1px solid $border;
+}
+
+.case-title {
+  margin: 0 0 8px;
+  color: $text-1;
+  font-family: $font-mono;
+  font-size: 29px;
+  font-weight: 700;
+
+  @include respond(768px) { font-size: 24px; }
+}
+
+.case-tagline {
+  max-width: 66ch;
+  margin: 0;
+  color: $text-2;
+  font-size: 16px;
+  line-height: 1.55;
+}
+
+.case-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin: 16px 0 0;
+}
+
+.case-body {
+  h3 {
+    margin: 26px 0 10px;
+    color: $cyan;
+    font-family: $font-mono;
+    font-size: 12.5px;
+    font-weight: 700;
+    letter-spacing: 1.3px;
+    text-transform: uppercase;
+
+    &:first-child { margin-top: 0; }
+  }
+
+  p {
+    max-width: 78ch;
+    margin: 0 0 12px;
+    color: $text-1;
+    font-size: 15px;
+    line-height: 1.72;
+  }
+
+  code {
+    padding: 1px 5px;
+    border-radius: 3px;
+    background: rgba(0, 229, 255, 0.09);
+    color: $cyan;
+    font-family: $font-mono;
+    font-size: 13px;
+  }
+
+  strong { color: $text-1; font-weight: 700; }
+}
+
+// Screenshots inside a case study. width/height are set on every <img> in the
+// markup so the box is reserved before the file loads and nothing shifts.
+.shot {
+  margin: 22px 0 26px;
+
+  img {
+    display: block;
+    width: 100%;
+    height: auto;
+    border: 1px solid $border-bright;
+    border-radius: 6px;
+    background: $void;
+  }
+
+  figcaption {
+    max-width: 78ch;
+    margin-top: 11px;
+    padding-left: 13px;
+    border-left: 2px solid $border-bright;
+    color: $text-2;
+    font-size: 13.5px;
+    line-height: 1.65;
+
+    strong { color: $text-1; }
+
+    code {
+      padding: 1px 5px;
+      border-radius: 3px;
+      background: rgba(0, 229, 255, 0.09);
+      color: $cyan;
+      font-family: $font-mono;
+      font-size: 12.5px;
+    }
+  }
+}
+
+// The one screenshot carrying the most weight gets a cyan edge to say so.
+.shot-feature {
+  img { border-color: $cyan; }
+  figcaption { border-left-color: $cyan; }
+}
+
+.case-stack {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 7px;
+  margin: 20px 0 0;
+  padding: 0;
+  list-style: none;
+
+  li {
+    padding: 4px 10px;
+    border: 1px solid $border-bright;
+    border-radius: 3px;
+    color: $text-2;
+    font-family: $font-mono;
+    font-size: 11.5px;
+  }
+}
+
+.case-note {
+  margin-top: 18px !important;
+  padding: 12px 15px;
+  border-left: 3px solid $amber;
+  border-radius: 3px;
+  background: rgba(255, 179, 0, 0.07);
+  color: $text-2 !important;
+  font-size: 13.5px !important;
+
+  strong { color: $amber !important; }
+}
+
+// ------------------------------------------------------------
+// COMPACT LISTS (other projects)
+// ------------------------------------------------------------
+.mini-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(255px, 1fr));
+  gap: 16px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+
+  > li {
+    padding: 16px;
+    border: 1px solid $border;
+    border-radius: 5px;
+    background: rgba(15, 23, 41, 0.55);
+  }
+
+  h3 {
+    margin: 0 0 7px;
+    font-family: $font-mono;
+    font-size: 14.5px;
+    font-weight: 600;
+  }
+
+  p {
+    margin: 0;
+    color: $text-2;
+    font-size: 13.5px;
+    line-height: 1.58;
+  }
+}
+
+.mini-stack {
+  margin-top: 9px !important;
+  color: $text-3 !important;
+  font-family: $font-mono;
+  font-size: 11.5px !important;
+}
+
+// ------------------------------------------------------------
+// TIMELINE — semantic-markup adjustments
+//
+// Roles are now h2/p rather than spans, and the tag row is a real
+// <ul>, so the inherited heading and list margins need resetting.
+// ------------------------------------------------------------
+.tl-role,
+.tl-date,
+.tl-company {
+  margin: 0;
+}
+
+.tl-company { margin-bottom: 12px; }
+
+.tl-tags {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+
+  li {
+    padding: 3px 8px;
+    border: 1px solid rgba($cyan, 0.15);
+    border-radius: 3px;
+    background: rgba($cyan, 0.06);
+    color: $cyan;
+    font-family: $font-mono;
+    font-size: 10px;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    list-style-image: none;
+  }
+}
+
+// ------------------------------------------------------------
+// SKILLS — words, not gauges
+// ------------------------------------------------------------
+.skill-group {
+  h3 {
+    margin: 0 0 12px;
+    color: $cyan;
+    font-family: $font-mono;
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 0.8px;
+    text-transform: uppercase;
+  }
+}
+
+.skill-list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+
+  li {
+    padding: 7px 0;
+    border-bottom: 1px solid rgba(26, 39, 68, 0.6);
+    color: $text-1;
+    font-size: 14px;
+    line-height: 1.55;
+
+    &:last-child { border-bottom: 0; }
+  }
+
+  strong { color: $text-1; }
+}
+
+// Proficiency label: a word tied to a definition, not a percentage.
+.prof {
+  display: inline-block;
+  margin-right: 8px;
+  padding: 2px 8px;
+  border: 1px solid $green;
+  border-radius: 3px;
+  background: rgba(57, 255, 20, 0.1);
+  color: $green;
+  font-family: $font-mono;
+  font-size: 10.5px;
+  font-weight: 700;
+  letter-spacing: 0.6px;
+  text-transform: uppercase;
+  vertical-align: 1px;
+}
+
+.prof-mid {
+  border-color: $amber;
+  background: rgba(255, 179, 0, 0.1);
+  color: $amber;
+}
+
+.prof-low {
+  border-color: $border-bright;
+  background: transparent;
+  color: $text-2;
+}
+
+.skill-note {
+  margin: 12px 0 0;
+  color: $text-3;
+  font-size: 12.5px;
+  line-height: 1.5;
+}
+
+// ------------------------------------------------------------
+// CERTIFICATIONS / EDUCATION
+// ------------------------------------------------------------
+.cert-list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+
+  li {
+    padding: 10px 0 10px 26px;
+    border-bottom: 1px solid rgba(26, 39, 68, 0.6);
+    position: relative;
+    color: $text-2;
+    font-size: 14.5px;
+    line-height: 1.55;
+
+    &::before {
+      content: '\2713';
+      position: absolute;
+      left: 0;
+      color: $green;
+      font-family: $font-mono;
+      font-weight: 700;
+    }
+
+    &:last-child { border-bottom: 0; }
+
+    strong { color: $text-1; }
+  }
+}
+
+// ------------------------------------------------------------
+// RÉSUMÉ HUB
+// ------------------------------------------------------------
+.resume-list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.resume-item {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 18px 0;
+  border-bottom: 1px solid $border;
+
+  &:last-child { border-bottom: 0; }
+
+  &.is-default {
+    padding: 18px;
+    margin-bottom: 6px;
+    border: 1px solid $cyan;
+    border-radius: 6px;
+    background: rgba(0, 229, 255, 0.05);
+  }
+
+  h2 {
+    margin: 0 0 5px;
+    color: $text-1;
+    font-family: $font-mono;
+    font-size: 17px;
+    font-weight: 600;
+  }
+
+  p {
+    margin: 0;
+    color: $text-2;
+    font-size: 13.5px;
+    line-height: 1.5;
+  }
+}
+
+.resume-meta { flex: 1 1 260px; }
+
+.badge {
+  display: inline-block;
+  padding: 2px 8px;
+  border-radius: 3px;
+  background: $cyan;
+  color: $void;
+  font-family: $font-mono;
+  font-size: 10.5px;
+  font-weight: 700;
+  letter-spacing: 0.6px;
+  text-transform: uppercase;
+  vertical-align: 2px;
+}
+
+.resume-fallback {
+  margin: 22px 0 0;
+  padding: 14px 16px;
+  border-left: 3px solid $cyan;
+  border-radius: 3px;
+  background: rgba(0, 229, 255, 0.06);
+  color: $text-2;
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+// ------------------------------------------------------------
+// WRITING
+// ------------------------------------------------------------
+.post-list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+
+  > li {
+    padding: 18px 0;
+    border-bottom: 1px solid $border;
+
+    &:last-child { border-bottom: 0; }
+  }
+
+  h2 {
+    margin: 0 0 6px;
+    font-family: $font-mono;
+    font-size: 18px;
+    font-weight: 600;
+  }
+
+  p {
+    margin: 0;
+    color: $text-2;
+    font-size: 14px;
+    line-height: 1.6;
+  }
+}
+
+.post-meta {
+  color: $text-3 !important;
+  font-family: $font-mono;
+  font-size: 12px !important;
+}
+
+// Single article (_layouts/post.html)
+.post-head {
+  padding-bottom: 16px;
+  margin-bottom: 22px;
+  border-bottom: 1px solid $border;
+
+  h1 {
+    margin: 0 0 8px;
+    color: $text-1;
+    font-family: $font-mono;
+    font-size: 30px;
+    font-weight: 700;
+    line-height: 1.2;
+
+    @include respond(768px) { font-size: 24px; }
+  }
+}
+
+.post-body {
+  max-width: 74ch;
+
+  h2, h3 {
+    margin: 30px 0 10px;
+    color: $cyan;
+    font-family: $font-mono;
+  }
+
+  h2 { font-size: 20px; }
+  h3 { font-size: 16px; }
+
+  p, li {
+    color: $text-1;
+    font-size: 15.5px;
+    line-height: 1.78;
+  }
+
+  // Japanese needs looser leading than Latin at the same size.
+  &:lang(ja) p,
+  &:lang(ja) li { line-height: 1.95; }
+
+  pre {
+    padding: 14px 16px;
+    border: 1px solid $border;
+    border-radius: 5px;
+    background: $void;
+    overflow-x: auto;
+  }
+}
+
+.post-foot {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 12px;
+  margin-top: 34px;
+  padding-top: 16px;
+  border-top: 1px solid $border;
+  font-family: $font-mono;
+  font-size: 13px;
+}
+
+.empty-state {
+  max-width: 74ch;
+  margin: 0 0 14px;
+  color: $text-2;
+  font-size: 15px;
+  line-height: 1.7;
+}
+
+// ------------------------------------------------------------
+// FOOTER — closing call to action
+// ------------------------------------------------------------
+.site-footer {
+  margin: 48px auto 0;
+  padding: 0 24px;
+  max-width: 1200px;
+
+  @include respond(768px) { padding: 0 12px; }
+}
+
+.footer-cta {
+  padding: 30px 26px;
+  border: 1px solid $border-bright;
+  border-top: 2px solid $cyan;
+  border-radius: 6px;
+  background: $panel;
+  text-align: center;
+
+  h2 {
+    margin: 0 0 10px;
+    color: $text-1;
+    font-family: $font-mono;
+    font-size: 21px;
+    font-weight: 700;
+  }
+
+  p {
+    max-width: 60ch;
+    margin: 0 auto;
+    color: $text-2;
+    font-size: 14.5px;
+    line-height: 1.62;
+  }
+
+  @include respond(768px) { padding: 22px 16px; }
+}
+
+.footer-actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+.footer-meta {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 8px;
+  padding: 20px 0 26px;
+  color: $text-3;
+  font-family: $font-mono;
+  font-size: 11.5px;
+}
+
+.footer-sep { color: $border-bright; }

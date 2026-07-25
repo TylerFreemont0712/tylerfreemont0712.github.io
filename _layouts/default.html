@@ -1,134 +1,105 @@
 <!DOCTYPE html>
-<html lang="{{ site.lang | default: "en-US" }}">
+<html lang="{{ page.lang | default: 'en' }}">
   <head>
-    <meta charset='utf-8'>
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="Tyler Freemont - Software Engineer specializing in local LLM systems, agentic AI workflows, and MCP servers. AI Systems Lead at MiraX. Based in Osaka, Japan. JLPT N1.">
-    <meta name="keywords" content="software engineer, AI systems, local LLM, llama.cpp, Ollama, MCP servers, RAG, LangChain, multi-agent, agentic workflows, Python, C++, TypeScript, RLHF, Osaka, Japan, JLPT N1">
-    <meta name="author" content="Tyler Freemont">
+
+    {%- comment -%}
+      Progressive enhancement marker. Reveal-on-scroll CSS is scoped to
+      html.js, so with scripting disabled every content block renders at
+      full opacity instead of the page coming up blank.
+    {%- endcomment -%}
+    <script>document.documentElement.className += ' js';</script>
+
+    {%- comment -%}
+      Title is written here rather than left to jekyll-seo-tag so the
+      separator and the fallback ("Name · Title") are controlled; seo-tag is
+      passed title=false to stop it emitting a second one. Description,
+      canonical and Open Graph tags all come from {% seo %}.
+    {%- endcomment -%}
+    <title>{% if page.title %}{{ page.title }} · {{ site.data.profile.name }}{% else %}{{ site.data.profile.name }} · {{ site.data.profile.title }}{% endif %}</title>
+    <meta name="author" content="{{ site.data.profile.name }}">
+
+    {%- comment -%}
+      hreflang pairs. x-default points at the English page: it is the fallback
+      for any locale that matches neither, and the site's default language.
+    {%- endcomment -%}
+    {%- if page.alt_url %}
+      {%- if page.lang == "ja" %}
+    <link rel="alternate" hreflang="ja" href="{{ page.url | absolute_url }}">
+    <link rel="alternate" hreflang="en" href="{{ page.alt_url | absolute_url }}">
+    <link rel="alternate" hreflang="x-default" href="{{ page.alt_url | absolute_url }}">
+      {%- else %}
+    <link rel="alternate" hreflang="en" href="{{ page.url | absolute_url }}">
+    <link rel="alternate" hreflang="ja" href="{{ page.alt_url | absolute_url }}">
+    <link rel="alternate" hreflang="x-default" href="{{ page.url | absolute_url }}">
+      {%- endif %}
+    {%- endif %}
+
     <link rel="stylesheet" href="{{ '/assets/css/style.css?v=' | append: site.github.build_revision | relative_url }}">
     {% include head-custom.html %}
-    {% seo %}
+    {% seo title=false %}
+
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "name": {{ site.data.profile.name | jsonify }},
+      "jobTitle": {{ site.data.profile.title | jsonify }},
+      "email": {{ site.data.profile.contact.email | prepend: "mailto:" | jsonify }},
+      "url": {{ site.url | jsonify }},
+      "sameAs": [{{ site.data.profile.contact.github | jsonify }}],
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": {{ site.data.profile.location.city | jsonify }},
+        "addressCountry": "JP"
+      },
+      "knowsLanguage": [
+        { "@type": "Language", "name": "English" },
+        { "@type": "Language", "name": "Japanese" }
+      ]
+    }
+    </script>
   </head>
 
   <body>
-    <!-- Scanline overlay -->
-    <div class="scanline-overlay"></div>
+    <div class="grid-bg" aria-hidden="true"></div>
 
-    <!-- Grid background -->
-    <div class="grid-bg"></div>
+    {% include nav.html %}
+    {% include lang-notice.html %}
 
-    <!-- Top System Bar -->
-    <nav class="system-bar">
-      <div class="sysbar-left">
-        <span class="sysbar-indicator"></span>
-        <span class="sysbar-host">tyler@osaka</span>
-        <span class="sysbar-sep">:</span>
-        <span class="sysbar-path">~/portfolio</span>
-      </div>
-      <div class="sysbar-center">
-        <a href="{{ '/' | relative_url }}" class="sysbar-tab {% if page.url == '/' %}active{% endif %}">
-          <i class="fa-solid fa-terminal"></i> main
-        </a>
-        <a href="{{ '/projects' | relative_url }}" class="sysbar-tab {% if page.url contains 'projects' %}active{% endif %}">
-          <i class="fa-solid fa-folder-tree"></i> projects
-        </a>
-      </div>
-      <div class="sysbar-right">
-        <span class="sysbar-clock" id="sysClock"></span>
-        <a href="https://github.com/tylerfreemont0712" target="_blank" rel="noopener" class="sysbar-icon" title="GitHub">
-          <i class="fa-brands fa-github"></i>
-        </a>
-        <a href="mailto:tfreemont0712@gmail.com" class="sysbar-icon" title="Email">
-          <i class="fa-solid fa-envelope"></i>
-        </a>
-        <button class="nav-toggle" aria-label="Toggle navigation">
-          <span></span><span></span><span></span>
-        </button>
-      </div>
-      <!-- Mobile dropdown -->
-      <div class="mobile-nav">
-        <a href="{{ '/' | relative_url }}"><i class="fa-solid fa-terminal"></i> main</a>
-        <a href="{{ '/projects' | relative_url }}"><i class="fa-solid fa-folder-tree"></i> projects</a>
-        <a href="https://github.com/tylerfreemont0712" target="_blank" rel="noopener"><i class="fa-brands fa-github"></i> github</a>
-        <a href="mailto:tfreemont0712@gmail.com"><i class="fa-solid fa-envelope"></i> email</a>
-      </div>
-    </nav>
-
-    <!-- Main Content Area -->
-    <main class="dashboard">
+    <main class="dashboard" id="main">
       {{ content }}
     </main>
 
-    <!-- Bottom Status Bar -->
-    <footer class="status-bar">
-      <div class="statusbar-left">
-        <span class="status-led"></span>
-        <span>SYSTEMS NOMINAL</span>
-      </div>
-      <div class="statusbar-center">
-        <span>&copy; 2026 Tyler Freemont</span>
-        <span class="statusbar-sep">&bull;</span>
-        <span>Built with Jekyll & GitHub Pages</span>
-      </div>
-      <div class="statusbar-right">
-        <span>Osaka, JP</span>
-        <span class="statusbar-sep">&bull;</span>
-        <span>34.69&deg;N 135.50&deg;E</span>
-      </div>
-    </footer>
+    {% include footer.html %}
 
     <script>
-      // System clock
-      function updateClock() {
-        var now = new Date();
-        var h = String(now.getHours()).padStart(2, '0');
-        var m = String(now.getMinutes()).padStart(2, '0');
-        var s = String(now.getSeconds()).padStart(2, '0');
-        var el = document.getElementById('sysClock');
-        if (el) el.textContent = h + ':' + m + ':' + s;
-      }
-      updateClock();
-      setInterval(updateClock, 1000);
+      // Reveal-on-scroll. Purely additive: without this the .js-scoped
+      // CSS never hides anything, so content is always readable.
+      (function () {
+        var targets = document.querySelectorAll('.reveal');
+        if (!targets.length) return;
 
-      // Mobile nav toggle
-      document.querySelector('.nav-toggle').addEventListener('click', function() {
-        document.querySelector('.mobile-nav').classList.toggle('active');
-        this.classList.toggle('active');
-      });
+        var reduce = window.matchMedia &&
+                     window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-      // Animate elements on scroll
-      var observer = new IntersectionObserver(function(entries) {
-        entries.forEach(function(entry) {
-          if (entry.isIntersecting) {
-            entry.target.classList.add('visible');
-          }
-        });
-      }, { threshold: 0.08 });
+        if (reduce || !('IntersectionObserver' in window)) {
+          for (var i = 0; i < targets.length; i++) targets[i].classList.add('visible');
+          return;
+        }
 
-      document.querySelectorAll('.pane, .gauge-fill, .timeline-entry, .proj-card').forEach(function(el) {
-        observer.observe(el);
-      });
+        var io = new IntersectionObserver(function (entries) {
+          entries.forEach(function (e) {
+            if (e.isIntersecting) {
+              e.target.classList.add('visible');
+              io.unobserve(e.target);
+            }
+          });
+        }, { threshold: 0.05, rootMargin: '0px 0px -40px 0px' });
 
-      // Typing effect for terminal lines
-      document.querySelectorAll('.term-typed').forEach(function(el) {
-        var text = el.getAttribute('data-text');
-        if (!text) return;
-        el.textContent = '';
-        var i = 0;
-        var obs = new IntersectionObserver(function(entries) {
-          if (entries[0].isIntersecting) {
-            obs.disconnect();
-            var interval = setInterval(function() {
-              el.textContent += text[i];
-              i++;
-              if (i >= text.length) clearInterval(interval);
-            }, 30);
-          }
-        }, { threshold: 0.5 });
-        obs.observe(el);
-      });
+        for (var j = 0; j < targets.length; j++) io.observe(targets[j]);
+      })();
     </script>
   </body>
 </html>

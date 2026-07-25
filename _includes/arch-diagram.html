@@ -1,0 +1,105 @@
+{%- comment -%}
+  AIOS architecture diagram. Usage: {% include arch-diagram.html lang="ja" %}
+
+  Geometry is shared; only the label strings switch. Inline SVG rather than
+  Mermaid because Mermaid renders on github.com when viewing a .md file, but a
+  Jekyll-built page would need a client-side library to draw it — which would
+  make the diagram disappear with JS disabled.
+{%- endcomment -%}
+{%- assign ja = false -%}
+{%- if include.lang == "ja" -%}{%- assign ja = true -%}{%- endif -%}
+
+{%- if ja -%}
+  {%- assign t_title = "AIOSの構成図" -%}
+  {%- assign t_desc = "LAN上の各端末から、自宅サーバ上のNodeサーバに接続します。サーバはllama.cppまたはOllamaで動作するローカルモデルとクラウドのモデルを同一のルーティング層で振り分け、ファイル操作・シェル・検索の各ツールを備えたエージェント基盤、Obsidianのノート、実PTYによる端末を提供します。" -%}
+  {%- assign t_clients = "LAN内の端末" -%}
+  {%- assign t_clients1 = "ブラウザ・タブレット" -%}
+  {%- assign t_clients2 = "ペアリングトークン" -%}
+  {%- assign t_server = "AIOSサーバ" -%}
+  {%- assign t_server1 = "Node ・ ポート7777" -%}
+  {%- assign t_server2 = "コマンドパレット" -%}
+  {%- assign t_server3 = "バックグラウンドで" -%}
+  {%- assign t_server4 = "常駐するアプリ群" -%}
+  {%- assign t_local = "ローカルモデル" -%}
+  {%- assign t_local1 = "llama.cpp ・ Ollama — 推論は自社内で完結" -%}
+  {%- assign t_cloud = "クラウドのモデル" -%}
+  {%- assign t_cloud1 = "同一のルーティング層・チャット単位で選択" -%}
+  {%- assign t_agent = "エージェント基盤" -%}
+  {%- assign t_agent1 = "ファイル読み書き ・ bash ・ grep ・ web_search" -%}
+  {%- assign t_vault = "ノート・端末" -%}
+  {%- assign t_vault1 = "Obsidian（Markdown）・実PTYセッション" -%}
+{%- else -%}
+  {%- assign t_title = "AIOS architecture" -%}
+  {%- assign t_desc = "Clients anywhere on the local network reach a self-hosted Node server, which routes to local models running under llama.cpp or Ollama as well as cloud providers, and exposes an agent runtime with filesystem, shell, search and web tools, an Obsidian vault, and live pseudo-terminals." -%}
+  {%- assign t_clients = "LAN clients" -%}
+  {%- assign t_clients1 = "browser · tablet" -%}
+  {%- assign t_clients2 = "pairing token" -%}
+  {%- assign t_server = "AIOS server" -%}
+  {%- assign t_server1 = "Node · port 7777" -%}
+  {%- assign t_server2 = "command palette" -%}
+  {%- assign t_server3 = "background-persistent" -%}
+  {%- assign t_server4 = "apps" -%}
+  {%- assign t_local = "Local models" -%}
+  {%- assign t_local1 = "llama.cpp · Ollama — inference stays on the box" -%}
+  {%- assign t_cloud = "Cloud providers" -%}
+  {%- assign t_cloud1 = "same routing layer, opt-in per chat" -%}
+  {%- assign t_agent = "Agent runtime" -%}
+  {%- assign t_agent1 = "read/write/edit · bash · grep · web_search" -%}
+  {%- assign t_vault = "Vault &amp; terminals" -%}
+  {%- assign t_vault1 = "Obsidian markdown · live PTY sessions" -%}
+{%- endif -%}
+
+{%- assign uid = include.lang | default: "en" -%}
+{%- assign fs_sm = 10.5 -%}
+{%- if ja %}{% assign fs_sm = 9.5 %}{% endif -%}
+
+<svg viewBox="0 0 760 320" class="arch-svg" role="img"
+     aria-labelledby="archT-{{ uid }} archD-{{ uid }}" preserveAspectRatio="xMidYMid meet">
+  <title id="archT-{{ uid }}">{{ t_title }}</title>
+  <desc id="archD-{{ uid }}">{{ t_desc }}</desc>
+
+  <defs>
+    <marker id="arw-{{ uid }}" viewBox="0 0 10 10" refX="9" refY="5"
+            markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#243a5e"/>
+    </marker>
+  </defs>
+
+  <rect x="6" y="122" width="132" height="76" rx="6"
+        fill="#0f1729" stroke="#243a5e" stroke-width="1.5"/>
+  <text x="72" y="150" text-anchor="middle" fill="#e0e6ed" font-size="12.5" font-weight="600">{{ t_clients }}</text>
+  <text x="72" y="168" text-anchor="middle" fill="#8899aa" font-size="{{ fs_sm }}">{{ t_clients1 }}</text>
+  <text x="72" y="183" text-anchor="middle" fill="#8899aa" font-size="{{ fs_sm }}">{{ t_clients2 }}</text>
+
+  <line x1="138" y1="160" x2="196" y2="160" stroke="#243a5e"
+        stroke-width="1.5" marker-end="url(#arw-{{ uid }})"/>
+
+  <rect x="200" y="92" width="168" height="136" rx="6"
+        fill="#131d33" stroke="#00e5ff" stroke-width="1.5"/>
+  <text x="284" y="122" text-anchor="middle" fill="#00e5ff" font-size="12.5" font-weight="600">{{ t_server }}</text>
+  <text x="284" y="142" text-anchor="middle" fill="#8899aa" font-size="{{ fs_sm }}">{{ t_server1 }}</text>
+  <text x="284" y="164" text-anchor="middle" fill="#8899aa" font-size="{{ fs_sm }}">{{ t_server2 }}</text>
+  <text x="284" y="182" text-anchor="middle" fill="#8899aa" font-size="{{ fs_sm }}">{{ t_server3 }}</text>
+  <text x="284" y="197" text-anchor="middle" fill="#8899aa" font-size="{{ fs_sm }}">{{ t_server4 }}</text>
+
+  <path d="M368 160 H404 V58 H434"  fill="none" stroke="#243a5e" stroke-width="1.5" marker-end="url(#arw-{{ uid }})"/>
+  <path d="M368 160 H404 V126 H434" fill="none" stroke="#243a5e" stroke-width="1.5" marker-end="url(#arw-{{ uid }})"/>
+  <path d="M368 160 H404 V194 H434" fill="none" stroke="#243a5e" stroke-width="1.5" marker-end="url(#arw-{{ uid }})"/>
+  <path d="M368 160 H404 V262 H434" fill="none" stroke="#243a5e" stroke-width="1.5" marker-end="url(#arw-{{ uid }})"/>
+
+  <rect x="438" y="32" width="316" height="52" rx="6" fill="#0f1729" stroke="#39ff14" stroke-width="1.5"/>
+  <text x="454" y="54" fill="#39ff14" font-size="11.5" font-weight="600">{{ t_local }}</text>
+  <text x="454" y="71" fill="#8899aa" font-size="{{ fs_sm }}">{{ t_local1 }}</text>
+
+  <rect x="438" y="100" width="316" height="52" rx="6" fill="#0f1729" stroke="#243a5e" stroke-width="1.5"/>
+  <text x="454" y="122" fill="#e0e6ed" font-size="11.5" font-weight="600">{{ t_cloud }}</text>
+  <text x="454" y="139" fill="#8899aa" font-size="{{ fs_sm }}">{{ t_cloud1 }}</text>
+
+  <rect x="438" y="168" width="316" height="52" rx="6" fill="#0f1729" stroke="#b388ff" stroke-width="1.5"/>
+  <text x="454" y="190" fill="#b388ff" font-size="11.5" font-weight="600">{{ t_agent }}</text>
+  <text x="454" y="207" fill="#8899aa" font-size="{{ fs_sm }}">{{ t_agent1 }}</text>
+
+  <rect x="438" y="236" width="316" height="52" rx="6" fill="#0f1729" stroke="#243a5e" stroke-width="1.5"/>
+  <text x="454" y="258" fill="#e0e6ed" font-size="11.5" font-weight="600">{{ t_vault }}</text>
+  <text x="454" y="275" fill="#8899aa" font-size="{{ fs_sm }}">{{ t_vault1 }}</text>
+</svg>

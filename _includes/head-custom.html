@@ -1,20 +1,24 @@
 <!-- start custom head snippets -->
 
-<!-- Setup theme-color -->
 {% include head-custom-theme-colors.html %}
-
-<!-- Setup Google Analytics -->
 {% include head-custom-google-analytics.html %}
 
-<!-- Font Awesome -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+{%- comment -%}
+  Font Awesome used to be loaded here from cdnjs — a render-blocking
+  stylesheet plus font files, for three icons. Those are inline SVG now
+  (_includes/icon.html), so the request is gone: one less third-party
+  dependency, and icons survive a network that blocks the CDN.
 
-<!-- Google Fonts - Inter for body text -->
+  Google Fonts stays, trimmed to the weights actually used (400/500/600/700).
+  If it is blocked the stacks fall back to system monospace and sans-serif,
+  which degrades legibly — unlike icons, which vanished.
+{%- endcomment -%}
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
 
-<!-- Favicon -->
-<!-- link rel="shortcut icon" type="image/x-icon" href="{{ '/favicon.ico' | relative_url }}" -->
+<link rel="icon" href="{{ '/assets/favicon.svg' | relative_url }}" type="image/svg+xml">
+<link rel="alternate icon" href="{{ '/assets/favicon.png' | relative_url }}" sizes="32x32">
+<link rel="apple-touch-icon" href="{{ '/assets/apple-touch-icon.png' | relative_url }}">
 
 <!-- end custom head snippets -->

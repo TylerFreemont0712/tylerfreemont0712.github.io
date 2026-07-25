@@ -1,0 +1,105 @@
+{%- comment -%}
+  Above-the-fold block. Order is fixed by the brief (§4):
+    1. name + one-line positioning
+    2. three-part credibility line
+    3. availability
+    4. two buttons — résumé, email
+    5. one piece of visual proof (architecture diagram, not a headshot)
+
+  Nothing else belongs here.
+
+  Usage: {% include hero.html lang="ja" %}
+  The Japanese strings are written for a Japanese reader, not translated from
+  the English — see positioning_ja and the *_ja fields in _data/profile.yml.
+{%- endcomment -%}
+
+{%- assign p = site.data.profile -%}
+{%- assign ja = false -%}
+{%- if include.lang == "ja" -%}{%- assign ja = true -%}{%- endif -%}
+
+{%- assign resume_file = "" -%}
+{%- for v in p.resume.variants -%}
+  {%- if ja -%}
+    {%- if v.id == "shokumu-keirekisho" and v.file != "" -%}{%- assign resume_file = v.file -%}{%- endif -%}
+  {%- else -%}
+    {%- if v.default and v.file != "" -%}{%- assign resume_file = v.file -%}{%- endif -%}
+  {%- endif -%}
+{%- endfor -%}
+
+{%- if ja -%}
+  {%- assign hub = "/ja/resume" -%}
+  {%- assign proj_url = "/ja/projects" -%}
+  {%- assign lbl_email = "メールで問い合わせ" -%}
+  {%- if resume_file != "" -%}
+    {%- assign resume_href = resume_file | relative_url -%}
+    {%- assign resume_label = "職務経歴書をダウンロード" -%}
+  {%- else -%}
+    {%- assign resume_href = hub | relative_url -%}
+    {%- assign resume_label = "職務経歴書" -%}
+  {%- endif -%}
+{%- else -%}
+  {%- assign hub = "/resume" -%}
+  {%- assign proj_url = "/projects" -%}
+  {%- assign lbl_email = "Email me" -%}
+  {%- if resume_file != "" -%}
+    {%- assign resume_href = resume_file | relative_url -%}
+    {%- assign resume_label = "Download résumé" -%}
+  {%- else -%}
+    {%- assign resume_href = hub | relative_url -%}
+    {%- assign resume_label = "Résumé" -%}
+  {%- endif -%}
+{%- endif -%}
+
+<header class="hero">
+  <p class="hero-eyebrow">{% if ja %}{{ p.title_ja }}{% else %}{{ p.title }}{% endif %}</p>
+  <h1 class="hero-name">{% if ja %}{{ p.name }}<span class="name-ja">（{{ p.name_ja }}）</span>{% else %}{{ p.name }}{% endif %}</h1>
+  <p class="hero-positioning">{% if ja %}{{ p.positioning_ja }}{% else %}{{ p.positioning }}{% endif %}</p>
+
+  <ul class="cred-line">
+    {%- for c in p.credibility %}
+    <li class="cred-chip">
+      <span class="cred-label">{% if ja %}{{ c.label_ja }}{% else %}{{ c.label }}{% endif %}</span>
+      <span class="cred-detail">{% if ja %}{{ c.detail_ja }}{% else %}{{ c.detail }}{% endif %}</span>
+    </li>
+    {%- endfor %}
+  </ul>
+
+  {%- if p.availability.open %}
+  <p class="availability">
+    <span class="avail-dot" aria-hidden="true"></span>
+    <span class="avail-text">
+      {%- if ja -%}
+        {{ p.availability.statement_ja }}
+      {%- else -%}
+        {{ p.availability.statement }}{% if p.availability.from != "" %} from {{ p.availability.from }}{% endif %}{% if p.availability.days_per_week != "" %} · {{ p.availability.days_per_week }}{% endif %}
+      {%- endif -%}
+    </span>
+  </p>
+  {%- endif %}
+
+  <div class="hero-actions">
+    <a href="{{ resume_href }}" class="btn btn-primary">
+      {% include icon.html name="download" %} {{ resume_label }}
+    </a>
+    <a href="mailto:{{ p.contact.email }}" class="btn btn-ghost">
+      {% include icon.html name="envelope" %} {{ lbl_email }}
+    </a>
+  </div>
+
+  <figure class="hero-proof">
+    <div class="diagram-frame">
+      {% include arch-diagram.html lang=include.lang %}
+    </div>
+    <figcaption>
+      {%- if ja %}
+      <strong>AIOS</strong> — 1台のマシンからLAN全体に生成AI環境を提供する自作の実行基盤です。
+      <a href="{{ p.contact.github }}/AIOS-v1" target="_blank" rel="noopener">ソースコード</a> ·
+      <a href="{{ proj_url | relative_url }}#aios">詳細</a>
+      {%- else %}
+      <strong>AIOS</strong> — self-hosted AI workspace that serves a whole LAN from one machine.
+      <a href="{{ p.contact.github }}/AIOS-v1" target="_blank" rel="noopener">Source</a> ·
+      <a href="{{ proj_url | relative_url }}#aios">Case study</a>
+      {%- endif %}
+    </figcaption>
+  </figure>
+</header>

@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://tylerfreemont0712.github.io/sitemap.xml

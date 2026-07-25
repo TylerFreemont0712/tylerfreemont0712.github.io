@@ -1,0 +1,50 @@
+{%- assign p = site.data.profile -%}
+{%- assign ja = false -%}
+{%- if page.lang == "ja" -%}{%- assign ja = true -%}{%- endif -%}
+
+<footer class="site-footer">
+  <div class="footer-cta">
+    {%- if ja %}
+    <h2>採用・業務委託のご相談</h2>
+    <p>
+      {{ p.availability.statement_ja }}。在留資格は「日本人の配偶者等」で就労制限がなく、
+      <strong>ビザスポンサー不要</strong>のため、入社手続きのみで就業を開始できます。
+      生成AI基盤・ローカルLLM・MCPサーバ・RAGパイプラインの案件を中心にお受けしています。
+    </p>
+    <div class="footer-actions">
+      <a href="mailto:{{ p.contact.email }}" class="btn btn-primary">
+        {% include icon.html name="envelope" %} {{ p.contact.email }}
+      </a>
+      <a href="{{ '/ja/resume' | relative_url }}" class="btn btn-ghost">
+        {% include icon.html name="download" %} 職務経歴書
+      </a>
+    </div>
+    {%- else %}
+    <h2>Hiring, or looking for a contractor?</h2>
+    <p>
+      {{ p.availability.statement }}{% if p.availability.from != "" %} from {{ p.availability.from }}{% endif %}.
+      No visa sponsorship required — I can start without immigration paperwork.
+    </p>
+    <div class="footer-actions">
+      <a href="mailto:{{ p.contact.email }}" class="btn btn-primary">
+        {% include icon.html name="envelope" %} {{ p.contact.email }}
+      </a>
+      <a href="{{ '/resume' | relative_url }}" class="btn btn-ghost">
+        {% include icon.html name="download" %} Résumé
+      </a>
+    </div>
+    {%- endif %}
+  </div>
+
+  <div class="footer-meta">
+    <span>&copy; {{ site.time | date: "%Y" }} {{ p.name }}</span>
+    <span class="footer-sep" aria-hidden="true">·</span>
+    <span>{% if ja %}{{ p.location.city_ja }}{% else %}{{ p.location.city }}, {{ p.location.region }}{% endif %}</span>
+    <span class="footer-sep" aria-hidden="true">·</span>
+    <a href="{{ p.contact.github }}/tylerfreemont0712.github.io" target="_blank" rel="noopener">{% if ja %}このサイトのソース{% else %}Source{% endif %}</a>
+    {%- if page.alt_url %}
+    <span class="footer-sep" aria-hidden="true">·</span>
+    <a href="{{ page.alt_url | relative_url }}" lang="{% if ja %}en{% else %}ja{% endif %}">{% if ja %}English{% else %}日本語{% endif %}</a>
+    {%- endif %}
+  </div>
+</footer>
