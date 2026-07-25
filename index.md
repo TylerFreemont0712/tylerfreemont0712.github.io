@@ -133,3 +133,35 @@ description: >-
     </p>
   </div>
 </section>
+
+<!-- ═══════════ LATEST WRITING ═══════════ -->
+{%- assign en_posts = site.posts | where_exp: "post", "post.lang != 'ja'" -%}
+{%- if en_posts.size > 0 %}
+<section class="pane reveal" aria-labelledby="wr-h">
+  <div class="pane-title-bar">
+    <div class="pane-dots" aria-hidden="true"><span></span><span></span><span></span></div>
+    <div class="pane-label">writing</div>
+  </div>
+  <div class="pane-body">
+    <div class="sec-head">
+      <p class="sec-prompt" aria-hidden="true"><span class="pr">$</span> <span class="cmd">tail</span> -n 3 ~/writing/</p>
+      <h2 class="sec-title" id="wr-h">Recent writing</h2>
+    </div>
+
+    <ul class="feed-list">
+      {%- for post in en_posts limit: 3 %}
+      <li>
+        <a href="{{ post.url | relative_url }}">
+          <time datetime="{{ post.date | date_to_xmlschema }}">{{ post.date | date: "%b %Y" }}</time>
+          <span class="feed-title">{{ post.title }}</span>
+        </a>
+      </li>
+      {%- endfor %}
+    </ul>
+
+    <p class="sec-more">
+      <a href="{{ '/writing' | relative_url }}" class="btn btn-ghost">All writing</a>
+    </p>
+  </div>
+</section>
+{%- endif %}
