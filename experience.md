@@ -1,5 +1,7 @@
 ---
 layout: default
+lang: en
+alt_url: /ja/experience
 title: Experience
 nav: experience
 permalink: /experience

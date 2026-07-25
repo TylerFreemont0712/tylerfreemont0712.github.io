@@ -1,5 +1,7 @@
 ---
 layout: default
+lang: en
+alt_url: /ja/projects
 title: Projects
 nav: projects
 permalink: /projects

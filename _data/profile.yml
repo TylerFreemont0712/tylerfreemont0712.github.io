@@ -13,24 +13,34 @@ name_ja: タイラー・フリーモント
 
 # Résumé wording (§2.2). Source of truth = résumé, not the old site copy.
 title: Software Engineer, AI Systems
+title_ja: ソフトウェアエンジニア（AI基盤）
 
 # §4 landing spec, item 1 — one-line positioning.
 positioning: >-
   AI systems engineer — local LLM infrastructure, MCP servers, RAG.
   Osaka, Japan.
 
+# Written for a Japanese reader rather than translated from the English.
+# Leads with 生成AI基盤 because that is the phrase agents actually search.
+positioning_ja: >-
+  生成AI基盤のエンジニアです。ローカルLLMによる推論基盤、MCPサーバ、
+  RAGパイプラインの設計・実装を専門としています。大阪在住。
+
 # §4 landing spec, item 2 — the three-part credibility line.
 # Rendered as three discrete chips so each reads on its own.
 credibility:
   - label: Native English + JLPT N1
-    icon: language
+    label_ja: 英語ネイティブ・日本語JLPT N1
     detail: Bilingual across Japanese and English engineering teams
+    detail_ja: 日英どちらの開発チームでも実務可能です
   - label: AWS certified
-    icon: aws
+    label_ja: AWS認定資格
     detail: Developer – Associate · Solutions Architect – Associate
+    detail_ja: Developer Associate／Solutions Architect Associate
   - label: No visa sponsorship required
-    icon: passport
+    label_ja: ビザスポンサー不要
     detail: Spouse-of-Japanese-national visa — no work restrictions
+    detail_ja: 在留資格「日本人の配偶者等」・就労制限なし
 
 # §4 landing spec, item 3 — availability.
 availability:

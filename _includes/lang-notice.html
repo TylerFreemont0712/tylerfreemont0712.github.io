@@ -1,0 +1,72 @@
+{%- comment -%}
+  Remembers a language choice without hijacking navigation.
+
+  The brief asked for a persisted language toggle. Auto-redirecting on a stored
+  preference is the wrong way to honour that: it overrides someone who
+  deliberately clicked through to the other language, breaks the back button,
+  and serves crawlers different content than users. So the choice is recorded
+  when the toggle is clicked, and a returning visitor whose stored preference
+  differs from the page they landed on gets a dismissible bar with a link.
+
+  Entirely progressive — with JS off, nothing appears and the toggle in the
+  header still works.
+{%- endcomment -%}
+
+{%- if page.alt_url -%}
+{%- assign other = "ja" -%}
+{%- assign msg = "日本語版があります" -%}
+{%- assign cta = "日本語で見る" -%}
+{%- assign dismiss = "閉じる" -%}
+{%- if page.lang == "ja" -%}
+  {%- assign other = "en" -%}
+  {%- assign msg = "An English version of this page is available." -%}
+  {%- assign cta = "Read in English" -%}
+  {%- assign dismiss = "Dismiss" -%}
+{%- endif -%}
+
+<div class="lang-notice" id="langNotice" hidden>
+  <p>{{ msg }}</p>
+  <a href="{{ page.alt_url | relative_url }}" class="btn btn-primary btn-sm">{{ cta }}</a>
+  <button type="button" class="lang-notice-x" id="langNoticeX" aria-label="{{ dismiss }}">&times;</button>
+</div>
+
+<script>
+  (function () {
+    var KEY = 'tf-lang', DISMISS = 'tf-lang-dismissed';
+    var pageLang = {{ page.lang | default: 'en' | jsonify }};
+    var other = {{ other | jsonify }};
+
+    // Record an explicit choice when the header toggle is used.
+    var toggle = document.querySelector('[data-lang-choice]');
+    if (toggle) {
+      toggle.addEventListener('click', function () {
+        try {
+          localStorage.setItem(KEY, toggle.getAttribute('data-lang-choice'));
+          localStorage.removeItem(DISMISS);
+        } catch (e) {}
+      });
+    }
+
+    var stored, dismissed;
+    try {
+      stored = localStorage.getItem(KEY);
+      dismissed = localStorage.getItem(DISMISS);
+    } catch (e) { return; }
+
+    // Only offer, never redirect — and only if they have not waved it away.
+    if (stored && stored !== pageLang && stored === other && !dismissed) {
+      var n = document.getElementById('langNotice');
+      if (n) n.hidden = false;
+    }
+
+    var x = document.getElementById('langNoticeX');
+    if (x) {
+      x.addEventListener('click', function () {
+        try { localStorage.setItem(DISMISS, '1'); } catch (e) {}
+        var n = document.getElementById('langNotice');
+        if (n) n.hidden = true;
+      });
+    }
+  })();
+</script>
+{%- endif -%}

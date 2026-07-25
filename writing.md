@@ -1,5 +1,7 @@
 ---
 layout: default
+lang: en
+alt_url: /ja/writing
 title: Writing
 nav: writing
 permalink: /writing
@@ -19,14 +21,18 @@ description: >-
       <h1 class="sec-title" id="wr-h">Writing</h1>
     </div>
 
-    {%- if site.posts.size > 0 %}
+    {%- comment -%}
+      English articles only. The Japanese ones live on /ja/writing so each
+      language's index stays readable on its own.
+    {%- endcomment -%}
+    {%- assign en_posts = site.posts | where_exp: "post", "post.lang != 'ja'" -%}
+    {%- if en_posts.size > 0 %}
     <ul class="post-list">
-      {%- for post in site.posts %}
-      <li{% if post.lang %} lang="{{ post.lang }}"{% endif %}>
+      {%- for post in en_posts %}
+      <li>
         <h2><a href="{{ post.url | relative_url }}">{{ post.title }}</a></h2>
         <p class="post-meta">
           <time datetime="{{ post.date | date_to_xmlschema }}">{{ post.date | date: "%-d %B %Y" }}</time>
-          {%- if post.lang == 'ja' %} · <span class="badge">日本語</span>{% endif %}
         </p>
         {%- if post.description %}<p>{{ post.description }}</p>{% endif %}
       </li>

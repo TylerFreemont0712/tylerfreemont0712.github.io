@@ -1,5 +1,7 @@
 ---
 layout: default
+lang: en
+alt_url: /ja/
 nav: home
 description: >-
   Tyler Freemont — software engineer in Osaka, Japan. Local LLM infrastructure,

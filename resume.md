@@ -1,5 +1,7 @@
 ---
 layout: default
+lang: en
+alt_url: /ja/resume
 title: Résumé
 nav: resume
 permalink: /resume

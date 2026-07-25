@@ -41,6 +41,188 @@
 }
 
 // ------------------------------------------------------------
+// JAPANESE TYPOGRAPHY
+//
+// Neither Inter nor JetBrains Mono ships CJK glyphs, so :lang(ja) needs a
+// stack that reaches a real Japanese face. Japanese also wants looser
+// leading than Latin at the same size, and must not break mid-word at
+// arbitrary points — hence word-break: normal with line-break: strict,
+// which keeps 禁則処理 (no leading 。or closing bracket on a new line).
+// ------------------------------------------------------------
+$font-ja: 'Inter', -apple-system, BlinkMacSystemFont, 'Hiragino Kaku Gothic ProN',
+          'Hiragino Sans', 'Yu Gothic UI', 'Yu Gothic', 'Meiryo', sans-serif;
+
+:lang(ja) {
+  font-family: $font-ja;
+  line-height: 1.85;
+  line-break: strict;
+  word-break: normal;
+  overflow-wrap: anywhere;
+}
+
+:lang(ja) .arch-svg text,
+:lang(ja) .hero-name,
+:lang(ja) .case-title,
+:lang(ja) .sec-title,
+:lang(ja) .tl-role {
+  font-family: $font-ja;
+}
+
+// Latin runs inside Japanese prose keep the mono face, which is what makes
+// llama.cpp and MCP read as identifiers rather than words.
+:lang(ja) code,
+:lang(ja) .proj-stack,
+:lang(ja) .mini-stack,
+:lang(ja) .case-stack,
+:lang(ja) .prof {
+  font-family: $font-mono;
+}
+
+:lang(ja) .hero-positioning,
+:lang(ja) .cap-card p,
+:lang(ja) .case-body p {
+  line-height: 1.9;
+}
+
+// Slightly tighter than the Latin measure: CJK characters are wider, so the
+// same character count is a longer line.
+:lang(ja) .case-body p { max-width: 46em; }
+:lang(ja) .sec-note,
+:lang(ja) .empty-state { max-width: 44em; }
+
+.name-ja {
+  display: inline-block;
+  margin-left: 2px;
+  color: $text-2;
+  font-size: 0.44em;
+  font-weight: 500;
+  vertical-align: 0.34em;
+}
+
+// ------------------------------------------------------------
+// LANGUAGE TOGGLE + RETURNING-VISITOR NOTICE
+// ------------------------------------------------------------
+.lang-toggle {
+  padding: 5px 11px;
+  border: 1px solid $border-bright;
+  border-radius: 4px;
+  color: $text-2;
+  font-family: $font-mono;
+  font-size: 11.5px;
+  font-weight: 600;
+  letter-spacing: 0.4px;
+  white-space: nowrap;
+  text-decoration: none;
+  transition: border-color 0.2s, color 0.2s;
+
+  &:hover,
+  &:focus {
+    border-color: $cyan;
+    color: $cyan;
+    text-decoration: none;
+  }
+}
+
+.lang-notice {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px;
+  max-width: 1200px;
+  margin: 12px auto 0;
+  padding: 11px 16px;
+  border: 1px solid $border-bright;
+  border-left: 3px solid $cyan;
+  border-radius: 5px;
+  background: rgba(0, 229, 255, 0.06);
+
+  &[hidden] { display: none; }
+
+  p {
+    flex: 1 1 auto;
+    margin: 0;
+    color: $text-1;
+    font-size: 13.5px;
+  }
+
+  @include respond(1248px) { margin: 12px 24px 0; }
+  @include respond(768px)  { margin: 12px 12px 0; }
+}
+
+.btn-sm {
+  padding: 5px 12px;
+  font-size: 12px;
+}
+
+.lang-notice-x {
+  flex: none;
+  width: 28px;
+  height: 28px;
+  border: 1px solid transparent;
+  border-radius: 4px;
+  background: none;
+  color: $text-2;
+  font-size: 19px;
+  line-height: 1;
+  cursor: pointer;
+
+  &:hover { border-color: $border-bright; color: $text-1; }
+}
+
+.lang-tag {
+  display: inline-block;
+  padding: 1px 7px;
+  border: 1px solid $border-bright;
+  border-radius: 3px;
+  color: $text-3;
+  font-family: $font-mono;
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  vertical-align: 2px;
+}
+
+// ------------------------------------------------------------
+// CONDITIONS LIST (/ja/ — 希望条件)
+// ------------------------------------------------------------
+.cond-list {
+  display: grid;
+  grid-template-columns: max-content 1fr;
+  gap: 0;
+  margin: 0;
+
+  dt {
+    padding: 12px 20px 12px 0;
+    border-top: 1px solid rgba(26, 39, 68, 0.7);
+    color: $cyan;
+    font-family: $font-mono;
+    font-size: 13px;
+    font-weight: 600;
+    white-space: nowrap;
+  }
+
+  dd {
+    padding: 12px 0;
+    margin: 0;
+    border-top: 1px solid rgba(26, 39, 68, 0.7);
+    color: $text-1;
+    font-size: 14.5px;
+
+    strong { color: $green; }
+  }
+
+  dt:first-of-type,
+  dt:first-of-type + dd { border-top: 0; }
+
+  @include respond(600px) {
+    grid-template-columns: 1fr;
+
+    dt { padding-bottom: 2px; }
+    dd { padding-top: 0; border-top: 0; }
+  }
+}
+
+// ------------------------------------------------------------
 // INLINE SVG ICONS (_includes/icon.html)
 // ------------------------------------------------------------
 .icon {

@@ -20,6 +20,22 @@
     <title>{% if page.title %}{{ page.title }} · {{ site.data.profile.name }}{% else %}{{ site.data.profile.name }} · {{ site.data.profile.title }}{% endif %}</title>
     <meta name="author" content="{{ site.data.profile.name }}">
 
+    {%- comment -%}
+      hreflang pairs. x-default points at the English page: it is the fallback
+      for any locale that matches neither, and the site's default language.
+    {%- endcomment -%}
+    {%- if page.alt_url %}
+      {%- if page.lang == "ja" %}
+    <link rel="alternate" hreflang="ja" href="{{ page.url | absolute_url }}">
+    <link rel="alternate" hreflang="en" href="{{ page.alt_url | absolute_url }}">
+    <link rel="alternate" hreflang="x-default" href="{{ page.alt_url | absolute_url }}">
+      {%- else %}
+    <link rel="alternate" hreflang="en" href="{{ page.url | absolute_url }}">
+    <link rel="alternate" hreflang="ja" href="{{ page.alt_url | absolute_url }}">
+    <link rel="alternate" hreflang="x-default" href="{{ page.url | absolute_url }}">
+      {%- endif %}
+    {%- endif %}
+
     <link rel="stylesheet" href="{{ '/assets/css/style.css?v=' | append: site.github.build_revision | relative_url }}">
     {% include head-custom.html %}
     {% seo title=false %}
@@ -50,6 +66,7 @@
     <div class="grid-bg" aria-hidden="true"></div>
 
     {% include nav.html %}
+    {% include lang-notice.html %}
 
     <main class="dashboard" id="main">
       {{ content }}
