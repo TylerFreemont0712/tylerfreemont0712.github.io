@@ -462,6 +462,48 @@ button:focus-visible,
   strong { color: $text-1; font-weight: 700; }
 }
 
+// Screenshots inside a case study. width/height are set on every <img> in the
+// markup so the box is reserved before the file loads and nothing shifts.
+.shot {
+  margin: 22px 0 26px;
+
+  img {
+    display: block;
+    width: 100%;
+    height: auto;
+    border: 1px solid $border-bright;
+    border-radius: 6px;
+    background: $void;
+  }
+
+  figcaption {
+    max-width: 78ch;
+    margin-top: 11px;
+    padding-left: 13px;
+    border-left: 2px solid $border-bright;
+    color: $text-2;
+    font-size: 13.5px;
+    line-height: 1.65;
+
+    strong { color: $text-1; }
+
+    code {
+      padding: 1px 5px;
+      border-radius: 3px;
+      background: rgba(0, 229, 255, 0.09);
+      color: $cyan;
+      font-family: $font-mono;
+      font-size: 12.5px;
+    }
+  }
+}
+
+// The one screenshot carrying the most weight gets a cyan edge to say so.
+.shot-feature {
+  img { border-color: $cyan; }
+  figcaption { border-left-color: $cyan; }
+}
+
 .case-stack {
   display: flex;
   flex-wrap: wrap;

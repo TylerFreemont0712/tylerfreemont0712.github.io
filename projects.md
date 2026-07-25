@@ -59,11 +59,27 @@ description: >-
         long-lived state. Local models run under llama.cpp and Ollama behind a routing
         layer that cloud providers plug into on equal terms, so switching where
         inference happens is a per-conversation choice, not an architectural one. On
-        top of that sit discrete apps — chat, a coding agent, project management, an
-        Obsidian-backed vault, a mindmap editor, a file editor and real terminals —
-        which keep running when you navigate away, so an agent run or a shell session
+        top of that sit discrete apps — chat, a coding agent, research, a planner, an
+        Obsidian-backed vault, a model bench, a file editor and real terminals — which
+        keep running when you navigate away, so an agent run or a shell session
         survives switching apps.
       </p>
+
+      <figure class="shot">
+        <img src="{{ '/assets/program-images/aios-home-services.png' | relative_url }}"
+             width="733" height="692" loading="lazy" decoding="async"
+             alt="AIOS home screen. A services panel shows live status for each
+                  dependency: SearXNG connected on 127.0.0.1:8890, llama.cpp reachable
+                  serving qwen3-1.7b-q8_0, Ollama not running, Anthropic with no key
+                  configured, the Obsidian vault connected, GitHub authenticated. Below
+                  it a grid of twelve apps including Agent, Chat, Research, Planner,
+                  Second Brain, Bench, Models, Files, Terminal and Projects.">
+        <figcaption>
+          Every dependency reports its own health, because half of running local
+          inference is knowing which piece is down. Nothing here assumes a service is
+          up — a missing API key and a stopped Ollama are normal states, not errors.
+        </figcaption>
+      </figure>
 
       <h3>Hard part</h3>
       <p>
@@ -81,6 +97,42 @@ description: >-
         sessions alive independently of whichever browser tab is currently attached.
       </p>
 
+      <figure class="shot shot-feature">
+        <img src="{{ '/assets/program-images/aios-agent-web-search.png' | relative_url }}"
+             width="748" height="646" loading="lazy" decoding="async"
+             alt="A chat turn in AIOS answering a question about current world events.
+                  A collapsed reasoning panel reads 'Thought for 3s'. Below it a
+                  web_search tool call, marked done, shows its query and the raw results
+                  it pulled back through a self-hosted SearXNG instance, with source
+                  URLs. The model's synthesised answer follows, and a footer reports
+                  135.4 tokens per second at 98 milliseconds to first token.">
+        <figcaption>
+          A tool call executing end to end on a <strong>1.7B model running
+          locally</strong>: reasoning, a <code>web_search</code> through self-hosted
+          SearXNG, the raw sources it actually read, then the synthesis — at
+          <strong>135.4 tok/s and 98 ms to first token</strong>. The raw results stay
+          visible on purpose. When a small model gets an answer wrong, the useful
+          question is whether the retrieval or the reasoning failed, and you cannot tell
+          those apart if the tool output is hidden.
+        </figcaption>
+      </figure>
+
+      <figure class="shot">
+        <img src="{{ '/assets/program-images/aios-projects-registry.png' | relative_url }}"
+             width="749" height="185" loading="lazy" decoding="async"
+             alt="Three registered projects in AIOS, each a card showing its filesystem
+                  path, git state and last-touched date: Sales on branch master with 5
+                  dirty files, OS on main with 31 dirty files and marked active, and
+                  Test-Project with no git repository. Each card offers Agent, Files and
+                  Shell buttons.">
+        <figcaption>
+          The agent is always scoped to a registered project, and each one surfaces its
+          branch and uncommitted-file count before you point anything at it. Handing a
+          model write access to a tree with 31 dirty files is a decision you should make
+          deliberately, so the state is shown rather than discovered afterwards.
+        </figcaption>
+      </figure>
+
       <h3>Outcome</h3>
       <p>
         It is what I use daily, and it works from a tablet on the same network via a
@@ -91,9 +143,23 @@ description: >-
         than a frontier one; and it is a single-user-at-a-time design.
       </p>
 
+      <figure class="shot">
+        <img src="{{ '/assets/program-images/aios-files-editor.png' | relative_url }}"
+             width="955" height="647" loading="lazy" decoding="async"
+             alt="The AIOS file browser and editor, open on the project OS. A tree on the
+                  left lists the repository's directories and files; the right pane is a
+                  CodeMirror editor with line numbers and syntax highlighting, showing
+                  AIOS's own README.">
+        <figcaption>
+          The file editor, editing AIOS's own source from inside AIOS. Tree explorer plus
+          CodeMirror, per-project, so a change the agent proposes can be read and
+          corrected in the same place it was made.
+        </figcaption>
+      </figure>
+
       <ul class="case-stack">
         <li>JavaScript</li><li>Node</li><li>llama.cpp</li><li>Ollama</li>
-        <li>xterm.js</li><li>CodeMirror</li>
+        <li>SearXNG</li><li>node-pty</li><li>xterm.js</li><li>CodeMirror</li>
       </ul>
     </div>
   </div>
