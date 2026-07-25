@@ -8,10 +8,10 @@
     </p>
     <div class="footer-actions">
       <a href="mailto:{{ p.contact.email }}" class="btn btn-primary">
-        <i class="fa-solid fa-envelope" aria-hidden="true"></i> {{ p.contact.email }}
+        {% include icon.html name="envelope" %} {{ p.contact.email }}
       </a>
       <a href="{{ '/resume' | relative_url }}" class="btn btn-ghost">
-        <i class="fa-solid fa-file-arrow-down" aria-hidden="true"></i> Résumé
+        {% include icon.html name="download" %} Résumé
       </a>
     </div>
   </div>

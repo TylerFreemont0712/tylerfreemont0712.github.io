@@ -51,16 +51,16 @@
 
   <div class="sysbar-right">
     <a href="{{ resume_href }}" class="sysbar-cta">
-      <i class="fa-solid fa-file-arrow-down" aria-hidden="true"></i>
+      {% include icon.html name="download" %}
       <span>Résumé</span>
     </a>
     <a href="{{ site.data.profile.contact.github }}" target="_blank" rel="noopener"
        class="sysbar-icon" title="GitHub">
-      <i class="fa-brands fa-github" aria-hidden="true"></i>
+      {% include icon.html name="github" %}
       <span class="sr-only">GitHub</span>
     </a>
     <a href="mailto:{{ site.data.profile.contact.email }}" class="sysbar-icon" title="Email">
-      <i class="fa-solid fa-envelope" aria-hidden="true"></i>
+      {% include icon.html name="envelope" %}
       <span class="sr-only">Email Tyler</span>
     </a>
   </div>

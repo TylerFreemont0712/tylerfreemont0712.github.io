@@ -48,10 +48,10 @@
 
   <div class="hero-actions">
     <a href="{{ resume_href }}" class="btn btn-primary">
-      <i class="fa-solid fa-file-arrow-down" aria-hidden="true"></i> {{ resume_label }}
+      {% include icon.html name="download" %} {{ resume_label }}
     </a>
     <a href="mailto:{{ p.contact.email }}" class="btn btn-ghost">
-      <i class="fa-solid fa-envelope" aria-hidden="true"></i> Email me
+      {% include icon.html name="envelope" %} Email me
     </a>
   </div>
 

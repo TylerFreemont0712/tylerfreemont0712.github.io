@@ -36,7 +36,7 @@ description: >-
         network from one machine.</p>
       <p class="case-links">
         <a href="{{ site.data.profile.contact.github }}/AIOS-v1" class="btn btn-primary" target="_blank" rel="noopener">
-          <i class="fa-brands fa-github" aria-hidden="true"></i> Source
+          {% include icon.html name="github" %} Source
         </a>
       </p>
     </header>
@@ -173,7 +173,7 @@ description: >-
         local network, with no cloud service in the middle.</p>
       <p class="case-links">
         <a href="{{ site.data.profile.contact.github }}/LocalSyncOrganization" class="btn btn-primary" target="_blank" rel="noopener">
-          <i class="fa-brands fa-github" aria-hidden="true"></i> Source
+          {% include icon.html name="github" %} Source
         </a>
       </p>
     </header>

@@ -41,6 +41,19 @@
 }
 
 // ------------------------------------------------------------
+// INLINE SVG ICONS (_includes/icon.html)
+// ------------------------------------------------------------
+.icon {
+  width: 1em;
+  height: 1em;
+  flex: none;
+  vertical-align: -0.13em;
+}
+
+.sysbar-cta .icon,
+.btn .icon { margin-right: 2px; }
+
+// ------------------------------------------------------------
 // ACCESSIBILITY PRIMITIVES
 // ------------------------------------------------------------
 .sr-only {
@@ -83,40 +96,11 @@ button:focus-visible,
 }
 
 // ------------------------------------------------------------
-// LAYOUT OVERRIDES
-//
-// The bar was position: fixed with a hard 44px height, and .dashboard
-// carried matching top/bottom padding to sit clear of it. Now that the
-// nav wraps rather than collapsing into a JS toggle, a fixed height
-// clips it — sticky lets it grow and keeps the flow correct with no
-// magic-number padding.
-// ------------------------------------------------------------
-.system-bar {
-  position: sticky;
-  height: auto;
-  min-height: 44px;
-  flex-wrap: wrap;
-  gap: 8px 16px;
-  padding: 6px 24px;
-
-  @include respond(768px) { padding: 6px 12px; }
-}
-
-.dashboard {
-  padding-top: 28px;
-  padding-bottom: 8px;
-
-  @include respond(768px) { padding-top: 20px; }
-}
-
-// Contact icons stayed useful on phones; the old rule hid them there
-// because the hamburger duplicated them.
-.sysbar-icon {
-  @include respond(768px) { display: inline-flex; }
-}
-
-// ------------------------------------------------------------
 // SYSTEM BAR — JS-free, wraps instead of collapsing to a toggle
+//
+// The sticky/wrapping behaviour it needs is set on .system-bar itself in
+// jekyll-theme-hacker.scss rather than overridden here, so there is only
+// one source of truth for the bar's layout.
 // ------------------------------------------------------------
 .sysbar-tabs {
   display: flex;
@@ -786,6 +770,67 @@ button:focus-visible,
   color: $text-3 !important;
   font-family: $font-mono;
   font-size: 12px !important;
+}
+
+// Single article (_layouts/post.html)
+.post-head {
+  padding-bottom: 16px;
+  margin-bottom: 22px;
+  border-bottom: 1px solid $border;
+
+  h1 {
+    margin: 0 0 8px;
+    color: $text-1;
+    font-family: $font-mono;
+    font-size: 30px;
+    font-weight: 700;
+    line-height: 1.2;
+
+    @include respond(768px) { font-size: 24px; }
+  }
+}
+
+.post-body {
+  max-width: 74ch;
+
+  h2, h3 {
+    margin: 30px 0 10px;
+    color: $cyan;
+    font-family: $font-mono;
+  }
+
+  h2 { font-size: 20px; }
+  h3 { font-size: 16px; }
+
+  p, li {
+    color: $text-1;
+    font-size: 15.5px;
+    line-height: 1.78;
+  }
+
+  // Japanese needs looser leading than Latin at the same size.
+  &:lang(ja) p,
+  &:lang(ja) li { line-height: 1.95; }
+
+  pre {
+    padding: 14px 16px;
+    border: 1px solid $border;
+    border-radius: 5px;
+    background: $void;
+    overflow-x: auto;
+  }
+}
+
+.post-foot {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 12px;
+  margin-top: 34px;
+  padding-top: 16px;
+  border-top: 1px solid $border;
+  font-family: $font-mono;
+  font-size: 13px;
 }
 
 .empty-state {
