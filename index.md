@@ -82,6 +82,28 @@ description: >-
       <h2 class="sec-title" id="work-h">Featured work</h2>
     </div>
 
+    <article class="proj-card proj-card-feature">
+      <div class="proj-feature-text">
+        <h3 class="proj-name">Rootward</h3>
+        <p class="proj-desc">
+          A programming roguelite in Godot. Every spell is a real Python or JavaScript
+          function run in a WASI sandbox; the program you build from algorithm cards
+          has its work measured, and Big-O decides whether you or the foe acts first.
+          Pure seeded rules, about 31,000 lines of typed GDScript, 404 tests, in English
+          and Japanese.
+        </p>
+        <p class="proj-stack">Godot 4.7 · GDScript · wasmtime · CPython · QuickJS</p>
+        <p class="proj-links">
+          <a href="{{ '/projects#rootward' | relative_url }}">Case study</a>
+          <a href="{{ site.data.profile.contact.github }}/rootward-godot" target="_blank" rel="noopener">Source</a>
+        </p>
+      </div>
+      <a class="proj-feature-shot" href="{{ '/projects#rootward' | relative_url }}" tabindex="-1" aria-hidden="true">
+        <img src="{{ '/assets/program-images/rootward-cast.jpg' | relative_url }}"
+             width="1600" height="900" loading="lazy" decoding="async" alt="">
+      </a>
+    </article>
+
     <div class="grid-3">
       <article class="proj-card">
         <h3 class="proj-name">AIOS</h3>

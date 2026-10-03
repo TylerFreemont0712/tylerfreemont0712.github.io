@@ -86,6 +86,27 @@ description: >-
       <h2 class="sec-title" id="work-h">主な開発実績</h2>
     </div>
 
+    <article class="proj-card proj-card-feature">
+      <div class="proj-feature-text">
+        <h3 class="proj-name">Rootward</h3>
+        <p class="proj-desc">
+          Godot製のプログラミング・ローグライトです。すべての呪文は本物のPythonまたは
+          JavaScriptの関数で、WASIサンドボックス上で実行されます。アルゴリズムカードで
+          組んだプログラムの仕事量を実測し、計算量(Big-O)が先手を決めます。
+          シード付きの純粋なルール層、型付きGDScript約31,000行、テスト404件、日英対応です。
+        </p>
+        <p class="proj-stack">Godot 4.7 ・ GDScript ・ wasmtime ・ CPython ・ QuickJS</p>
+        <p class="proj-links">
+          <a href="{{ '/ja/projects' | relative_url }}#rootward">詳細</a>
+          <a href="{{ site.data.profile.contact.github }}/rootward-godot" target="_blank" rel="noopener">ソースコード</a>
+        </p>
+      </div>
+      <a class="proj-feature-shot" href="{{ '/ja/projects' | relative_url }}#rootward" tabindex="-1" aria-hidden="true">
+        <img src="{{ '/assets/program-images/rootward-cast.jpg' | relative_url }}"
+             width="1600" height="900" loading="lazy" decoding="async" alt="">
+      </a>
+    </article>
+
     <div class="grid-3">
       <article class="proj-card">
         <h3 class="proj-name">AIOS</h3>
