@@ -27,7 +27,7 @@ writing.md             technical articles
 ja/                    Japanese site — same five pages, written for a
                        Japanese reader rather than translated
 assets/resume/         the four résumé PDFs
-assets/program-images/ AIOS screenshots used as evidence
+assets/program-images/ AIOS and Rootward screenshots used as evidence
 ```
 
 Content facts live in `_data/profile.yml` rather than in page markup, so the

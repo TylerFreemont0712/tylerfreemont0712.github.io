@@ -6,8 +6,9 @@ title: Projects
 nav: projects
 permalink: /projects
 description: >-
-  Projects by Tyler Freemont — self-hosted AI workspaces, multi-agent code
-  generation, local-network sync tooling, and llama.cpp server tooling.
+  Projects by Tyler Freemont — Rootward, a Godot roguelite whose spells are real
+  code run in a sandbox; self-hosted AI workspaces; multi-agent code generation;
+  local-network sync and llama.cpp server tooling.
 ---
 
 <section class="pane reveal" aria-labelledby="proj-h">
@@ -24,6 +25,161 @@ description: >-
     </div>
   </div>
 </section>
+
+<!-- ═══════════ ROOTWARD ═══════════ -->
+<article class="pane reveal case" id="rootward" aria-labelledby="rootward-h">
+  <div class="pane-title-bar">
+    <div class="pane-dots" aria-hidden="true"><span></span><span></span><span></span></div>
+    <div class="pane-label">case-study · rootward</div>
+  </div>
+  <div class="pane-body">
+    <header class="case-head">
+      <h2 class="case-title" id="rootward-h">Rootward</h2>
+      <p class="case-tagline">A programming roguelite in Godot where every spell is real
+        code run in a sandbox, and Big-O decides who acts first.</p>
+      <p class="case-links">
+        <a href="{{ site.data.profile.contact.github }}/rootward-godot" class="btn btn-primary" target="_blank" rel="noopener">
+          {% include icon.html name="github" %} Source
+        </a>
+      </p>
+    </header>
+
+    <div class="case-body">
+      <h3>Problem</h3>
+      <p>
+        Games that teach programming usually either simulate code with a toy language
+        or ask you to write something and grade it somewhere off to the side of the
+        fun. I wanted the code itself to be the mechanic: a spell that does damage
+        because of what a real function returns, so that choosing a better algorithm
+        is also the better move. It also had to be playable in Japanese as well as
+        English.
+      </p>
+
+      <h3>Approach</h3>
+      <p>
+        A run starts by drafting a <strong>paradigm</strong> — Divide &amp; Conquer,
+        Search &amp; Index, Greedy, Brute Force or Dynamic Programming — each a school
+        of algorithms with its own speed class. The cards are real algorithms (merge
+        sort, binary search, knapsack, Kadane's, quickselect), each a function from a
+        volley of bolts to a volley of bolts, written in both Python and JavaScript.
+        You play cards in order into one program, and the program is what runs. Its
+        <em>measured</em> work races the foes' tempo: a program that does too much work
+        lets the foe act first, so an O(n²) brute-force card buys enormous damage at the
+        price of initiative.
+      </p>
+
+      <figure class="shot shot-feature">
+        <img src="{{ '/assets/program-images/rootward-cast.jpg' | relative_url }}"
+             width="1600" height="900" loading="lazy" decoding="async"
+             alt="A fight in Rootward. A witch casts a glowing magic circle toward a fire
+                  sprite named Tally Wisp. Below the stage, a program panel shows main.py
+                  built from four cards, each call annotated with its complexity and
+                  measured operations, and a race bar where the player's 21 operations
+                  sit just ahead of the Wisp's tempo of 28.">
+        <figcaption>
+          A cast landing. The code on the right is the program the four played cards
+          wrote, and every call is annotated with its complexity, the <code>n</code> it
+          was given and the ops it cost. The program did <strong>21 ops</strong> of work
+          against the Wisp's tempo of <strong>28</strong>, so the volley lands first,
+          and the game says so. Everything on screen is the result of a real run.
+        </figcaption>
+      </figure>
+
+      <h3>Hard part</h3>
+      <p>
+        The sandbox was the riskiest piece, so it came first. Player code must never
+        run in the game's own process, and Godot's WebAssembly add-on has no WASI
+        filesystem, which rules out CPython. The answer was the <code>wasmtime</code>
+        CLI as a sidecar process per job, running CPython and QuickJS compiled to WASI,
+        both pinned by SHA-256. A job gets only the files it is handed, a time limit,
+        a memory cap and an output cap, with no network; a port of an earlier
+        malicious-code suite, a read-only standard library and a symlink-escape check
+        hold that line. A turn measures about 74&nbsp;ms in Python and 11&nbsp;ms in
+        JavaScript, off the main thread, which is fast enough that the preview of a
+        spell is a real run too, and the cast lands exactly what the preview said.
+      </p>
+      <p>
+        The second problem is trusting the output. Player code returns data, and the
+        rules, not the code, decide what it means: every bolt is clamped and resolved
+        against weaknesses, shields and foe traits, a crash or a timeout becomes a game
+        outcome instead of an exception, and a foe can be built around a bug class —
+        one caches the values it has already seen and shrugs off repeats of them. The
+        rules live in a pure, seeded layer (no nodes, no file or network I/O, all
+        randomness from one RNG, state as plain dictionaries that save as JSON), and
+        the scenes only render state and send commands. That layer began as a port of
+        my earlier TypeScript version and was proven against its recorded runs — 36
+        seeded runs, 3,789 steps — before I let it diverge, after which a rule changed
+        on purpose re-records its reference results and the diff is reviewed.
+      </p>
+
+      <figure class="shot">
+        <img src="{{ '/assets/program-images/rootward-program.jpg' | relative_url }}"
+             width="1600" height="900" loading="lazy" decoding="async"
+             alt="The program panel stretched upward over the stage to show the whole of
+                  main.py: a program function calling salvo, fire_constant, merge_strike
+                  and amplify in order, followed by each card's own source with its
+                  comments, and a summary line reading initiative, one bolt, 33 damage.">
+        <figcaption>
+          The program stretched up over the arena to read it whole before running it.
+          Each card's source is the real function, comments included, and the footer is
+          the preview of what this exact program will do. It folds away on its own when
+          the cast starts, so the animation is not hidden.
+        </figcaption>
+      </figure>
+
+      <figure class="shot">
+        <img src="{{ '/assets/program-images/rootward-paradigms.jpg' | relative_url }}"
+             width="1296" height="580" loading="lazy" decoding="async"
+             alt="The paradigm draft: three cards offering Dynamic Programming at
+                  O(n·H), Search and Index at O(log n) and Brute Force at O(n squared),
+                  each with a one-line description and two signature algorithm cards.">
+        <figcaption>
+          The draft at the start of a run. The speed class on each paradigm is the
+          trade-off the rest of the run plays out.
+        </figcaption>
+      </figure>
+
+      <h3>Outcome</h3>
+      <p>
+        It plays end to end: a four-ring descent with fights, elites, forges, rests and
+        guardians, around seventy algorithm cards with forge upgrades, 216 functions
+        in each language whose worked examples are run in the sandbox by a validation
+        script, and English and Japanese text throughout. The assets come from a
+        scripted pipeline (ComfyUI art and music, Blender-retargeted VRM characters
+        with a shared move library), and every picture, model and sound has a fallback
+        so a missing file never breaks a screen.
+      </p>
+      <p>
+        It was built in about ten days with AI coding agents under a written working
+        agreement kept in the repository: tests first for the rules and the sandbox,
+        untyped GDScript a compile error, a screenshot before anything visible counts
+        as done, and 44 decision records for the choices a later reader might question.
+        There are about 31,000 lines of GDScript and 404 tests. Honest limits: it is a
+        single-player desktop game, developed and tested on Linux; the roughly 100&nbsp;MB
+        sandbox runtime is fetched by a script rather than stored in the repository;
+        only Python and JavaScript are supported; and the balance is early.
+      </p>
+
+      <figure class="shot">
+        <img src="{{ '/assets/program-images/rootward-map.jpg' | relative_url }}"
+             width="1600" height="900" loading="lazy" decoding="async"
+             alt="The route map of one ring of the descent: a branching network of room
+                  icons for fights, elites, rests, forges and caches over a painted
+                  machine shaft, with the ring's description and the next rooms listed in
+                  a side panel.">
+        <figcaption>
+          One ring of the descent. Maps and runs are generated from a seed, so a bug
+          report can be replayed from the seed and the commands that led to it.
+        </figcaption>
+      </figure>
+
+      <ul class="case-stack">
+        <li>Godot 4.7</li><li>GDScript</li><li>wasmtime / WASI</li><li>CPython</li>
+        <li>QuickJS</li><li>gdUnit4</li><li>ComfyUI</li><li>Blender</li>
+      </ul>
+    </div>
+  </div>
+</article>
 
 <!-- ═══════════ AIOS ═══════════ -->
 <article class="pane reveal case" id="aios" aria-labelledby="aios-h">

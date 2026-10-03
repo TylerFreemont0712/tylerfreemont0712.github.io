@@ -6,7 +6,8 @@ title: 開発実績
 nav: projects
 permalink: /ja/projects
 description: >-
-  Tyler Freemontの開発実績。ローカルLLM推論基盤AIOS、マルチエージェントによる
+  Tyler Freemontの開発実績。本物のコードをサンドボックスで実行するGodot製ゲームRootward、
+  ローカルLLM推論基盤AIOS、マルチエージェントによる
   自律開発システムLLM Council、LAN内同期アプリLocalSyncの設計と技術的判断について。
 ---
 
@@ -26,6 +27,156 @@ description: >-
     </div>
   </div>
 </section>
+
+<!-- ═══════════ ROOTWARD ═══════════ -->
+<article class="pane reveal case" id="rootward" aria-labelledby="rootward-h">
+  <div class="pane-title-bar">
+    <div class="pane-dots" aria-hidden="true"><span></span><span></span><span></span></div>
+    <div class="pane-label">case-study · rootward</div>
+  </div>
+  <div class="pane-body">
+    <header class="case-head">
+      <h2 class="case-title" id="rootward-h">Rootward</h2>
+      <p class="case-tagline">
+        すべての呪文が本物のコードで、サンドボックス上で実際に実行され、
+        計算量(Big-O)が行動順を決める、Godot製のプログラミング・ローグライトです。
+      </p>
+      <p class="case-links">
+        <a href="{{ site.data.profile.contact.github }}/rootward-godot" class="btn btn-primary" target="_blank" rel="noopener">
+          {% include icon.html name="github" %} ソースコード
+        </a>
+      </p>
+    </header>
+
+    <div class="case-body">
+      <h3>課題</h3>
+      <p>
+        プログラミングを教えるゲームは、玩具のような独自言語でコードを模擬するか、
+        コードを書かせたうえで楽しい部分とは別の場所で採点するか、のどちらかになりがちです。
+        私はコードそのものをゲームの仕組みにしたいと考えました。本物の関数が返した値で
+        呪文のダメージが決まるので、より良いアルゴリズムを選ぶことがそのまま
+        より良い一手になります。日本語でも英語でも遊べることも条件でした。
+      </p>
+
+      <h3>設計</h3>
+      <p>
+        一回の挑戦は<strong>パラダイム</strong>(分割統治、探索とインデックス、貪欲法、
+        全探索、動的計画法)を選ぶところから始まります。パラダイムはそれぞれ速度クラスを
+        持つアルゴリズムの流派です。カードはマージソート、二分探索、ナップサック、
+        Kadane法、クイックセレクトといった実在のアルゴリズムで、ボルト(弾)の束を受け取って
+        ボルトの束を返す関数としてPythonとJavaScriptの両方で書かれています。カードを順に
+        並べて一つのプログラムを作り、そのプログラムが実行されます。実行で<em>実測</em>された
+        仕事量が敵のテンポと競走し、仕事量が多すぎると敵が先に動きます。そのため、
+        O(n²)の全探索カードは、先手を犠牲にして巨大なダメージを得る選択になります。
+      </p>
+
+      <figure class="shot shot-feature">
+        <img src="{{ '/assets/program-images/rootward-cast.jpg' | relative_url }}"
+             width="1600" height="900" loading="lazy" decoding="async"
+             alt="Rootwardの戦闘画面。魔女が火の精霊タリー・ウィスプに向けて魔法陣を展開している。
+                  下部のプログラムパネルには4枚のカードから組み立てたmain.pyが表示され、
+                  各呼び出しに計算量と実測の演算回数が添えられている。レースバーでは
+                  プレイヤーの21演算がウィスプのテンポ28の手前に位置している。">
+        <figcaption>
+          呪文が発動する場面です。右のコードは、出した4枚のカードが書き上げたプログラムで、
+          呼び出しごとに計算量、渡された<code>n</code>、消費した演算回数が表示されます。
+          このプログラムの仕事量は<strong>21演算</strong>、ウィスプのテンポは
+          <strong>28</strong>なので、先に攻撃が届き、ゲームもそれを表示します。
+          画面に出るものはすべて実際の実行結果です。
+        </figcaption>
+      </figure>
+
+      <h3>難しかった点</h3>
+      <p>
+        最もリスクが高いのがサンドボックスだったため、最初に作りました。プレイヤーのコードを
+        ゲーム本体のプロセスで動かすことはできず、GodotのWebAssembly拡張にはWASIの
+        ファイルシステムがないためCPythonも動かせません。そこで、ジョブごとに
+        <code>wasmtime</code>のCLIを別プロセスとして起動し、WASIにコンパイルした
+        CPythonとQuickJSを実行する構成にしました。どちらもSHA-256で固定しています。
+        ジョブには渡されたファイルだけを与え、時間・メモリ・出力量に上限を設け、
+        ネットワークは使えません。以前の悪意あるコード向けテストの移植、読み取り専用の
+        標準ライブラリ、シンボリックリンク経由の脱出の検査でこの境界を守っています。
+        1ターンの実測はPythonで約74ミリ秒、JavaScriptで約11ミリ秒(メインスレッド外)で、
+        呪文のプレビューも実際の実行になり、発動時にはプレビューどおりの結果が反映されます。
+      </p>
+      <p>
+        もう一つの課題は、出力を信用しないことです。プレイヤーのコードが返すのはデータに
+        すぎず、その意味を決めるのはコードではなくルールです。ボルトはすべて上限を
+        適用したうえで、弱点、シールド、敵の特性に照らして解決されます。クラッシュや
+        タイムアウトは例外ではなくゲーム内の結果として扱われ、バグの種類を題材にした敵も
+        います(一度見た値をキャッシュして、同じ値の繰り返しを受け流す敵など)。
+        ルール層はノードもファイル・ネットワークI/Oも持たず、乱数はすべて単一のRNG、
+        状態はJSONとして保存できる辞書だけで構成され、シーンは状態を描画してコマンドを
+        送るだけです。この層は以前作ったTypeScript版の移植として始め、その記録済みの実行
+        (36本のシード付き実行、3,789ステップ)と一致することを確認してから、
+        意図的に独自の進化をさせました。ルールを意図して変えた場合は基準結果を
+        再記録し、差分をレビューします。
+      </p>
+
+      <figure class="shot">
+        <img src="{{ '/assets/program-images/rootward-program.jpg' | relative_url }}"
+             width="1600" height="900" loading="lazy" decoding="async"
+             alt="プログラムパネルをステージの上まで引き伸ばし、main.pyの全体を表示した画面。
+                  salvo、fire_constant、merge_strike、amplifyを順に呼ぶprogram関数と、
+                  各カードのソースがコメント付きで並び、末尾に「先手・1ボルト・33ダメージ」の
+                  要約が出ている。">
+        <figcaption>
+          実行前にプログラム全体を読めるよう、アリーナの上へ引き伸ばした状態です。
+          各カードのソースはコメントも含めて本物の関数で、末尾はこのプログラムが
+          実際に何をするかのプレビューです。呪文の発動が始まると自動で元に戻り、
+          演出が隠れることはありません。
+        </figcaption>
+      </figure>
+
+      <figure class="shot">
+        <img src="{{ '/assets/program-images/rootward-paradigms.jpg' | relative_url }}"
+             width="1296" height="580" loading="lazy" decoding="async"
+             alt="パラダイムの選択画面。動的計画法 O(n·H)、探索とインデックス O(log n)、
+                  全探索 O(n²) の3枚が並び、それぞれに説明と代表的なアルゴリズムカード2枚が付いている。">
+        <figcaption>
+          挑戦の最初に行うドラフトです。各パラダイムの速度クラスが、その後の挑戦全体で
+          問われるトレードオフになります。
+        </figcaption>
+      </figure>
+
+      <h3>成果</h3>
+      <p>
+        最初から最後まで遊べる状態です。4つの環を降りていく道のり、戦闘・精鋭・鍛冶・休息・
+        守護者、強化を含め約70種のアルゴリズムカード、各言語216個の関数(検証スクリプトが
+        サンドボックスで例題をすべて実行します)、全体にわたる日英のテキストを備えています。
+        素材はスクリプト化したパイプライン(ComfyUIによる画像と音楽、共通のモーション
+        ライブラリを持つBlender経由のVRMキャラクター)から生成し、画像・モデル・音のすべてに
+        代替を用意しているため、ファイルが欠けても画面が壊れることはありません。
+      </p>
+      <p>
+        開発期間は約10日で、リポジトリに置いた作業規約のもとでAIコーディングエージェントと
+        進めました。ルールとサンドボックスは先にテストを書き、型のないGDScriptは
+        コンパイルエラーにし、見た目に関わるものはスクリーンショットで確認するまで完了と
+        しません。後から疑問になりそうな判断は44件の決定記録(ADR)に残しています。
+        GDScriptは約31,000行、テストは404件です。正直な制約として、一人用のデスクトップ
+        ゲームで、開発とテストはLinuxで行っています。約100MBのサンドボックス実行環境は
+        リポジトリに含めずスクリプトで取得します。対応言語はPythonとJavaScriptのみで、
+        バランス調整は初期段階です。
+      </p>
+
+      <figure class="shot">
+        <img src="{{ '/assets/program-images/rootward-map.jpg' | relative_url }}"
+             width="1600" height="900" loading="lazy" decoding="async"
+             alt="降下の一つの環の経路マップ。描かれた機械の縦穴を背景に、戦闘・精鋭・休息・鍛冶・
+                  キャッシュの部屋アイコンが枝分かれして並び、横のパネルに環の説明と次の部屋が表示されている。">
+        <figcaption>
+          降下の一つの環です。マップも挑戦もシードから生成されるため、不具合が出たときは
+          シードとその時点までのコマンドから再現できます。
+        </figcaption>
+      </figure>
+
+      <ul class="case-stack">
+        <li>Godot 4.7</li><li>GDScript</li><li>wasmtime / WASI</li><li>CPython</li>
+        <li>QuickJS</li><li>gdUnit4</li><li>ComfyUI</li><li>Blender</li>
+      </ul>
+    </div>
+  </div>
+</article>
 
 <!-- ═══════════ AIOS ═══════════ -->
 <article class="pane reveal case" id="aios" aria-labelledby="aios-h">
