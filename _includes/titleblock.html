@@ -1,0 +1,37 @@
+{%- comment -%}
+  The title block: the box in the corner of every engineering drawing that
+  says what it is, who drew it and which revision you are holding. Here it
+  doubles as the site footer and the contact call to action.
+
+  Front matter: dwg (drawing number) and sheet ("01".."05", or "P1".. for
+  project sheets). Sheet count is the number of top-level sheets in the nav.
+{%- endcomment -%}
+{%- assign lang = page.lang | default: "en" -%}
+{%- assign t = site.data.i18n[lang] -%}
+{%- assign p = site.data.profile -%}
+{%- assign resume_url = "/resume" -%}{%- if lang == "ja" -%}{%- assign resume_url = "/ja/resume" -%}{%- endif -%}
+<footer class="titleblock" aria-label="{{ t.tb_contact }}">
+  <div class="tb-cta">
+    <span class="t-label">{{ t.tb_issued }}{% if t.tb_issued_alt %} · <span lang="{% if lang == 'ja' %}en{% else %}ja{% endif %}">{{ t.tb_issued_alt }}</span>{% endif %}</span>
+    <h2>{{ t.tb_cta_h }}</h2>
+    <p>{% if lang == "ja" %}{{ p.availability.statement_ja }}。{% else %}{{ p.availability.statement }}. {% endif %}{{ t.tb_cta_p }}</p>
+    <div class="btn-row">
+      <a class="btn btn-primary" href="mailto:{{ p.contact.email }}">{% include icon.html name="envelope" %}{{ t.tb_email }}</a>
+      <a class="btn" href="{{ resume_url | relative_url }}">{% include icon.html name="download" %}{{ t.tb_resume }}</a>
+    </div>
+  </div>
+  <div>
+    <div class="tb-cell"><span class="tb-k">{{ t.tb_drawn }}</span><span class="tb-v">{% if lang == "ja" %}{{ p.name_ja }}（{{ p.name }}）{% else %}{{ p.name }}{% endif %}</span></div>
+    <div class="tb-cell"><span class="tb-k">{{ t.tb_location }}</span><span class="tb-v">{{ t.tb_location_v }}</span></div>
+    <div class="tb-cell"><span class="tb-k">{{ t.tb_contact }}</span><span class="tb-v"><a href="mailto:{{ p.contact.email }}">{{ p.contact.email }}</a><br><a href="{{ p.contact.github }}" rel="me noopener" target="_blank">github.com/{{ p.contact.github_handle }}</a></span></div>
+  </div>
+  <div>
+    <div class="tb-cell"><span class="tb-k">{{ t.tb_dwg }}</span><span class="tb-dwg">{{ page.dwg | default: "TF-000" }}</span></div>
+    <div class="tb-cell"><span class="tb-k">{{ t.tb_sheet }}</span><span class="tb-v t-mono">{{ page.sheet | default: "—" }} {{ t.tb_of }} {{ t.nav.size | prepend: "0" | slice: -2, 2 }}</span></div>
+    <div class="tb-cell"><span class="tb-k">{{ t.tb_rev }} · {{ t.tb_scale }}</span><span class="tb-v t-mono">{{ site.time | date: "%Y.%m.%d" }} · 1:1</span></div>
+  </div>
+  <div class="tb-seal">
+    {% include hanko.html %}
+    <span class="tb-k">{{ t.tb_approved }}</span>
+  </div>
+</footer>

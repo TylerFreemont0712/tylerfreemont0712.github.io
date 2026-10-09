@@ -1,0 +1,8 @@
+{%- comment -%}
+  A screenshot framed as a drawing "detail".
+  {% include shot.html src="/assets/…" w=1600 h=900 alt="…" label="Detail A" caption="…" %}
+{%- endcomment -%}
+<figure class="shot">
+<div class="shot-frame ticks"><img src="{{ include.src | relative_url }}" width="{{ include.w }}" height="{{ include.h }}" alt="{{ include.alt }}" loading="lazy" decoding="async"></div>
+<figcaption><span class="t-label">{{ include.label }}</span><span>{{ include.caption }}</span></figcaption>
+</figure>

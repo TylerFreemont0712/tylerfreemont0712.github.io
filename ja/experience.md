@@ -5,284 +5,198 @@ alt_url: /experience
 title: 職務経歴
 nav: experience
 permalink: /ja/experience
+dwg: TF-003
+sheet: "03"
 description: >-
-  Tyler Freemontの職務経歴。MiraXでの生成AI基盤開発、フロンティアモデルの評価業務、
-  楽天モバイル様・ダイキン様向けのPythonネットワーク自動化。保有資格・スキル一覧。
+  Tyler Freemontの職務経歴。MiraXでの生成AI基盤開発、2024年からのフロンティアモデル評価業務、楽天モバイル様・ダイキン様向けのPythonネットワーク自動化。スキル・保有資格・学歴。
 ---
+{%- assign p = site.data.profile -%}
+{%- assign c = site.data.career -%}
 
-<section class="pane reveal" aria-labelledby="exp-h">
-  <div class="pane-title-bar">
-    <div class="pane-dots" aria-hidden="true"><span></span><span></span><span></span></div>
-    <div class="pane-label">work-history</div>
+<header class="ps-head" style="margin-bottom:48px">
+  <div>
+    <div class="ps-crumb"><span class="t-label">図番 TF-003 · 第03葉 · 最新改訂 {{ c[0].rev }}</span></div>
+    <h1 class="ps-title">職務経歴</h1>
+    <p class="ps-tag">
+      現在は生成AI基盤の開発を専門としています。その土台は、2年にわたるフロンティアモデルの評価業務と、2年半のインフラ自動化の実務です。日英どちらの環境でも業務を行ってきました。
+    </p>
   </div>
-  <div class="pane-body">
-    <div class="sec-head">
-      <p class="sec-prompt" aria-hidden="true"><span class="pr">$</span> <span class="cmd">git log</span> --oneline career</p>
-      <h1 class="sec-title" id="exp-h">職務経歴</h1>
-      <p class="sec-note">
-        生成AI基盤の開発を専門とするソフトウェアエンジニアです。それ以前は
-        エンタープライズ向けネットワークのインフラ自動化に従事しておりました。
-      </p>
+  <table class="tb">
+    <caption class="sr-only">概要</caption>
+    <tbody>
+      <tr><th scope="row">現職</th><td>{{ c[0].role_ja }}・{{ c[0].org_ja }}</td></tr>
+      <tr><th scope="row">言語</th><td>英語（ネイティブ）・日本語（JLPT N1）</td></tr>
+      <tr><th scope="row">資格</th><td>AWS Developer – Associate・AWS Solutions Architect – Associate</td></tr>
+      <tr><th scope="row">就労資格</th><td>在留資格「日本人の配偶者等」・就労制限なし・ビザスポンサー不要</td></tr>
+      <tr><th scope="row">勤務地</th><td>大阪・リモート／ハイブリッド／出社いずれも可</td></tr>
+    </tbody>
+  </table>
+</header>
+
+<!-- ═══ A — 職務経歴 ═══ -->
+<section class="view" aria-labelledby="hist-h">
+  <header class="view-h">
+    <span class="view-tag" aria-hidden="true">A</span>
+    <h2 class="view-title" id="hist-h">職務経歴<span class="alt" lang="en">Revision history</span></h2>
+    <span class="view-ref">新しい順</span>
+  </header>
+
+  <article class="rev-entry reveal">
+    <div class="rev-side">{% include revmark.html r="E" %}<span class="t-label">2026年3月 – 現在<br>リモート／大阪</span></div>
+    <div>
+      <h3 class="rev-role">ソフトウェアエンジニア（AI基盤）</h3>
+      <p class="rev-org"><b>MiraX</b></p>
+      <ul class="rev-list">
+        <li>Ollama・llama.cppを用いた社内向けローカルLLM推論基盤を構築し、社内APIエンドポイント経由で提供。外部モデルプロバイダへの依存を解消し、顧客データを社外に出さずに生成AIを活用できる体制を実現しました。</li>
+        <li>MCP（Model Context Protocol）サーバを<strong>{{ p.figures.mcp_servers_production }}件</strong>設計・実装し、社内のローカルLLM基盤から利用する形で本番運用中。日本語ファイルシステムおよびUnicodeに完全対応した社内文書サーバ、英日バイリンガル対応のWeb検索サービスを含みます。</li>
+        <li>RAG検索、ツール呼び出し、LangChainによるマルチエージェントワークフローを、ビデオ会議・翻訳・記録管理を含むエンタープライズ向けSaaSプラットフォームへ実装。</li>
+        <li>オープンウェイトモデル（Qwen、DeepSeek、Gemma、gpt-oss）を本番環境のレイテンシ・品質要件に照らしてベンチマーク・統合し、AI機能のリリース可否を判断する社内評価を担当。</li>
+        <li>Python、C++、C#、TypeScript、JavaScriptを用いたバックエンド・フロントエンド機能を、少人数のスタートアップ環境で開発。</li>
+      </ul>
+      <ul class="chips"><li class="chip">Python</li><li class="chip">C++</li><li class="chip">TypeScript</li><li class="chip">Ollama</li><li class="chip">llama.cpp</li><li class="chip">MCP</li><li class="chip">LangChain</li><li class="chip">RAG</li><li class="chip">マルチエージェント</li></ul>
     </div>
+  </article>
 
-    <article class="timeline-entry reveal">
-      <div class="tl-header">
-        <h2 class="tl-role">ソフトウェアエンジニア（AI基盤）</h2>
-        <p class="tl-date">2026年3月 &mdash; 現在</p>
-      </div>
-      <p class="tl-company">MiraX <span class="tl-loc">・ リモート／大阪</span></p>
-      <ul class="tl-list">
-        <li>
-          Ollama・llama.cppを用いた社内向けローカルLLM推論基盤を構築し、社内APIエンドポイント
-          経由で提供。外部モデルプロバイダへの依存を解消し、顧客データを社外に出さずに
-          生成AIを活用できる体制を実現しました。
-        </li>
-        <li>
-          MCP（Model Context Protocol）サーバを<strong>{{ site.data.profile.figures.mcp_servers_production }}件</strong>
-          設計・実装し、社内のローカルLLM基盤から利用する形で本番運用中。日本語
-          ファイルシステムおよびUnicodeに完全対応した社内文書サーバ、英日バイリンガル対応の
-          Web検索サービスを含みます。
-        </li>
-        <li>
-          RAG検索、ツール呼び出し、LangChainによるマルチエージェントワークフローを、
-          ビデオ会議・翻訳・記録管理を含むエンタープライズ向けSaaSプラットフォームへ実装。
-        </li>
-        <li>
-          オープンウェイトモデル（Qwen、DeepSeek、Gemma、gpt-oss）を本番環境の
-          レイテンシ・品質要件に照らしてベンチマーク・統合し、AI機能のリリース可否を
-          判断する社内評価を担当。
-        </li>
-        <li>
-          Python、C++、C#、TypeScript、JavaScriptを用いたバックエンド・フロントエンド機能を、
-          少人数のスタートアップ環境で開発。
-        </li>
+  <article class="rev-entry reveal">
+    <div class="rev-side">{% include revmark.html r="D" %}<span class="t-label">2024年1月 – 現在<br>リモート（業務委託）</span></div>
+    <div>
+      <h3 class="rev-role">AI評価スペシャリスト（コード・数学）</h3>
+      <p class="rev-org"><b>Outlier / Alignerr</b></p>
+      <ul class="rev-list">
+        <li>フロンティアモデルの学習パイプラインに用いられるRLHF選好データおよび技術的根拠の記述を作成。</li>
+        <li>Python、JavaScript/TypeScript、C++、C#において、モデル出力の正確性・推論品質・指示追従性を評価しランク付け。</li>
+        <li>マルチステップ推論、エージェントのタスク実行、ツール利用の挙動を評価。自分がエージェント基盤を構築する際に対処すべき失敗パターンと同じ領域です。</li>
+        <li>コード補完、デバッグタスク、アルゴリズム実装を実務エンジニアリングの基準でレビュー。大学レベルの数学問題の解析も担当。</li>
       </ul>
-      <ul class="tl-tags">
-        <li>Python</li><li>C++</li><li>TypeScript</li><li>Ollama</li><li>llama.cpp</li>
-        <li>MCP</li><li>LangChain</li><li>RAG</li><li>マルチエージェント</li>
-      </ul>
-    </article>
+      <ul class="chips"><li class="chip">RLHF</li><li class="chip">LLM評価</li><li class="chip">エージェント評価</li><li class="chip">コードレビュー</li></ul>
+    </div>
+  </article>
 
-    <article class="timeline-entry reveal">
-      <div class="tl-header">
-        <h2 class="tl-role">AI評価スペシャリスト（コード・数学）</h2>
-        <p class="tl-date">2024年1月 &mdash; 現在</p>
-      </div>
-      <p class="tl-company">Outlier / Alignerr <span class="tl-loc">・ リモート（業務委託）</span></p>
-      <ul class="tl-list">
-        <li>
-          フロンティアモデルの学習パイプラインに直接用いられるRLHF選好データおよび
-          技術的根拠の記述を作成。
-        </li>
-        <li>
-          Python、JavaScript/TypeScript、C++、C#および一般的なコンピュータサイエンス領域に
-          おいて、モデル出力の正確性・推論品質・指示追従性を評価しランク付け。
-        </li>
-        <li>
-          マルチステップ推論、ツール利用、関数呼び出しといったエージェント挙動を、
-          実務エンジニアリングの基準に照らして評価。自分がエージェント基盤を構築する際に
-          対処すべき失敗パターンと同じ領域です。
-        </li>
-        <li>
-          コード補完、デバッグタスク、アルゴリズム実装のレビュー、および大学レベルの
-          数学問題の解析。
-        </li>
-      </ul>
-      <ul class="tl-tags">
-        <li>RLHF</li><li>LLM評価</li><li>エージェント評価</li><li>コードレビュー</li>
-      </ul>
-    </article>
-
-    <article class="timeline-entry reveal">
-      <div class="tl-header">
-        <h2 class="tl-role">ソフトウェア／インフラエンジニア</h2>
-        <p class="tl-date">2023年9月 &mdash; 2026年2月</p>
-      </div>
-      <p class="tl-company">株式会社Neighbors <span class="tl-loc">・ 大阪</span></p>
-      <ul class="tl-list">
-        <li>
-          <strong>楽天モバイル様</strong>・<strong>ダイキン様</strong>をはじめとする
-          エンタープライズのネットワーク顧客向けに、Pythonによる自動化ツールおよび
-          社内サービスを開発。
-        </li>
-        <li>
-          <strong>{{ site.data.profile.figures.neighbors_nodes }}ノード規模</strong>を対象とする
-          障害検知・自動復旧サービスを設計・実装し、オペレータ主導の障害復旧を自動化。
-        </li>
+  <article class="rev-entry reveal">
+    <div class="rev-side">{% include revmark.html r="C" %}<span class="t-label">2023年9月 – 2026年2月<br>大阪</span></div>
+    <div>
+      <h3 class="rev-role">ソフトウェア／インフラエンジニア</h3>
+      <p class="rev-org"><b>株式会社Neighbors</b></p>
+      <ul class="rev-list">
+        <li><strong>楽天モバイル様</strong>・<strong>ダイキン様</strong>をはじめとするエンタープライズのネットワーク顧客向けに、Pythonによる自動化ツールおよび社内サービスを開発。</li>
+        <li><strong>{{ p.figures.neighbors_nodes }}ノード規模</strong>を対象とする障害検知・自動復旧サービスを設計・実装し、オペレータ主導の障害復旧を自動化。</li>
         <li>管理対象機器全体に対する手動での設定変更を置き換える構成管理ツールを開発。</li>
-        <li>
-          デプロイパイプラインの構築・保守を担当し、ネットワークエンジニアと連携して
-          トポロジ設計を実施。
-        </li>
-        <li>
-          日英バイリンガルの開発環境において、技術要件の翻訳・橋渡しを担当。
-        </li>
+        <li>デプロイパイプラインの構築・保守を担当し、ネットワークエンジニアと連携してトポロジ設計を実施。</li>
+        <li>日英バイリンガルの開発環境において、技術要件の翻訳・橋渡しを担当。</li>
       </ul>
-      <ul class="tl-tags">
-        <li>Python</li><li>Linux</li><li>ネットワーク自動化</li><li>TCP/IP</li>
-        <li>CI/CD</li><li>障害検知</li>
-      </ul>
-    </article>
+      <ul class="chips"><li class="chip">Python</li><li class="chip">Linux</li><li class="chip">ネットワーク自動化</li><li class="chip">TCP/IP</li><li class="chip">CI/CD</li><li class="chip">障害検知</li></ul>
+    </div>
+  </article>
 
-    <article class="timeline-entry reveal">
-      <div class="tl-header">
-        <h2 class="tl-role">技術翻訳者（英日・日英）</h2>
-        <p class="tl-date">2022年4月 &mdash; 2023年12月</p>
-      </div>
-      <p class="tl-company">フリーランス <span class="tl-loc">・ 大阪</span></p>
-      <ul class="tl-list">
-        <li>
-          IT・インフラ領域の技術文書を英日・日英で翻訳。字面の一致よりも運用上の
-          正確性を優先する方針で対応しました。
-        </li>
+  <article class="rev-entry reveal">
+    <div class="rev-side">{% include revmark.html r="B" %}<span class="t-label">2022年4月 – 2023年12月<br>大阪</span></div>
+    <div>
+      <h3 class="rev-role">技術翻訳者（英日・日英）</h3>
+      <p class="rev-org"><b>フリーランス</b></p>
+      <ul class="rev-list">
+        <li>IT・インフラ領域の技術文書を英日・日英で翻訳。字面の一致よりも運用上の正確性を優先する方針で対応しました。</li>
         <li>多国籍エンジニアリングチームの仕様策定・システム設計を支援。</li>
       </ul>
-      <ul class="tl-tags">
-        <li>技術翻訳</li><li>日本語</li><li>英語</li>
-      </ul>
-    </article>
+    </div>
+  </article>
 
-    <article class="timeline-entry reveal">
-      <div class="tl-header">
-        <h2 class="tl-role">英語講師</h2>
-        <p class="tl-date">2021年1月 &mdash; 2023年4月</p>
-      </div>
-      <p class="tl-company">崇志学園高等学校 <span class="tl-loc">・ 大阪</span></p>
-      <ul class="tl-list">
+  <article class="rev-entry reveal">
+    <div class="rev-side">{% include revmark.html r="A" %}<span class="t-label">2021年1月 – 2023年4月<br>大阪</span></div>
+    <div>
+      <h3 class="rev-role">英語講師</h3>
+      <p class="rev-org"><b>崇志学園高等学校</b></p>
+      <ul class="rev-list">
         <li>習熟度別の英語カリキュラムを設計・実施。</li>
       </ul>
-      <ul class="tl-tags">
-        <li>カリキュラム設計</li><li>バイリンガル環境</li>
+    </div>
+  </article>
+</section>
+
+<!-- ═══ B — スキル ═══ -->
+<section class="view reveal" aria-labelledby="spec-h">
+  <header class="view-h">
+    <span class="view-tag" aria-hidden="true">B</span>
+    <h2 class="view-title" id="spec-h">スキル<span class="alt" lang="en">Specification</span></h2>
+    <span class="view-ref">習熟度は言葉で記載</span>
+  </header>
+  <p class="view-lede">
+    <span class="prof">実務レベル</span>は本番環境での開発経験があるもの、
+    <span class="prof is-mid">基礎レベル</span>は読解と改修はできるものの深さを主張しないもの、
+    <span class="prof is-low">使用経験あり</span>は触ったことがある段階のものです。
+  </p>
+  <div class="spec">
+    <section>
+      <h3>生成AI・LLM基盤</h3>
+      <ul>
+        <li>ローカルLLM構築 — Ollama、llama.cpp</li>
+        <li>MCP（Model Context Protocol）サーバ</li>
+        <li>RAG・検索パイプライン</li>
+        <li>LangChain、マルチエージェント基盤</li>
+        <li>ツール呼び出し、構造化出力、文法による出力制約</li>
+        <li>Qwen、DeepSeek、Gemma、gpt-oss</li>
       </ul>
-    </article>
+    </section>
+    <section>
+      <h3>評価</h3>
+      <ul>
+        <li>RLHF選好データと技術的根拠の記述</li>
+        <li>コード評価 — Python、JavaScript/TypeScript、C++、C#</li>
+        <li>マルチステップ推論、指示追従性、エージェント挙動・ツール利用の評価</li>
+        <li>ベンチマーク設計：決定的な採点、正解漏えいの防止、速度と品質の両立</li>
+        <li>英日双方向のバイリンガル評価</li>
+      </ul>
+    </section>
+    <section>
+      <h3>プログラミング言語</h3>
+      <ul>
+        <li><span class="prof">実務レベル</span> Python、TypeScript、JavaScript、C++、C#、SQL、HTML/CSS</li>
+        <li><span class="prof is-mid">基礎レベル</span> GDScript、Go、Rust</li>
+        <li><span class="prof is-low">使用経験あり</span> Ansible</li>
+      </ul>
+    </section>
+    <section>
+      <h3>ゲーム開発</h3>
+      <ul>
+        <li>Godot 4 — 型付きGDScript、シーン、バックグラウンドスレッド、gdUnit4</li>
+        <li>シード固定の決定的なゲームルール、差分テスト</li>
+        <li>サンドボックス化したスクリプト実行 — wasmtime／WASI、QuickJS、Pyodide</li>
+        <li>コンテンツパイプライン — JSONCスキーマ、ローカライズ、生成アセット</li>
+      </ul>
+    </section>
+    <section>
+      <h3>インフラ・バックエンド</h3>
+      <ul>
+        <li>Linux、Docker、AWS、CI/CD（GitHub Actions）</li>
+        <li>REST・WebSocket API — Node/Express、FastAPI、Fastify</li>
+        <li>SQLite、ネットワーク自動化、TCP/IP</li>
+        <li>障害検知・自動復旧</li>
+      </ul>
+    </section>
+    <section>
+      <h3>アプリケーション・言語</h3>
+      <ul>
+        <li>React、PyQt6、HTML5 Canvas</li>
+        <li><strong>英語</strong> — ネイティブ</li>
+        <li><strong>日本語</strong> — JLPT N1・ビジネスレベル。技術文書の読み書き、顧客との打ち合わせ、英日・日英の技術翻訳に対応</li>
+      </ul>
+    </section>
   </div>
 </section>
 
-<!-- ═══════════ スキル ═══════════ -->
-<section class="pane reveal" aria-labelledby="skills-h">
-  <div class="pane-title-bar">
-    <div class="pane-dots" aria-hidden="true"><span></span><span></span><span></span></div>
-    <div class="pane-label">toolchain</div>
-  </div>
-  <div class="pane-body">
-    <div class="sec-head">
-      <p class="sec-prompt" aria-hidden="true"><span class="pr">$</span> <span class="cmd">cat</span> toolchain.txt</p>
-      <h2 class="sec-title" id="skills-h">スキル</h2>
-      <p class="sec-note">
-        習熟度は数値やグラフではなく言葉で記載しています。<strong>実務レベル</strong>は
-        本番環境での開発経験があるもの、<strong>基礎レベル</strong>は読解と改修は
-        できるものの深さを主張しないもの、<strong>使用経験あり</strong>は
-        触ったことがある段階のものです。
-      </p>
-    </div>
-
-    <div class="grid-2">
-      <div class="skill-group">
-        <h3>生成AI・LLM基盤</h3>
-        <ul class="skill-list">
-          <li>ローカルLLM構築 — Ollama、llama.cpp</li>
-          <li>MCP（Model Context Protocol）サーバ</li>
-          <li>RAG・検索パイプライン</li>
-          <li>LangChain、マルチエージェント基盤</li>
-          <li>ツール呼び出し・関数呼び出し</li>
-          <li>モデル評価（RLHF）、ベンチマーク</li>
-          <li>Qwen、DeepSeek、Gemma、gpt-oss</li>
-        </ul>
-      </div>
-
-      <div class="skill-group">
-        <h3>プログラミング言語</h3>
-        <ul class="skill-list">
-          <li><span class="prof">実務レベル</span> Python、TypeScript、JavaScript、
-            C++、C#、SQL、HTML/CSS</li>
-          <li><span class="prof prof-mid">基礎レベル</span> Go、Rust</li>
-          <li><span class="prof prof-low">使用経験あり</span> Ansible</li>
-        </ul>
-      </div>
-
-      <div class="skill-group">
-        <h3>インフラ・バックエンド</h3>
-        <ul class="skill-list">
-          <li>Linux</li>
-          <li>Docker</li>
-          <li>AWS</li>
-          <li>CI/CD</li>
-          <li>REST API設計</li>
-          <li>ネットワーク自動化、TCP/IP</li>
-          <li>障害検知・自動復旧</li>
-          <li>Git</li>
-        </ul>
-      </div>
-
-      <div class="skill-group">
-        <h3>フロントエンド・アプリケーション</h3>
-        <ul class="skill-list">
-          <li>React</li>
-          <li>PyQt6</li>
-          <li>HTML5 Canvas</li>
-          <li>SaaSプロダクト開発</li>
-        </ul>
-      </div>
-
-      <div class="skill-group">
-        <h3>評価業務の専門領域</h3>
-        <ul class="skill-list">
-          <li>コード評価 — Python、JavaScript/TypeScript、C++、C#</li>
-          <li>マルチステップ推論、アルゴリズム的問題解決</li>
-          <li>指示追従性の評価</li>
-          <li>エージェント挙動・ツール利用の評価</li>
-          <li>選好順位付けと技術的根拠の記述</li>
-          <li>英日双方向のバイリンガル評価</li>
-        </ul>
-      </div>
-
-      <div class="skill-group">
-        <h3>言語</h3>
-        <ul class="skill-list">
-          <li><strong>英語</strong> — ネイティブ</li>
-          <li><strong>日本語</strong> — JLPT N1・ビジネスレベル</li>
-        </ul>
-        <p class="skill-note">
-          技術文書の読み書き、顧客との打ち合わせ、英日・日英の技術翻訳実務に対応可能です。
-        </p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ═══════════ 資格・学歴 ═══════════ -->
-<section class="pane reveal" aria-labelledby="edu-h">
-  <div class="pane-title-bar">
-    <div class="pane-dots" aria-hidden="true"><span></span><span></span><span></span></div>
-    <div class="pane-label">credentials</div>
-  </div>
-  <div class="pane-body">
-    <div class="sec-head">
-      <p class="sec-prompt" aria-hidden="true"><span class="pr">$</span> <span class="cmd">cat</span> credentials.txt</p>
-      <h2 class="sec-title" id="edu-h">保有資格・学歴</h2>
-    </div>
-
-    <h3 class="sub-h">保有資格</h3>
-    <ul class="cert-list">
-      <li><strong>AWS Certified Developer – Associate</strong>（Amazon Web Services）</li>
-      <li><strong>AWS Certified Solutions Architect – Associate</strong>（Amazon Web Services）</li>
-      <li><strong>日本語能力試験 N1</strong>（最上級）</li>
-      <li><strong>Google IT Support Professional Certificate</strong>（Google）</li>
-    </ul>
-
-    <h3 class="sub-h">学歴</h3>
-    <ul class="cert-list">
-      <li>
-        <strong>ポートランド州立大学</strong>（米国オレゴン州）・
-        文学士（日本語・日本文化／コミュニケーション）・2014年〜2018年
-      </li>
-      <li>
-        <strong>クラカマス・コミュニティ・カレッジ</strong>（米国オレゴン州）・
-        数学、C++、プログラミング基礎
-      </li>
-      <li>
-        <strong>同志社大学</strong>（京都・交換留学）・日本語・日本文化・2017年〜2018年
-      </li>
-    </ul>
-  </div>
+<!-- ═══ C — 資格・学歴 ═══ -->
+<section class="view reveal" aria-labelledby="cert-h">
+  <header class="view-h">
+    <span class="view-tag" aria-hidden="true">C</span>
+    <h2 class="view-title" id="cert-h">保有資格・学歴<span class="alt" lang="en">Certification &amp; education</span></h2>
+    <span class="view-ref">検査済み・承認済み</span>
+  </header>
+  <ul class="certs">
+    <li><span class="balloon is-red" aria-hidden="true">1</span><span><b>AWS Certified Developer – Associate</b><span>Amazon Web Services</span></span></li>
+    <li><span class="balloon is-red" aria-hidden="true">2</span><span><b>AWS Certified Solutions Architect – Associate</b><span>Amazon Web Services</span></span></li>
+    <li><span class="balloon is-red" aria-hidden="true">3</span><span><b>日本語能力試験 N1</b><span>最上級</span></span></li>
+    <li><span class="balloon is-red" aria-hidden="true">4</span><span><b>Google IT Support Professional Certificate</b><span>Google</span></span></li>
+    <li><span class="balloon" aria-hidden="true">5</span><span><b>ポートランド州立大学</b><span>米国オレゴン州・文学士（日本語・日本文化／コミュニケーション）・2014年〜2018年</span></span></li>
+    <li><span class="balloon" aria-hidden="true">6</span><span><b>同志社大学</b><span>京都・交換留学・日本語・日本文化・2017年〜2018年</span></span></li>
+    <li><span class="balloon" aria-hidden="true">7</span><span><b>クラカマス・コミュニティ・カレッジ</b><span>米国オレゴン州・数学、C++、プログラミング基礎</span></span></li>
+  </ul>
 </section>

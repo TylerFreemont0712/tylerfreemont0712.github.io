@@ -1,48 +1,39 @@
 ---
 layout: default
 ---
-
 {%- comment -%}
   Article layout. `lang` is set on the prose itself so a Japanese article is
-  announced correctly even though some site chrome stays English.
+  announced correctly even if some chrome stays English.
 
-  Reading time is computed differently per language: number_of_words is
-  meaningless for Japanese, which has no inter-word spaces and would score a
-  whole paragraph as one "word". Japanese uses characters instead, at roughly
-  500/min against 200 words/min for English.
+  Reading time differs by language: number_of_words is meaningless for
+  Japanese, which has no spaces, so Japanese counts characters at ~500/min
+  against ~200 words/min for English.
 {%- endcomment -%}
-
 {%- assign p = site.data.profile -%}
-{%- if page.lang == "ja" -%}
+{%- assign lang = page.lang | default: "en" -%}
+{%- if lang == "ja" -%}
   {%- assign chars = content | strip_html | size -%}
   {%- assign mins = chars | divided_by: 500 | plus: 1 -%}
   {%- assign t_read = mins | append: "分で読めます" -%}
-  {%- assign t_all = "技術記事の一覧" -%}
-  {%- assign t_reply = "メールで返信" -%}
-  {%- assign t_newer = "新しい記事" -%}
-  {%- assign t_older = "古い記事" -%}
-  {%- assign t_tags = "タグ" -%}
-  {%- assign all_url = "/ja/writing" -%}
+  {%- assign t_all = "技術記事の一覧" -%}{%- assign t_reply = "メールで返信" -%}
+  {%- assign t_newer = "新しい記事" -%}{%- assign t_older = "古い記事" -%}
+  {%- assign t_note = "注記" -%}{%- assign all_url = "/ja/writing" -%}
+  {%- assign t_other = "English version" -%}
 {%- else -%}
   {%- assign words = content | number_of_words -%}
   {%- assign mins = words | divided_by: 200 | plus: 1 -%}
   {%- assign t_read = mins | append: " min read" -%}
-  {%- assign t_all = "All writing" -%}
-  {%- assign t_reply = "Reply by email" -%}
-  {%- assign t_newer = "Newer" -%}
-  {%- assign t_older = "Older" -%}
-  {%- assign t_tags = "Tags" -%}
-  {%- assign all_url = "/writing" -%}
+  {%- assign t_all = "All writing" -%}{%- assign t_reply = "Reply by email" -%}
+  {%- assign t_newer = "Newer" -%}{%- assign t_older = "Older" -%}
+  {%- assign t_note = "Note" -%}{%- assign all_url = "/writing" -%}
+  {%- assign t_other = "日本語版" -%}
 {%- endif -%}
 
-{%- comment -%} Prev/next within the same language only. {%- endcomment -%}
-{%- assign siblings = site.posts | where: "lang", page.lang -%}
+{%- assign siblings = site.posts | where: "lang", lang -%}
 {%- assign idx = -1 -%}
-{%- for s in siblings -%}
-  {%- if s.url == page.url -%}{%- assign idx = forloop.index0 -%}{%- endif -%}
-{%- endfor -%}
-{%- assign newer_i = idx | minus: 1 -%}
-{%- assign older_i = idx | plus: 1 -%}
+{%- for s in siblings -%}{%- if s.url == page.url -%}{%- assign idx = forloop.index0 -%}{%- endif -%}{%- endfor -%}
+{%- assign newer_i = idx | minus: 1 -%}{%- assign older_i = idx | plus: 1 -%}
+{%- assign note_no = siblings.size | minus: idx | prepend: "0" | slice: -2, 2 -%}
 
 <script type="application/ld+json">
 {
@@ -50,7 +41,7 @@ layout: default
   "@type": "BlogPosting",
   "headline": {{ page.title | jsonify }},
   "description": {{ page.description | strip_newlines | strip | jsonify }},
-  "inLanguage": {{ page.lang | default: "en" | jsonify }},
+  "inLanguage": {{ lang | jsonify }},
   "datePublished": {{ page.date | date_to_xmlschema | jsonify }},
   "dateModified": {{ page.date | date_to_xmlschema | jsonify }},
   "mainEntityOfPage": { "@type": "WebPage", "@id": {{ page.url | absolute_url | jsonify }} },
@@ -60,54 +51,36 @@ layout: default
 }
 </script>
 
-<article class="pane reveal post" {% if page.lang %}lang="{{ page.lang }}"{% endif %}>
-  <div class="pane-title-bar">
-    <div class="pane-dots" aria-hidden="true"><span></span><span></span><span></span></div>
-    <div class="pane-label">writing</div>
-  </div>
-  <div class="pane-body">
-    <header class="post-head">
-      <h1>{{ page.title }}</h1>
-      <p class="post-meta">
-        <time datetime="{{ page.date | date_to_xmlschema }}">
-          {%- if page.lang == "ja" -%}
-            {{ page.date | date: "%Y年%-m月%-d日" }}
-          {%- else -%}
-            {{ page.date | date: "%-d %B %Y" }}
-          {%- endif -%}
-        </time>
-        <span aria-hidden="true">·</span>
-        <span>{{ t_read }}</span>
-      </p>
+<article class="post" lang="{{ lang }}">
+  <header class="ps-head" style="margin-bottom:40px">
+    <div>
+      <div class="ps-crumb">
+        <a href="{{ all_url | relative_url }}">← {{ t_all }}</a>
+        <span class="t-label">{{ t_note }} {{ note_no }} · <time datetime="{{ page.date | date_to_xmlschema }}">{{ page.date | date: "%Y.%m.%d" }}</time> · {{ t_read }}</span>
+      </div>
+      <h1 class="post-title">{{ page.title }}</h1>
+      {%- if page.description %}<p class="ps-tag">{{ page.description | strip_newlines | strip }}</p>{% endif %}
       {%- if page.tags and page.tags != empty %}
-      <ul class="post-tags" aria-label="{{ t_tags }}">
-        {%- for tag in page.tags %}<li>{{ tag }}</li>{% endfor %}
-      </ul>
+      <ul class="chips" style="margin-top:18px">{% for tag in page.tags %}<li class="chip">{{ tag }}</li>{% endfor %}</ul>
       {%- endif %}
-    </header>
-
-    <div class="post-body">
-      {{ content }}
+      {%- if page.alt_url %}
+      <p style="margin-top:14px"><a class="go" href="{{ page.alt_url | relative_url }}" data-lang-choice="{% if lang == 'ja' %}en{% else %}ja{% endif %}" lang="{% if lang == 'ja' %}en{% else %}ja{% endif %}">{{ t_other }}</a></p>
+      {%- endif %}
     </div>
+  </header>
 
-    <nav class="post-nav" aria-label="{{ t_all }}">
-      {%- if newer_i >= 0 %}
-      <a class="post-nav-link" href="{{ siblings[newer_i].url | relative_url }}">
-        <span class="post-nav-dir">← {{ t_newer }}</span>
-        <span class="post-nav-title">{{ siblings[newer_i].title }}</span>
-      </a>
-      {%- else %}<span></span>{% endif %}
-      {%- if older_i < siblings.size %}
-      <a class="post-nav-link post-nav-older" href="{{ siblings[older_i].url | relative_url }}">
-        <span class="post-nav-dir">{{ t_older }} →</span>
-        <span class="post-nav-title">{{ siblings[older_i].title }}</span>
-      </a>
-      {%- endif %}
-    </nav>
-
-    <footer class="post-foot">
-      <a href="{{ all_url | relative_url }}">{{ t_all }}</a>
-      <a href="mailto:{{ p.contact.email }}?subject={{ page.title | uri_escape }}">{{ t_reply }}</a>
-    </footer>
+  <div class="prose post-body">
+    {{ content }}
   </div>
+
+  <nav class="ps-pager" aria-label="{{ t_all }}">
+    {%- if newer_i >= 0 %}
+    <a href="{{ siblings[newer_i].url | relative_url }}"><span class="t-label">← {{ t_newer }}</span><b class="post-pager-title">{{ siblings[newer_i].title }}</b></a>
+    {%- else %}<span></span>{% endif %}
+    {%- if older_i < siblings.size %}
+    <a class="next" href="{{ siblings[older_i].url | relative_url }}"><span class="t-label">{{ t_older }} →</span><b class="post-pager-title">{{ siblings[older_i].title }}</b></a>
+    {%- else %}
+    <a class="next" href="mailto:{{ p.contact.email }}?subject={{ page.title | uri_escape }}"><span class="t-label">{{ t_reply }} →</span><b class="post-pager-title">{{ p.contact.email }}</b></a>
+    {%- endif %}
+  </nav>
 </article>

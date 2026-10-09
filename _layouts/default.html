@@ -1,27 +1,29 @@
 <!DOCTYPE html>
-<html lang="{{ page.lang | default: 'en' }}">
+{%- assign lang = page.lang | default: "en" -%}
+{%- assign t = site.data.i18n[lang] -%}
+{%- assign p = site.data.profile -%}
+<html lang="{{ lang }}">
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     {%- comment -%}
-      Progressive enhancement marker. Reveal-on-scroll CSS is scoped to
-      html.js, so with scripting disabled every content block renders at
-      full opacity instead of the page coming up blank.
+      Runs before first paint so there is no flash of the wrong colourway.
+      `js` scopes every animation: with scripting off, nothing is hidden.
+      Stored choices are read defensively — storage can throw in private
+      windows, and the page must render either way.
     {%- endcomment -%}
-    <script>document.documentElement.className += ' js';</script>
+    <script>
+      (function (d) {
+        var h = d.documentElement; h.className += ' js';
+        try {
+          var th = localStorage.getItem('tf-theme'); if (th) h.setAttribute('data-theme', th);
+          var vw = localStorage.getItem('tf-view'); if (vw) h.setAttribute('data-view', vw);
+        } catch (e) {}
+      })(document);
+    </script>
 
-    {%- comment -%}
-      Social and canonical meta are written here rather than delegated to
-      jekyll-seo-tag. The plugin silently dropped og:image (it does not read a
-      top-level site.image the way we assumed) and emitted a bare "@" for
-      twitter:site, so a link pasted into Slack or LinkedIn had no card at all.
-      These tags are the whole point of the OG image, so they are explicit.
-
-      seo_tag is no longer included; jekyll-sitemap still is.
-    {%- endcomment -%}
-    {%- assign p = site.data.profile -%}
-    {%- if page.lang == "ja" -%}
+    {%- if lang == "ja" -%}
       {%- assign og_locale = "ja_JP" -%}
       {%- assign og_name = p.name | append: "（" | append: p.name_ja | append: "）" -%}
       {%- assign default_title = p.name | append: " · " | append: p.title_ja -%}
@@ -36,39 +38,39 @@
       {%- assign full_title = default_title -%}
     {%- endif -%}
     {%- assign desc = page.description | default: site.description | strip_newlines | strip -%}
-    {%- assign og_img = "/assets/og-image.png" | absolute_url -%}
+    {%- assign og_img = page.og_image | default: "/assets/og-image.png" | absolute_url -%}
 
     <title>{{ full_title }}</title>
     <meta name="description" content="{{ desc | escape }}">
     <meta name="author" content="{{ p.name }}">
+    <meta name="theme-color" content="#0b2441">
     <link rel="canonical" href="{{ page.url | absolute_url }}">
 
-    <meta property="og:type" content="website">
+    <meta property="og:type" content="{% if page.layout == 'post' %}article{% else %}website{% endif %}">
     <meta property="og:site_name" content="{{ og_name }}">
     <meta property="og:title" content="{{ full_title | escape }}">
     <meta property="og:description" content="{{ desc | escape }}">
     <meta property="og:url" content="{{ page.url | absolute_url }}">
     <meta property="og:locale" content="{{ og_locale }}">
     {%- if page.alt_url %}
-    <meta property="og:locale:alternate" content="{% if page.lang == 'ja' %}en_US{% else %}ja_JP{% endif %}">
+    <meta property="og:locale:alternate" content="{% if lang == 'ja' %}en_US{% else %}ja_JP{% endif %}">
     {%- endif %}
     <meta property="og:image" content="{{ og_img }}">
     <meta property="og:image:type" content="image/png">
     <meta property="og:image:width" content="1200">
     <meta property="og:image:height" content="630">
     <meta property="og:image:alt" content="{{ p.name }} — {{ p.title }}. Native English and JLPT N1, AWS certified, no visa sponsorship required. Osaka, Japan.">
-
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="{{ full_title | escape }}">
     <meta name="twitter:description" content="{{ desc | escape }}">
     <meta name="twitter:image" content="{{ og_img }}">
 
     {%- comment -%}
-      hreflang pairs. x-default points at the English page: it is the fallback
-      for any locale that matches neither, and the site's default language.
+      hreflang pairs. x-default is the English page. Pairs must be
+      reciprocal: if /projects points at /ja/projects, that page points back.
     {%- endcomment -%}
     {%- if page.alt_url %}
-      {%- if page.lang == "ja" %}
+      {%- if lang == "ja" %}
     <link rel="alternate" hreflang="ja" href="{{ page.url | absolute_url }}">
     <link rel="alternate" hreflang="en" href="{{ page.alt_url | absolute_url }}">
     <link rel="alternate" hreflang="x-default" href="{{ page.alt_url | absolute_url }}">
@@ -78,70 +80,64 @@
     <link rel="alternate" hreflang="x-default" href="{{ page.url | absolute_url }}">
       {%- endif %}
     {%- endif %}
+    <link rel="alternate" type="application/atom+xml" title="{{ p.name }}" href="{{ '/feed.xml' | relative_url }}">
 
-    <link rel="stylesheet" href="{{ '/assets/css/style.css?v=' | append: site.github.build_revision | relative_url }}">
-    {% include head-custom.html %}
+    {%- comment -%}
+      Fonts: Archivo (width axis, for condensed drafting capitals), IBM Plex
+      Sans and Mono for text. The Japanese face is only requested on Japanese
+      pages; English pages fall back to the system's CJK font for the odd
+      Japanese word, which every OS ships.
+    {%- endcomment -%}
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,500..800&family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400{% if lang == 'ja' %}&family=IBM+Plex+Sans+JP:wght@400;500;700{% endif %}&display=swap">
+
+    <link rel="stylesheet" href="{{ '/assets/css/site.css' | relative_url }}?v={{ site.time | date: '%s' }}">
+    <script src="{{ '/assets/js/site.js' | relative_url }}?v={{ site.time | date: '%s' }}" defer></script>
+
+    <link rel="icon" href="{{ '/assets/favicon.svg' | relative_url }}" type="image/svg+xml">
+    <link rel="alternate icon" href="{{ '/assets/favicon.png' | relative_url }}" sizes="32x32">
+    <link rel="apple-touch-icon" href="{{ '/assets/apple-touch-icon.png' | relative_url }}">
 
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
       "@type": "Person",
-      "name": {{ site.data.profile.name | jsonify }},
-      "jobTitle": {{ site.data.profile.title | jsonify }},
-      "email": {{ site.data.profile.contact.email | prepend: "mailto:" | jsonify }},
+      "name": {{ p.name | jsonify }},
+      "alternateName": {{ p.name_ja | jsonify }},
+      "jobTitle": {{ p.title | jsonify }},
+      "email": {{ p.contact.email | prepend: "mailto:" | jsonify }},
       "url": {{ site.url | jsonify }},
-      "sameAs": [{{ site.data.profile.contact.github | jsonify }}],
-      "address": {
-        "@type": "PostalAddress",
-        "addressLocality": {{ site.data.profile.location.city | jsonify }},
-        "addressCountry": "JP"
-      },
-      "knowsLanguage": [
-        { "@type": "Language", "name": "English" },
-        { "@type": "Language", "name": "Japanese" }
-      ]
+      "sameAs": [{{ p.contact.github | jsonify }}],
+      "address": { "@type": "PostalAddress", "addressLocality": {{ p.location.city | jsonify }}, "addressCountry": "JP" },
+      "knowsLanguage": [{ "@type": "Language", "name": "English" }, { "@type": "Language", "name": "Japanese" }],
+      "knowsAbout": ["Large language models", "Model Context Protocol", "Retrieval-augmented generation", "AI agents", "LLM evaluation", "RLHF", "Game development", "Godot", "Python", "TypeScript", "C++"]
     }
     </script>
   </head>
 
   <body>
-    <div class="grid-bg" aria-hidden="true"></div>
+    <a class="skip-link" href="#main">{{ t.skip }}</a>
 
-    {% include nav.html %}
+    {% include topbar.html %}
     {% include lang-notice.html %}
 
-    <main class="dashboard" id="main">
-      {{ content }}
-    </main>
+    <div class="sheet-wrap">
+      <div class="sheet">
+        <div class="zones zones-x" aria-hidden="true"><span>1</span><span>2</span><span>3</span><span>4</span><span>5</span><span>6</span><span>7</span><span>8</span></div>
+        <div class="zones zones-y" aria-hidden="true"><span>A</span><span>B</span><span>C</span><span>D</span><span>E</span><span>F</span></div>
+        <div class="zones zones-y is-right" aria-hidden="true"><span>A</span><span>B</span><span>C</span><span>D</span><span>E</span><span>F</span></div>
 
-    {% include footer.html %}
+        <main class="sheet-body" id="main">
+          {{ content }}
+        </main>
 
-    <script>
-      // Reveal-on-scroll. Purely additive: without this the .js-scoped
-      // CSS never hides anything, so content is always readable.
-      (function () {
-        var targets = document.querySelectorAll('.reveal');
-        if (!targets.length) return;
+        {% include titleblock.html %}
+      </div>
+    </div>
 
-        var reduce = window.matchMedia &&
-                     window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    {% include colophon.html %}
 
-        if (reduce || !('IntersectionObserver' in window)) {
-          for (var i = 0; i < targets.length; i++) targets[i].classList.add('visible');
-          return;
-        }
-
-        var io = new IntersectionObserver(function (entries) {
-          entries.forEach(function (e) {
-            if (e.isIntersecting) {
-              e.target.classList.add('visible');
-              io.unobserve(e.target);
-            }
-          });
-        }, { threshold: 0.05, rootMargin: '0px 0px -40px 0px' });
-
-        for (var j = 0; j < targets.length; j++) io.observe(targets[j]);
-      })();
-    </script>
+    <div class="crosshair" aria-hidden="true"><i class="xh"></i><i class="xv"></i><i class="xb"></i></div>
   </body>
 </html>

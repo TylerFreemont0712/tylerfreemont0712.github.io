@@ -34,7 +34,7 @@ fluent the output, the more carefully you check it. That instinct is the single
 most useful thing I brought into building systems.
 
 It is also, directly, why
-[LLM Council]({{ '/projects#llm-council' | relative_url }}) validates generated
+[LLM Council]({{ '/projects/' | relative_url }}#llm-council) validates generated
 code at the AST level before anything is written to disk. Parse the output, walk
 the tree, check that names resolve and calls match their definitions. Not because
 AST checking is clever, but because after enough evaluation work you stop
@@ -57,7 +57,7 @@ It should not, because the path will not generalise.
 That reframed how I log agent runs. The transcript needs to make the *decision
 points* recoverable, not just the outcome — which tool was called, what came
 back, what the model did with it. It is the same reason the
-[web search screenshot]({{ '/projects#aios' | relative_url }}) keeps raw tool
+[web search screenshot]({{ '/projects/aios/' | relative_url }}) keeps raw tool
 output visible above the summary. If you can only see the answer, you can only
 evaluate the answer, and the answer is the least informative part of a failed
 run.

@@ -11,7 +11,7 @@ description: >-
   enough to run on hardware I own.
 ---
 
-The agent in [AIOS]({{ '/projects#aios' | relative_url }}) has real tools. It
+The agent in [AIOS]({{ '/projects/aios/' | relative_url }}) has real tools. It
 lists directories, greps, reads and writes files, runs `bash`, and searches the
 web. Pointing a frontier model at that set is mostly a solved problem. Pointing
 a 1.7B model at it is a different exercise, and most of what I learned came from
@@ -85,7 +85,7 @@ context window is real budget you get back for the actual work.
 
 ## Show the tool output
 
-The screenshot on the [project page]({{ '/projects#aios' | relative_url }})
+The screenshot on the [project page]({{ '/projects/aios/' | relative_url }})
 shows a `web_search` call with the raw results left visible above the model's
 summary. That is deliberate, and it is the single most useful debugging decision
 in the whole system.

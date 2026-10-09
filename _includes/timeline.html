@@ -1,0 +1,25 @@
+{%- comment -%}
+  Gantt-style timeline of active work per project, from _data/projects.yml
+  (from/to as YYYY.MM). Columns are the months Dec 2025 – Oct 2026.
+{%- endcomment -%}
+{%- assign lang = page.lang | default: "en" -%}
+{%- if lang == "ja" -%}
+  {%- assign months = "12月,1月,2月,3月,4月,5月,6月,7月,8月,9月,10月" | split: "," -%}
+{%- else -%}
+  {%- assign months = "Dec,Jan,Feb,Mar,Apr,May,Jun,Jul,Aug,Sep,Oct" | split: "," -%}
+{%- endif -%}
+{%- assign dated = site.data.projects.items | where_exp: "i", "i.from != ''" | sort: "from" -%}
+<div class="tl">
+  <div class="tl-ruler" aria-hidden="true"><span class="tl-y">{% if lang == "ja" %}2025年 → 2026年{% else %}2025 → 2026{% endif %}</span>{% for m in months %}<span>{{ m }}</span>{% endfor %}</div>
+  <ol class="tl-rows">
+    {%- for it in dated %}
+    {%- assign a = it.from | split: "." -%}{%- assign b = it.to | split: "." -%}
+    {%- assign ya = a[0] | plus: 0 | minus: 2025 | times: 12 -%}{%- assign ca = a[1] | plus: 0 | plus: ya | minus: 10 -%}
+    {%- assign yb = b[0] | plus: 0 | minus: 2025 | times: 12 -%}{%- assign cb = b[1] | plus: 0 | plus: yb | minus: 9 -%}
+    <li class="tl-row{% if it.tier == 'sheet' %} is-key{% endif %}">
+      <a class="tl-name" href="#{{ it.id }}">{{ it.name }}</a>
+      <span class="tl-bar" style="grid-column: {{ ca }} / {{ cb }}"><span class="sr-only">{{ it.from }} – {{ it.to }}</span></span>
+    </li>
+    {%- endfor %}
+  </ol>
+</div>
