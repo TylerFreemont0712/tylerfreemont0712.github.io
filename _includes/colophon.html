@@ -1,0 +1,13 @@
+{%- assign lang = page.lang | default: "en" -%}
+{%- assign t = site.data.i18n[lang] -%}
+{%- assign p = site.data.profile -%}
+<aside class="colophon" aria-label="{% if lang == 'ja' %}サイト情報{% else %}Colophon{% endif %}">
+  <span>&copy; {{ site.time | date: "%Y" }} {{ p.name }} · {{ t.col_built }}</span>
+  <nav aria-label="{% if lang == 'ja' %}サイトのリンク{% else %}Site links{% endif %}">
+    <a href="{{ p.contact.github }}/tylerfreemont0712.github.io" target="_blank" rel="noopener">{{ t.col_source }}</a>
+    <a href="{{ '/feed.xml' | relative_url }}">{{ t.col_rss }}</a>
+    {%- if page.alt_url %}
+    <a href="{{ page.alt_url | relative_url }}" lang="{% if lang == 'ja' %}en{% else %}ja{% endif %}" data-lang-choice="{% if lang == 'ja' %}en{% else %}ja{% endif %}">{{ t.col_other_lang }}</a>
+    {%- endif %}
+  </nav>
+</aside>

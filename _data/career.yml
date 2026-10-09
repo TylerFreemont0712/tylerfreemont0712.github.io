@@ -1,0 +1,60 @@
+# Career as a drawing revision history: the first job is revision A, each
+# later one supersedes it. Used by the landing page's revision table; the
+# full entries live on /experience and /ja/experience.
+# Newest first.
+
+- rev: E
+  role: Software Engineer, AI Systems
+  role_ja: ソフトウェアエンジニア（AI基盤）
+  org: MiraX
+  org_ja: MiraX
+  where: Remote / Osaka
+  where_ja: リモート／大阪
+  from: 2026.03
+  to: ""
+  note: Local LLM inference layer, 3 MCP servers in production, model benchmarking and release evaluation.
+  note_ja: ローカルLLM推論基盤、MCPサーバ3件の本番運用、モデル評価とリリース判定。
+- rev: D
+  role: AI Evaluation Specialist (Code & Math)
+  role_ja: AI評価スペシャリスト（コード・数学）
+  org: Outlier / Alignerr
+  org_ja: Outlier / Alignerr
+  where: Remote
+  where_ja: リモート
+  from: 2024.01
+  to: ""
+  note: RLHF preference data and written justifications on frontier-model code, maths and agentic tasks.
+  note_ja: フロンティアモデルのコード・数学・エージェント課題に対するRLHF選好データと評価根拠の作成。
+- rev: C
+  role: Software / Infrastructure Engineer
+  role_ja: ソフトウェア／インフラエンジニア
+  org: Neighbors Inc.
+  org_ja: 株式会社Neighbors
+  where: Osaka
+  where_ja: 大阪
+  from: 2023.09
+  to: 2026.02
+  note: Python network automation for Rakuten Mobile and Daikin; fault detection and auto-recovery across 10,000+ nodes.
+  note_ja: 楽天モバイル様・ダイキン様向けPythonネットワーク自動化。10,000ノード超の障害検知・自動復旧。
+- rev: B
+  role: EN ↔ JP Technical Translator
+  role_ja: 技術翻訳者（英日・日英）
+  org: Freelance
+  org_ja: フリーランス
+  where: Osaka
+  where_ja: 大阪
+  from: 2022.04
+  to: 2023.12
+  note: IT and infrastructure documentation, both directions.
+  note_ja: IT・インフラ関連ドキュメントの英日・日英翻訳。
+- rev: A
+  role: English Instructor
+  role_ja: 英語講師
+  org: Soshi Gakuen High School
+  org_ja: 崇志学園高等学校
+  where: Osaka
+  where_ja: 大阪
+  from: 2021.01
+  to: 2023.04
+  note: Curriculum design for mixed-proficiency classes.
+  note_ja: 習熟度の異なるクラス向けのカリキュラム設計。

@@ -1,19 +1,17 @@
 title: Tyler Freemont
 description: >-
-  Software Engineer, AI Systems — local LLM infrastructure, MCP servers and RAG
-  pipelines. Osaka, Japan. Native English, JLPT N1, AWS certified, no visa
-  sponsorship required.
+  Software engineer in Osaka building AI systems and games — local LLM
+  infrastructure, MCP servers, agent tooling, model evaluation, and a Godot
+  roguelite whose spells are real code. Native English, JLPT N1, AWS certified,
+  no visa sponsorship required.
 
 url: https://tylerfreemont0712.github.io
 baseurl: ""
 lang: en
 
-theme: jekyll-theme-hacker
-
-# The 1200x630 social card lives at /assets/og-image.png and is wired up
-# explicitly in _layouts/default.html. It is not configured here: we tried
-# `image:` plus a `twitter:` block for jekyll-seo-tag and the plugin ignored
-# both, shipping pages with no og:image and a bare "@" for twitter:site.
+# No theme: every layout, include and stylesheet in this repo is custom.
+# The 1200x630 social card at /assets/og-image.png is wired up explicitly in
+# _layouts/default.html rather than through jekyll-seo-tag, which ignored it.
 
 plugins:
   - jekyll-sitemap
@@ -24,20 +22,33 @@ plugins:
 feed:
   path: feed.xml
 
+# One document per project sheet and language. Each sets its own permalink
+# (/projects/<slug>/ or /ja/projects/<slug>/) and alt_url.
+collections:
+  projects:
+    output: true
+
 defaults:
   - scope:
       type: posts
     values:
       layout: post
       lang: en
+      nav: writing
+      dwg: TF-004
+      sheet: "04"
+  - scope:
+      type: projects
+    values:
+      layout: sheet
+      nav: projects
+      lang: en
 
-sass:
-  style: compressed
-
-# Nothing here should ship to the built site.
 exclude:
   - Gemfile
   - Gemfile.lock
   - LICENSE
   - README.md
   - vendor
+  - tools
+  - .bundle

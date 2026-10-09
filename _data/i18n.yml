@@ -1,0 +1,135 @@
+# UI strings for the site chrome, keyed by page.lang.
+# Page content is written per language in the pages themselves; this file
+# only holds the words the layout and includes need.
+
+en:
+  skip: Skip to content
+  nav_label: Primary
+  nav:
+    - { id: home, n: "01", label: Index, url: / }
+    - { id: projects, n: "02", label: Work, url: /projects/ }
+    - { id: experience, n: "03", label: Experience, url: /experience }
+    - { id: writing, n: "04", label: Writing, url: /writing }
+    - { id: resume, n: "05", label: Résumé, url: /resume }
+  lang_toggle: 日本語
+  lang_toggle_title: 日本語版を表示
+  theme_to_light: Whiteprint
+  theme_to_dark: Blueprint
+  theme_title: Switch colourway (blueprint / whiteprint)
+  plain: Plain
+  plain_title: Plain view — drop the drawing decoration for fast reading
+  resume_cta: Résumé
+  resume_title: Download résumé (PDF)
+  coord: "X {x}  Y {y}"
+  # title block
+  tb_issued: Issued for hire
+  tb_issued_alt: 採用のご相談
+  tb_cta_h: Hiring, or need a contractor?
+  tb_cta_p: >-
+    No visa sponsorship required — I can start without immigration paperwork.
+    Based in Osaka; remote, hybrid or on-site.
+  tb_email: Email me
+  tb_resume: Résumé
+  tb_drawn: Drawn by
+  tb_location: Location
+  tb_location_v: Osaka, Japan · JST (UTC+9)
+  tb_contact: Contact
+  tb_dwg: Dwg no.
+  tb_sheet: Sheet
+  tb_of: of
+  tb_rev: Rev
+  tb_scale: Scale
+  tb_approved: Approved
+  # colophon
+  col_built: Drawn by hand in Jekyll · set in IBM Plex and Archivo
+  col_source: Source
+  col_rss: RSS
+  col_other_lang: 日本語
+  # misc
+  read_more: Read
+  case_study: Sheet
+  source: Source
+  private_repo: Private repository
+  min_read: min read
+  # language notice
+  bom_item: Item
+  bom_part: Part
+  bom_material: Material
+  bom_spec: Spec
+  bom_status: Status
+  bom_caption: Parts list — every project, with what it is built from
+  status:
+    active: In development
+    paused: Paused
+    done: Complete
+    private: Private
+  go_sheet: Sheet
+  go_source: Source
+  go_private: Not public
+  notice_msg: 日本語版があります
+  notice_cta: 日本語で見る
+  notice_dismiss: 閉じる
+
+ja:
+  skip: 本文へ移動
+  nav_label: メインナビゲーション
+  nav:
+    - { id: home, n: "01", label: ホーム, url: /ja/ }
+    - { id: projects, n: "02", label: 開発実績, url: /ja/projects/ }
+    - { id: experience, n: "03", label: 職務経歴, url: /ja/experience }
+    - { id: writing, n: "04", label: 技術記事, url: /ja/writing }
+    - { id: resume, n: "05", label: 職務経歴書, url: /ja/resume }
+  lang_toggle: English
+  lang_toggle_title: Switch to English
+  theme_to_light: 白焼き
+  theme_to_dark: 青焼き
+  theme_title: 配色を切り替える（青焼き／白焼き）
+  plain: 簡易
+  plain_title: 簡易表示 — 図面の装飾を外して読みやすくします
+  resume_cta: 職務経歴書
+  resume_title: 職務経歴書をダウンロード（PDF）
+  coord: "X {x}  Y {y}"
+  tb_issued: 採用・業務委託のご相談
+  tb_issued_alt: Issued for hire
+  tb_cta_h: 採用・業務委託のご相談
+  tb_cta_p: >-
+    在留資格は「日本人の配偶者等」で就労制限がなく、ビザスポンサー不要です。
+    大阪在住、フルリモート・ハイブリッド・出社いずれも対応可能です。
+  tb_email: メールで問い合わせ
+  tb_resume: 職務経歴書
+  tb_drawn: 作成
+  tb_location: 所在地
+  tb_location_v: 大阪府 · JST（UTC+9）
+  tb_contact: 連絡先
+  tb_dwg: 図番
+  tb_sheet: 枚番
+  tb_of: ／
+  tb_rev: 改訂
+  tb_scale: 尺度
+  tb_approved: 承認
+  col_built: Jekyllで手描き · 書体はIBM PlexとArchivo
+  col_source: このサイトのソース
+  col_rss: RSS
+  col_other_lang: English
+  read_more: 読む
+  case_study: 詳細
+  source: ソースコード
+  private_repo: 非公開リポジトリ
+  min_read: 分で読めます
+  bom_item: 品番
+  bom_part: 名称
+  bom_material: 材質（技術）
+  bom_spec: 仕様
+  bom_status: 状態
+  bom_caption: 部品表 — すべての開発実績と使用技術
+  status:
+    active: 開発中
+    paused: 休止中
+    done: 完成
+    private: 非公開
+  go_sheet: 詳細
+  go_source: ソース
+  go_private: 非公開
+  notice_msg: An English version of this page is available.
+  notice_cta: Read in English
+  notice_dismiss: Dismiss

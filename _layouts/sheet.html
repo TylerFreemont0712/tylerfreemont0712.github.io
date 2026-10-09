@@ -1,0 +1,101 @@
+---
+layout: default
+---
+{%- comment -%}
+  A project drawing sheet (case study).
+
+  Front matter:
+    pid       id in _data/projects.yml (name, item number, stack, repo)
+    tagline   one sentence under the title
+    links     [{label, url}] — source and other evidence
+    tb        [[key, value], …] — rows of the title block
+    dims      [{v, u, k}] — key dimensions: value, unit, what it measures
+    notes     [{t, d}] — assembly notes, keyed in order to the balloons
+              drawn on the diagram (_includes/dg/<pid>.html)
+    fig       caption under the assembly drawing
+    toc       [{id, label}] — sections of the body, for the side index
+{%- endcomment -%}
+{%- assign lang = page.lang | default: "en" -%}
+{%- assign t = site.data.i18n[lang] -%}
+{%- assign ja = false -%}{%- if lang == "ja" -%}{%- assign ja = true -%}{%- endif -%}
+{%- assign it = site.data.projects.items | where: "id", page.pid | first -%}
+{%- assign sheets = site.data.projects.items | where: "tier", "sheet" -%}
+{%- if ja -%}{%- assign base = "/ja/projects/" -%}{%- else -%}{%- assign base = "/projects/" -%}{%- endif -%}
+
+<article class="ps" data-xref>
+  <header class="ps-head">
+    <div>
+      <div class="ps-crumb">
+        <a href="{{ base | relative_url }}">← {% if ja %}部品表{% else %}Parts list{% endif %}</a>
+        <span class="t-label">{% if ja %}品番{% else %}Item{% endif %} {{ it.item }} · {{ page.dwg }}</span>
+      </div>
+      <h1 class="ps-title"><span class="balloon is-red" aria-hidden="true">{{ it.item }}</span>{{ it.name }}</h1>
+      <p class="ps-tag">{{ page.tagline }}</p>
+      {%- if page.links %}
+      <div class="btn-row" style="margin-top:22px">
+        {%- for l in page.links %}
+        <a class="btn{% if forloop.first %} btn-primary{% endif %}" href="{{ l.url }}"{% if l.url contains '://' %} target="_blank" rel="noopener"{% endif %}>{% if l.url contains 'github.com' %}{% include icon.html name="github" %}{% endif %}{{ l.label }}</a>
+        {%- endfor %}
+      </div>
+      {%- endif %}
+    </div>
+    <table class="tb">
+      <caption class="sr-only">{% if ja %}表題欄{% else %}Title block{% endif %}</caption>
+      <tbody>
+        {%- for row in page.tb %}
+        <tr><th scope="row">{{ row[0] }}</th><td>{{ row[1] }}</td></tr>
+        {%- endfor %}
+        <tr><th scope="row">{% if ja %}材質{% else %}Material{% endif %}</th><td><ul class="chips">{% for s in it.stack %}<li class="chip">{{ s }}</li>{% endfor %}</ul></td></tr>
+      </tbody>
+    </table>
+  </header>
+
+  {%- if page.dims %}
+  <div class="dims" role="list" aria-label="{% if ja %}主要寸法{% else %}Key dimensions{% endif %}">
+    {%- for d in page.dims %}
+    <div role="listitem"><span class="v">{{ d.v }}{% if d.u %}<small>{{ d.u }}</small>{% endif %}</span><span class="k">{{ d.k }}</span></div>
+    {%- endfor %}
+  </div>
+  {%- endif %}
+
+  {%- capture dg_path %}dg/{{ page.pid }}.html{% endcapture %}
+  <section class="assembly" aria-labelledby="asm-h">
+    <figure class="assembly-fig">
+      {% include {{ dg_path }} lang=lang %}
+      <figcaption class="t-label">{{ page.fig }}</figcaption>
+    </figure>
+    <div class="assembly-notes">
+      <h2 id="asm-h">{% if ja %}注記 — 番号は図中の風船に対応{% else %}Notes — numbers key to the balloons{% endif %}</h2>
+      <ol>
+        {%- for n in page.notes %}
+        <li data-ref="{{ forloop.index }}" tabindex="0"><span class="balloon is-red" aria-hidden="true">{{ forloop.index }}</span><span><b>{{ n.t }}{% if ja %}：{% else %}.{% endif %}</b>{% unless ja %} {% endunless %}{{ n.d }}</span></li>
+        {%- endfor %}
+      </ol>
+    </div>
+  </section>
+
+  <div class="ps-body">
+    {%- if page.toc %}
+    <nav class="ps-toc" aria-label="{% if ja %}この図面の内容{% else %}On this sheet{% endif %}">
+      <ol>{% for s in page.toc %}<li><a href="#{{ s.id }}">{{ s.label }}</a></li>{% endfor %}</ol>
+    </nav>
+    {%- endif %}
+    <div class="prose">
+      {{ content }}
+    </div>
+  </div>
+
+  {%- assign idx = 0 -%}
+  {%- for s in sheets -%}{%- if s.id == page.pid -%}{%- assign idx = forloop.index0 -%}{%- endif -%}{%- endfor -%}
+  {%- assign prev_i = idx | minus: 1 -%}{%- assign next_i = idx | plus: 1 -%}
+  <nav class="ps-pager" aria-label="{% if ja %}他の図面{% else %}Other sheets{% endif %}">
+    {%- if prev_i >= 0 %}{%- assign s = sheets[prev_i] %}
+    <a href="{{ base | append: s.id | append: '/' | relative_url }}"><span class="t-label">← {% if ja %}前の図面{% else %}Previous sheet{% endif %} · {% if ja %}品番{% else %}Item{% endif %} {{ s.item }}</span><b>{{ s.name }}</b></a>
+    {%- else %}<span></span>{% endif %}
+    {%- if next_i < sheets.size %}{%- assign s = sheets[next_i] %}
+    <a class="next" href="{{ base | append: s.id | append: '/' | relative_url }}"><span class="t-label">{% if ja %}次の図面{% else %}Next sheet{% endif %} · {% if ja %}品番{% else %}Item{% endif %} {{ s.item }} →</span><b>{{ s.name }}</b></a>
+    {%- else %}
+    <a class="next" href="{{ base | relative_url }}"><span class="t-label">{% if ja %}一覧へ{% else %}Back to{% endif %} →</span><b>{% if ja %}部品表{% else %}Parts list{% endif %}</b></a>
+    {%- endif %}
+  </nav>
+</article>

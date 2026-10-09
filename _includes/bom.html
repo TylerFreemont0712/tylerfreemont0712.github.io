@@ -1,0 +1,65 @@
+{%- comment -%}
+  Parts list (bill of materials) rendered from _data/projects.yml.
+
+    {% include bom.html %}                      every group, with group header rows
+    {% include bom.html featured=true %}        landing page: no lab items, no group rows
+
+  A real table, so it reads correctly to screen readers and prints well; on
+  narrow screens CSS restacks each row into a record.
+{%- endcomment -%}
+{%- assign lang = page.lang | default: "en" -%}
+{%- assign t = site.data.i18n[lang] -%}
+{%- assign ja = false -%}{%- if lang == "ja" -%}{%- assign ja = true -%}{%- endif -%}
+<table class="bom">
+  <caption class="sr-only">{{ t.bom_caption }}</caption>
+  <thead>
+    <tr>
+      <th class="c-item" scope="col">{{ t.bom_item }}</th>
+      <th class="c-part" scope="col">{{ t.bom_part }}</th>
+      <th class="c-mat" scope="col">{{ t.bom_material }}</th>
+      <th class="c-spec" scope="col">{{ t.bom_spec }}</th>
+      <th class="c-status" scope="col">{{ t.bom_status }}</th>
+      <th class="c-go" scope="col"><span class="sr-only">{{ t.go_sheet }}</span></th>
+    </tr>
+  </thead>
+  {%- for g in site.data.projects.groups %}
+  {%- if include.featured and g.id == "lab" -%}{%- continue -%}{%- endif -%}
+  {%- assign g_items = site.data.projects.items | where: "group", g.id %}
+  <tbody>
+    {%- unless include.featured %}
+    <tr class="group-row" id="group-{{ g.id }}">
+      <th colspan="6" scope="colgroup">{% if ja %}{{ g.label_ja }}<span class="alt" lang="en">{{ g.label }}</span>{% else %}{{ g.label }}<span class="alt" lang="ja">{{ g.label_ja }}</span>{% endif %}</th>
+    </tr>
+    {%- endunless %}
+    {%- for it in g_items %}
+    {%- if ja -%}{%- assign sheet_url = "/ja/projects/" | append: it.id | append: "/" -%}{%- else -%}{%- assign sheet_url = "/projects/" | append: it.id | append: "/" -%}{%- endif -%}
+    {%- assign href = "" -%}{%- assign ext = false -%}
+    {%- if it.tier == "sheet" -%}{%- assign href = sheet_url | relative_url -%}
+    {%- elsif it.repo != "" -%}{%- assign href = it.repo -%}{%- assign ext = true -%}{%- endif %}
+    <tr id="{{ it.id }}">
+      <td class="c-item"><span class="balloon{% if it.tier == 'sheet' %} is-red{% endif %}">{{ it.item }}</span></td>
+      <th class="c-part" scope="row">
+        {%- if href != "" %}
+        <a class="part-name" href="{{ href }}"{% if ext %} target="_blank" rel="noopener"{% endif %}>{{ it.name }}</a>
+        {%- else %}
+        <span class="part-name">{{ it.name }}</span>
+        {%- endif %}
+        <p class="part-desc">{% if ja %}{{ it.summary_ja }}{% else %}{{ it.summary }}{% endif %}</p>
+      </th>
+      <td class="c-mat"><ul class="mat">{% for s in it.stack %}<li>{{ s }}</li>{% endfor %}</ul></td>
+      <td class="c-spec">{% if ja %}{{ it.spec_ja | default: "—" }}{% else %}{{ it.spec | default: "—" }}{% endif %}</td>
+      <td class="c-status"><span class="status is-{{ it.status }}">{{ t.status[it.status] }} · {{ it.year }}</span></td>
+      <td class="c-go">
+        {%- if it.tier == "sheet" %}
+        <a class="go" href="{{ href }}">{{ t.go_sheet }}<span class="sr-only">: {{ it.name }}</span></a>
+        {%- elsif it.repo != "" %}
+        <a class="go is-ext" href="{{ it.repo }}" target="_blank" rel="noopener">{{ t.go_source }}<span class="sr-only">: {{ it.name }}</span></a>
+        {%- else %}
+        <span class="go is-quiet">{{ t.go_private }}</span>
+        {%- endif %}
+      </td>
+    </tr>
+    {%- endfor %}
+  </tbody>
+  {%- endfor %}
+</table>

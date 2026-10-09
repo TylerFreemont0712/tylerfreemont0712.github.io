@@ -1,0 +1,250 @@
+# ══════════════════════════════════════════════════════════════════════
+# The parts list. Every project on the site, in one place.
+#
+#   tier: sheet   — has its own drawing sheet (case study) under /projects/<id>/
+#         card    — listed with a description and a link
+#         lab     — one line in the lab drawer
+#   from/to: months of active work (YYYY.MM), for the timeline
+#   status: active | paused | done | private
+#   repo: public source URL; empty for private work, which is described but
+#         never linked.
+#   spec: measured figures only. Each one was counted from the repository
+#         (line counts exclude vendored code, lockfiles and generated files);
+#         see the notes on each project sheet for how.
+#
+# Repositories deliberately absent: Dashboard, AIAgent, OrchCheck and
+# ServerStarter are empty; LammaStart and llama-launcher are earlier copies
+# of llama-launcher-2; Work is employer-owned; Sales is a stub.
+# ══════════════════════════════════════════════════════════════════════
+
+groups:
+  - id: games
+    label: Games
+    label_ja: ゲーム開発
+  - id: ai
+    label: AI systems
+    label_ja: AI基盤
+  - id: apps
+    label: Applications
+    label_ja: アプリケーション
+  - id: lab
+    label: Lab — smaller and earlier work
+    label_ja: ラボ — 小規模・初期の作品
+
+items:
+  - id: rootward
+    item: 1
+    from: "2026.09"
+    to: "2026.10"
+    group: games
+    tier: sheet
+    name: Rootward
+    year: 2026
+    status: active
+    repo: https://github.com/TylerFreemont0712/rootward-godot
+    summary: >-
+      A programming roguelite in Godot 4.7. Every spell is a real Python or
+      JavaScript function run in a WASI sandbox, and Big-O decides who acts first.
+    summary_ja: >-
+      Godot 4.7製のプログラミング・ローグライト。呪文はすべて本物のPython／JavaScript関数で、WASIサンドボックス上で実行され、計算量が先手を決めます。
+    stack: [Godot 4.7, GDScript, wasmtime, CPython, QuickJS]
+    spec: 31k LOC · 390 tests · EN/JA
+    spec_ja: 約3.1万行 · テスト390件 · 日英対応
+    image: /assets/program-images/rootward-keyart.webp
+    image_alt: Rootward title art — the wordmark over an underground brass-elevator foundry lit by lanterns.
+    image_alt_ja: Rootwardのタイトル画像。ランタンに照らされた地下の真鍮製エレベーター工房の上にロゴが配置されています。
+
+  - id: aios
+    item: 2
+    from: "2026.07"
+    to: "2026.09"
+    group: ai
+    tier: sheet
+    name: AIOS
+    year: 2026
+    status: active
+    repo: https://github.com/TylerFreemont0712/AIOS-v1
+    summary: >-
+      A self-hosted AI workspace for the whole LAN: local and cloud models behind
+      one provider layer, a permissioned coding agent, MCP, real terminals, and a
+      model benchmark graded entirely in code.
+    summary_ja: >-
+      LAN全体に提供する自作のAI作業環境。ローカル／クラウドのモデルを単一のプロバイダ層で扱い、承認制のコーディングエージェント、MCP、実端末、コードで採点するモデル評価基盤を備えます。
+    stack: [Node, JavaScript, llama.cpp, Ollama, MCP, SQLite]
+    spec: 39k LOC · 86 tools · 22-test bench
+    spec_ja: 約3.9万行 · ツール86種 · 評価22項目
+    image: /assets/program-images/aios-agent-web-search.png
+    image_alt: A chat turn in AIOS where a 1.7B local model calls web_search through self-hosted SearXNG, shows the raw results, then answers at 135.4 tokens per second.
+    image_alt_ja: AIOSのチャット画面。ローカルの1.7Bモデルが自前のSearXNG経由でweb_searchを呼び出し、取得した結果を表示したうえで毎秒135.4トークンで回答しています。
+
+  - id: llama-launcher
+    item: 3
+    from: "2026.05"
+    to: "2026.06"
+    group: ai
+    tier: card
+    name: Local AI server launcher
+    year: 2026
+    status: done
+    repo: https://github.com/TylerFreemont0712/llama-launcher-2
+    summary: >-
+      A PyQt6 front end for llama.cpp, faster-whisper and MusicGen servers. The
+      form and the live command preview are generated from one flag table, and
+      one supervisor class runs all three processes.
+    summary_ja: >-
+      llama.cpp・faster-whisper・MusicGenの各サーバをGUIから起動するPyQt6製ツール。フォームとコマンドのプレビューは1つのフラグ定義表から生成し、3つのプロセスを共通の監視クラスで管理します。
+    stack: [Python, PyQt6, FastAPI, llama.cpp, faster-whisper]
+    spec: 2.5k LOC · 53 flags · 3 servers
+    spec_ja: 約2,500行 · 53項目 · サーバ3種
+
+  - id: llm-council
+    item: 4
+    from: ""
+    to: ""
+    group: ai
+    tier: card
+    name: LLM Council
+    year: 2026
+    status: private
+    repo: ""
+    summary: >-
+      Specialised agents that build HTML5 Canvas games end to end, coordinating
+      through a shared tool module. Generated code is checked at the AST level —
+      names resolve, calls match their definitions — before it is written to disk.
+    summary_ja: >-
+      役割を分担したエージェントがHTML5 Canvasのゲームを一から構築するシステム。共通のツール層を介して連携し、生成コードはディスクに書き込む前にASTレベルで検証します（名前の解決、呼び出しと定義の整合）。
+    stack: [Python, Multi-agent, AST analysis, HTML5 Canvas]
+    spec: Source not public
+    spec_ja: ソース非公開
+
+  - id: command-center
+    item: 5
+    from: "2026.06"
+    to: "2026.06"
+    group: ai
+    tier: card
+    name: Command Center
+    year: 2026
+    status: private
+    repo: ""
+    summary: >-
+      A prototype engine for YAML-defined agent workflows: loops, branches,
+      human approval gates and parallel judge votes, with every call routed through
+      a deny-by-default permission broker and an append-only event journal.
+    summary_ja: >-
+      YAMLで定義したエージェントのワークフロー（ループ、分岐、人による承認、複数の審査役による投票）を実行する試作エンジン。すべての呼び出しは既定拒否の権限管理と追記型のイベント記録を通ります。
+    stack: [TypeScript, Node, React, SQLite]
+    spec: 4.8k LOC · prototype
+    spec_ja: 約4,800行 · 試作
+
+  - id: ty-work-hub
+    item: 6
+    from: "2026.08"
+    to: "2026.09"
+    group: apps
+    tier: sheet
+    name: Ty Work Hub
+    year: 2026
+    status: active
+    repo: https://github.com/TylerFreemont0712/ty-work-hub
+    summary: >-
+      A Windows and Linux desktop workspace that puts tickets, Git and SVN, time
+      tracking and notes in one window, with a local LLM that drafts only from
+      evidence it is handed.
+    summary_ja: >-
+      チケット、Git／SVN、作業時間、ノートを1つの画面にまとめたWindows／Linux向けデスクトップアプリ。ローカルLLMは渡された根拠だけをもとに下書きを作成します。
+    stack: [Python 3.12, PyQt6, Git, SVN, llama.cpp, GitHub Actions]
+    spec: 15k LOC · 521 asserts · Win + Linux CI
+    spec_ja: 約1.5万行 · アサーション521件 · Win/Linux CI
+    image: /assets/program-images/tywork-today.webp
+    image_alt: The Today workspace in Ty Work Hub, with demo data — task counts, a next-moves queue, a work timer, upcoming deadlines and a seven-day chart of logged time.
+    image_alt_ja: Ty Work Hubの「Today」画面（デモデータ）。タスク数、次の作業キュー、作業タイマー、今後の締切、直近7日間の作業時間グラフが表示されています。
+
+  - id: localsync
+    item: 7
+    from: "2026.03"
+    to: "2026.05"
+    group: apps
+    tier: card
+    name: LocalSync
+    year: 2026
+    status: paused
+    repo: https://github.com/TylerFreemont0712/LocalSyncOrganization
+    summary: >-
+      Tasks, calendar, earnings and Obsidian notes synced between my own machines
+      over the LAN with no server — subnet discovery, last-write-wins merge, and a
+      vault watcher tuned to Obsidian's atomic saves. Also a 13-stage receipt OCR
+      pipeline that cross-checks the LLM's parse against a regex parse.
+    summary_ja: >-
+      タスク・予定・収支・Obsidianのノートを、サーバを介さずLAN内の自分の端末間で同期するアプリ。サブネット探索、last-write-winsによる統合、Obsidianの保存挙動に合わせた監視処理に加え、LLMと正規表現の解析結果を突き合わせる13段階のレシートOCRを備えます。
+    stack: [Python, PyQt6, SQLite, PaddleOCR, llama.cpp]
+    spec: 20.7k LOC · 14 tables · 18 agent tools
+    spec_ja: 約2.1万行 · テーブル14 · ツール18種
+
+  - id: laichat
+    item: 8
+    from: "2026.04"
+    to: "2026.04"
+    group: lab
+    tier: lab
+    name: LaiChat
+    year: 2026
+    status: private
+    repo: ""
+    summary: >-
+      Japanese-first chat with AI characters you design — speaking style from
+      casual to Kansai-ben to keigo — on a local llama.cpp model, streaming over SSE
+      with the model's hidden reasoning stripped out as it arrives.
+    summary_ja: >-
+      自分で設定したAIキャラクターと話す日本語中心のチャットアプリ。話し方はくだけた口調から関西弁、敬語まで選べ、ローカルのllama.cppモデルの応答をSSEで流しながら、モデルの思考部分を逐次取り除きます。
+    stack: [FastAPI, React, TypeScript, llama.cpp]
+    spec: ""
+    spec_ja: ""
+
+  - id: ytdownload
+    item: 9
+    from: "2025.12"
+    to: "2026.02"
+    group: lab
+    tier: lab
+    name: YTDownload
+    year: 2025
+    status: done
+    repo: https://github.com/TylerFreemont0712/YTDownload
+    summary: A PyQt6 media downloader over yt-dlp with format and quality selection, and 203 tests.
+    summary_ja: yt-dlpを利用したPyQt6製のメディアダウンローダ。形式・画質を選択でき、テストは203件。
+    stack: [Python, PyQt6, yt-dlp]
+    spec: ""
+    spec_ja: ""
+
+  - id: personal-dashboard
+    item: 10
+    from: "2026.02"
+    to: "2026.02"
+    group: lab
+    tier: lab
+    name: PersonalDashboard
+    year: 2026
+    status: done
+    repo: https://github.com/TylerFreemont0712/PersonalDashboard
+    summary: Calendar, yen income and expenses, and 確定申告 prep summaries in a layered PyQt6 + SQLite app with 65 passing unit tests. The ideas grew into LocalSync.
+    summary_ja: 予定、円建ての収支、確定申告用の集計を扱うPyQt6＋SQLiteのアプリ。層構造で設計し、単体テスト65件。後のLocalSyncの原型です。
+    stack: [Python, PyQt6, SQLite]
+    spec: ""
+    spec_ja: ""
+
+  - id: snake
+    item: 11
+    from: "2025.12"
+    to: "2025.12"
+    group: lab
+    tier: lab
+    name: SnakeGame
+    year: 2025
+    status: done
+    repo: https://github.com/TylerFreemont0712/SnakeGame
+    summary: Where the game work started — a single-file pygame Snake from December 2025, ten months before Rootward.
+    summary_ja: ゲーム開発の出発点。2025年12月にpygameで作った1ファイルのスネークゲームで、Rootwardの10か月前です。
+    stack: [Python, pygame]
+    spec: ""
+    spec_ja: ""

@@ -17,14 +17,15 @@ title_ja: ソフトウェアエンジニア（AI基盤）
 
 # §4 landing spec, item 1 — one-line positioning.
 positioning: >-
-  AI systems engineer — local LLM infrastructure, MCP servers, RAG.
-  Osaka, Japan.
+  I build software that has to hold up in real use: local LLM infrastructure
+  and MCP servers in production, agents with real tools and real guardrails,
+  harnesses that measure models instead of trusting them — and a Godot
+  roguelite where every spell is real code run in a sandbox.
 
 # Written for a Japanese reader rather than translated from the English.
 # Leads with 生成AI基盤 because that is the phrase agents actually search.
 positioning_ja: >-
-  生成AI基盤のエンジニアです。ローカルLLMによる推論基盤、MCPサーバ、
-  RAGパイプラインの設計・実装を専門としています。大阪在住。
+  生成AI基盤のエンジニアです。ローカルLLMによる推論基盤とMCPサーバの本番運用、実際のツールを安全に扱うエージェント、モデルを「信じる」のではなく「測る」評価基盤を設計・実装しています。呪文がすべて本物のコードとして動くGodot製ゲームも個人で開発しています。大阪在住。
 
 # §4 landing spec, item 2 — the three-part credibility line.
 # Rendered as three discrete chips so each reads on its own.

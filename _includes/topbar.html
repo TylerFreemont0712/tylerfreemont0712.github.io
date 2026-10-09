@@ -1,0 +1,50 @@
+{%- comment -%}
+  Sticky top bar: brand, the five sheets as drawing tabs, and the view tools.
+
+  The language toggle is a plain link to page.alt_url; it never redirects on
+  a stored preference (see lang-notice.html). Theme and plain-view buttons do
+  nothing without JS, so they are hidden until html.js is set.
+{%- endcomment -%}
+{%- assign lang = page.lang | default: "en" -%}
+{%- assign t = site.data.i18n[lang] -%}
+{%- assign p = site.data.profile -%}
+{%- assign resume_file = "" -%}
+{%- for v in p.resume.variants -%}
+  {%- if lang == "ja" -%}
+    {%- if v.id == "shokumu-keirekisho" -%}{%- assign resume_file = v.file -%}{%- endif -%}
+  {%- elsif v.default -%}{%- assign resume_file = v.file -%}{%- endif -%}
+{%- endfor -%}
+<header class="topbar">
+  <a class="brand" href="{% if lang == 'ja' %}{{ '/ja/' | relative_url }}{% else %}{{ '/' | relative_url }}{% endif %}" aria-label="{{ p.name }}">
+    <span class="brand-mark" aria-hidden="true">TF</span>
+    <span class="brand-text"><b>{{ p.name }}</b><small>{% if lang == 'ja' %}{{ p.title_ja }}{% else %}{{ p.title }}{% endif %}</small></span>
+  </a>
+
+  <nav class="tabs" aria-label="{{ t.nav_label }}">
+    <ul>
+      {%- for n in t.nav %}
+      <li><a href="{{ n.url | relative_url }}"{% if page.nav == n.id %} aria-current="page"{% endif %}><span>{{ n.n }}</span>{{ n.label }}</a></li>
+      {%- endfor %}
+    </ul>
+  </nav>
+
+  <div class="tools">
+    <span class="coord t-hide-md" aria-hidden="true" data-coord>X 0000 &nbsp;Y 0000</span>
+    {%- if page.alt_url %}
+    <a class="tool-btn" href="{{ page.alt_url | relative_url }}" lang="{% if lang == 'ja' %}en{% else %}ja{% endif %}"
+       hreflang="{% if lang == 'ja' %}en{% else %}ja{% endif %}" title="{{ t.lang_toggle_title }}"
+       data-lang-choice="{% if lang == 'ja' %}en{% else %}ja{% endif %}">{{ t.lang_toggle }}</a>
+    {%- endif %}
+    <button class="tool-btn needs-js t-hide-sm" type="button" data-theme-toggle
+            data-label-light="{{ t.theme_to_light }}" data-label-dark="{{ t.theme_to_dark }}"
+            title="{{ t.theme_title }}" aria-label="{{ t.theme_title }}">
+      {% include icon.html name="contrast" %}
+    </button>
+    <button class="tool-btn needs-js" type="button" data-plain-toggle aria-pressed="false" title="{{ t.plain_title }}">
+      {% include icon.html name="plain" %}<span class="t-hide-sm">{{ t.plain }}</span>
+    </button>
+    <a class="tool-btn is-cta" href="{{ resume_file | relative_url }}" title="{{ t.resume_title }}">
+      {% include icon.html name="download" %}<span class="t-hide-sm">{{ t.resume_cta }}</span>
+    </a>
+  </div>
+</header>
