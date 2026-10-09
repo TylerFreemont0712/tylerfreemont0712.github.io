@@ -68,7 +68,7 @@ layout: default
       <h2 id="asm-h">{% if ja %}注記 — 番号は図中の風船に対応{% else %}Notes — numbers key to the balloons{% endif %}</h2>
       <ol>
         {%- for n in page.notes %}
-        <li data-ref="{{ forloop.index }}" tabindex="0"><span class="balloon is-red" aria-hidden="true">{{ forloop.index }}</span><span><b>{{ n.t }}{% if ja %}：{% else %}.{% endif %}</b>{% unless ja %} {% endunless %}{{ n.d }}</span></li>
+        <li data-ref="{{ forloop.index }}" tabindex="0"><span class="balloon is-red" aria-hidden="true">{{ forloop.index }}</span><span><b>{{ n.t }}{% if ja %}：{% else %}.{% endif %}</b>{% unless ja %}&#32;{% endunless %}{{ n.d }}</span></li>
         {%- endfor %}
       </ol>
     </div>

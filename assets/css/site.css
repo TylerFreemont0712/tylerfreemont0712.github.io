@@ -315,10 +315,12 @@ hr { border: 0; border-top: 1px solid var(--line-soft); margin: 2rem 0; }
 .view-h {
   display: grid;
   grid-template-columns: auto 1fr auto;
-  align-items: end;
+  align-items: start;
   gap: 4px 14px;
   margin-bottom: 28px;
+  --title-size: clamp(1.6rem, 3.2vw, 2.4rem);
 }
+:lang(ja) .view-h { --title-size: clamp(1.45rem, 2.8vw, 2.05rem); }
 .view-tag {
   display: flex; align-items: center; justify-content: center;
   width: 42px; height: 42px; flex: none;
@@ -327,6 +329,8 @@ hr { border: 0; border-top: 1px solid var(--line-soft); margin: 2rem 0; }
   font-family: var(--f-display); font-stretch: 75%; font-weight: 700; font-size: 1.15rem;
   color: var(--ink);
   position: relative;
+  /* centre the circle on the title's first line (the title is set solid, line-height 1) */
+  margin-top: calc((var(--title-size) - 42px) / 2);
 }
 .view-tag::after { /* section-view arrow */
   content: ""; position: absolute; right: -9px; top: 50%;
@@ -336,7 +340,7 @@ hr { border: 0; border-top: 1px solid var(--line-soft); margin: 2rem 0; }
 }
 .view-title {
   font-family: var(--f-display); font-stretch: 75%; font-weight: 700;
-  font-size: clamp(1.6rem, 3.2vw, 2.4rem);
+  font-size: var(--title-size);
   text-transform: uppercase; letter-spacing: 0.02em; line-height: 1;
   padding-left: 6px;
 }
@@ -345,10 +349,11 @@ hr { border: 0; border-top: 1px solid var(--line-soft); margin: 2rem 0; }
   font-family: var(--f-mono); font-stretch: 100%; font-weight: 500;
   font-size: 0.74rem; letter-spacing: 0.14em; color: var(--ink-3);
 }
-:lang(ja) .view-title { text-transform: none; font-family: var(--f-sans); font-weight: 700; font-stretch: 100%; letter-spacing: 0.04em; font-size: clamp(1.45rem, 2.8vw, 2.05rem); }
+:lang(ja) .view-title { text-transform: none; font-family: var(--f-sans); font-weight: 700; font-stretch: 100%; letter-spacing: 0.04em; font-size: var(--title-size); }
 .view-ref {
   font-family: var(--f-mono); font-size: 0.68rem; letter-spacing: 0.1em;
   color: var(--ink-3); text-transform: uppercase; text-align: right;
+  align-self: end;
 }
 .view-h::after {
   content: ""; grid-column: 1 / -1; height: 0;
@@ -453,7 +458,7 @@ hr { border: 0; border-top: 1px solid var(--line-soft); margin: 2rem 0; }
 
 .btn {
   display: inline-flex; align-items: center; gap: 9px;
-  min-height: 46px; padding: 0 20px;
+  min-height: 46px; padding: 9px 20px; line-height: 1.35;
   font-family: var(--f-mono); font-size: 0.8rem; font-weight: 600;
   letter-spacing: 0.1em; text-transform: uppercase; text-decoration: none;
   border: 1.5px solid var(--line); color: var(--ink); background: var(--bg);
@@ -508,7 +513,7 @@ hr { border: 0; border-top: 1px solid var(--line-soft); margin: 2rem 0; }
 
 .creds { list-style: none; padding: 0; margin: 0 0 30px; display: grid; gap: 10px; }
 .creds li { display: grid; grid-template-columns: auto 1fr; gap: 0 12px; align-items: start; }
-.creds .balloon { margin-top: 1px; }
+.creds .balloon { margin-top: -1.5px; }
 .creds b { display: block; font-weight: 600; color: var(--ink); line-height: 1.35; }
 .creds span.d { display: block; font-size: 0.86rem; color: var(--ink-3); line-height: 1.45; }
 
@@ -726,7 +731,7 @@ a.detail:hover h3 { color: var(--accent); }
 .certs { list-style: none; padding: 0; margin: 0; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; }
 .certs li { display: flex; gap: 14px; align-items: flex-start; padding: 16px 18px; border: 1px solid var(--line-soft); background: var(--bg); }
 .certs b { display: block; color: var(--ink); line-height: 1.35; }
-.certs span { display: block; color: var(--ink-3); font-size: 0.86rem; }
+.certs b + span { display: block; color: var(--ink-3); font-size: 0.86rem; }
 
 /* ─── 14. General notes (writing list) ──────────────────────────────── */
 
@@ -883,7 +888,7 @@ a.detail:hover h3 { color: var(--accent); }
 .printset .thumb { position: relative; display: block; border: 1.5px solid var(--line); background: var(--bg-2); padding: 10px; text-decoration: none; }
 .printset .thumb img { width: 100%; aspect-ratio: 612 / 792; object-fit: cover; object-position: top; background: #fff; border: 1px solid var(--line-faint); }
 .printset .thumb .stamp { position: absolute; right: 16px; bottom: 26px; font-size: 0.86rem; background: color-mix(in srgb, var(--bg) 70%, transparent); }
-.printset h2 { font-size: 1.12rem; font-weight: 600; display: flex; gap: 10px; align-items: center; }
+.printset h2 { font-size: 1.12rem; font-weight: 600; display: flex; gap: 10px; align-items: center; line-height: 1.3; }
 .printset p { color: var(--ink-2); font-size: 0.9rem; margin: 0; }
 .printset .meta { font-family: var(--f-mono); font-size: 0.72rem; color: var(--ink-3); letter-spacing: 0.06em; }
 
@@ -1153,3 +1158,25 @@ html[data-view="plain"] .hero { margin-bottom: 48px; }
 
 /* Japanese pages: no forced capitals on Latin words inside Japanese labels */
 :lang(ja) .btn, :lang(ja) .dims .k, :lang(ja) .tb th, :lang(ja) .t-label, :lang(ja) .go, :lang(ja) .detail-label { text-transform: none; }
+
+/* ─── 26. Alignment pass ────────────────────────────────────────────── */
+
+/* breadcrumb: a hairline separator between the back link and the sheet label */
+.ps-crumb > a + .t-label { display: inline-flex; align-items: center; gap: 10px; }
+.ps-crumb > a + .t-label::before { content: ""; width: 1px; height: 0.9em; background: var(--line-soft); }
+
+/* skills: fixed-width proficiency badges so every list starts on the same line */
+.spec li:has(.prof) { display: flex; align-items: baseline; gap: 10px; }
+.spec li .prof { flex: none; width: 9.2rem; margin-right: 0; text-align: center; white-space: nowrap; }
+:lang(ja) .spec li .prof { width: 7.2rem; }
+
+/* résumé print set: titles one height, metadata and buttons pinned to a common baseline */
+.printset li { height: 100%; }
+.printset h2 { min-height: 2.1rem; }
+.printset .meta { margin-top: auto; }
+
+@media (max-width: 640px) {
+  /* all five sheet tabs fit on a phone without scrolling */
+  .tabs ul { gap: 0; }
+  .tabs a { padding: 8px 7px; font-size: 0.72rem; letter-spacing: 0.03em; }
+}

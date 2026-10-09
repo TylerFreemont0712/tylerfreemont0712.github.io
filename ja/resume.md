@@ -47,7 +47,7 @@ description: >-
     {%- for v in ordered %}
     {%- assign thumb = v.file | replace: "/resume/", "/resume/thumbs/" | replace: ".pdf", ".webp" %}
     {%- assign rec = false -%}{%- if v.id == "shokumu-keirekisho" -%}{%- assign rec = true -%}{%- endif %}
-    <li{% unless v.lang == "ja" %} lang="ja"{% endunless %}>
+    <li>
       <a class="thumb ticks" href="{{ v.file | relative_url }}" download>
         <img src="{{ thumb | relative_url }}" width="640" height="829" loading="lazy" decoding="async" alt="{{ v.label_ja }}の1ページ目">
         {%- if rec %}<span class="stamp">推奨<small>Start here</small></span>{% endif %}

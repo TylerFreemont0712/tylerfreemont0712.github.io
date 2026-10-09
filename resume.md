@@ -41,12 +41,12 @@ description: >-
   <ul class="printset">
     {%- for v in p.resume.variants %}
     {%- assign thumb = v.file | replace: "/resume/", "/resume/thumbs/" | replace: ".pdf", ".webp" %}
-    <li{% if v.lang %} lang="{{ v.lang }}"{% endif %}>
+    <li>
       <a class="thumb ticks" href="{{ v.file | relative_url }}" download>
         <img src="{{ thumb | relative_url }}" width="640" height="829" loading="lazy" decoding="async" alt="First page of the {{ v.label }} résumé">
         {%- if v.default %}<span class="stamp" lang="en">Start here<small>Recommended</small></span>{% endif %}
       </a>
-      <h2><span class="balloon{% if v.default %} is-red{% endif %}" aria-hidden="true">{{ forloop.index }}</span>{{ v.label }}</h2>
+      <h2><span class="balloon{% if v.default %} is-red{% endif %}" aria-hidden="true">{{ forloop.index }}</span><span{% if v.lang %} lang="{{ v.lang }}"{% endif %}>{{ v.label }}</span></h2>
       <p>{{ v.description }}</p>
       <p class="meta">PDF · {{ v.pages }} page{% if v.pages > 1 %}s{% endif %}</p>
       <p><a class="btn btn-small{% if v.default %} btn-primary{% endif %}" href="{{ v.file | relative_url }}" download>{% include icon.html name="download" %}Download</a></p>
