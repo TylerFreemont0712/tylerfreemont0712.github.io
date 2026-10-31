@@ -83,8 +83,9 @@ description: >-
       <h3>ゲーム開発</h3>
       <p>
         Godot 4.7製のローグライト。シード固定の純粋なルール層、ゲームの核としてサンドボックス実行するPython／JavaScript、バランス調整用のボット、日英両対応のコンテンツ、TypeScript版試作との差分テストを備えています。
+        もう1本のGodot製ゲーム「Rootward Voxel」では、Pythonを書いて町を変えながらプログラミングを学べます。
       </p>
-      <p class="evidence">実績：<a href="{{ '/ja/projects/rootward/' | relative_url }}">Rootward</a></p>
+      <p class="evidence">実績：<a href="{{ '/ja/projects/rootward/' | relative_url }}">Rootward</a> · <a href="{{ '/ja/projects/voxel-rootward/' | relative_url }}">Rootward Voxel</a></p>
     </article>
     <article>
       <div class="scope-n">
@@ -121,7 +122,7 @@ description: >-
   </header>
 
   <div class="details">
-    {%- assign letters = "A,B,C" | split: "," -%}
+    {%- assign letters = "A,B,C,D" | split: "," -%}
     {%- assign shown = 0 -%}
     {%- for it in items -%}
     {%- if it.tier != "sheet" -%}{%- continue -%}{%- endif -%}

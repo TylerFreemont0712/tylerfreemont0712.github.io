@@ -9,7 +9,8 @@ dwg: TF-002
 sheet: "02"
 description: >-
   Projects by Tyler Freemont: Rootward, a Godot roguelite whose spells are real
-  code run in a sandbox; AIOS, a self-hosted AI workspace with a judge-free model
+  code run in a sandbox; Rootward Voxel, a Godot game where you learn Python by
+  changing a town; AIOS, a self-hosted AI workspace with a judge-free model
   benchmark; Ty Work Hub, a cross-platform desktop workspace with grounded local
   LLM drafts; and the smaller work behind them.
 ---
@@ -22,7 +23,7 @@ description: >-
     <h1 class="ps-title">Work</h1>
     <p class="ps-tag">
       Everything on my GitHub that is worth your time, measured from the code
-      rather than from memory. Three projects have full drawing sheets; the rest
+      rather than from memory. Four projects have full drawing sheets; the rest
       are listed with what they are built from and what state they are in.
     </p>
   </div>
@@ -45,7 +46,7 @@ description: >-
     <span class="view-ref">{{ sheets.size }} case studies</span>
   </header>
   <div class="details">
-    {%- assign letters = "A,B,C" | split: "," -%}
+    {%- assign letters = "A,B,C,D" | split: "," -%}
     {%- for it in sheets %}
     <a class="detail" href="{{ '/projects/' | append: it.id | append: '/' | relative_url }}">
       <span class="detail-label"><span><b>Detail {{ letters[forloop.index0] }}</b> · Item {{ it.item }}</span><span>{{ it.spec }}</span></span>

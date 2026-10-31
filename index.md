@@ -91,8 +91,10 @@ description: >-
         A Godot 4.7 roguelite with a pure, seeded rules layer, sandboxed Python
         and JavaScript as the core mechanic, a balance bot, English and Japanese
         content, and differential tests against its TypeScript prototype.
+        A second Godot game, Rootward Voxel, teaches Python by changing a town
+        with the code.
       </p>
-      <p class="evidence">Evidence: <a href="{{ '/projects/rootward/' | relative_url }}">Rootward</a></p>
+      <p class="evidence">Evidence: <a href="{{ '/projects/rootward/' | relative_url }}">Rootward</a> · <a href="{{ '/projects/voxel-rootward/' | relative_url }}">Rootward Voxel</a></p>
     </article>
     <article>
       <div class="scope-n">
@@ -134,7 +136,7 @@ description: >-
   </header>
 
   <div class="details">
-    {%- assign letters = "A,B,C" | split: "," -%}
+    {%- assign letters = "A,B,C,D" | split: "," -%}
     {%- assign shown = 0 -%}
     {%- for it in items -%}
     {%- if it.tier != "sheet" -%}{%- continue -%}{%- endif -%}

@@ -119,6 +119,42 @@ DIAGRAMS = {
             ("M770 196 H846", ("schema", "スキーマ"), 808, 188, False),
         ],
     ),
+    "voxel-rootward": dict(
+        h=392,
+        title=("Rootward Voxel architecture", "Rootward Voxelの構成図"),
+        desc=(
+            "Area documents are validated by the rules core, which holds the world as plain data and never touches nodes or files. "
+            "The session takes commands from the scenes and the notebook, treats them as proposals and commits them on Apply. "
+            "Player Python runs in a copied WASI sandbox outside the game, and its output must pass the rules before it changes the world. "
+            "Blender sources are exported to GLB for the scenes, and headless test scripts check the lot.",
+            "エリア定義はルール層で検証されます。ルール層はワールドを素のデータとして保持し、ノードやファイルには触れません。"
+            "セッションは画面とノートからの操作を受け取って提案として扱い、適用されたときにだけ確定します。"
+            "プレイヤーのPythonはゲームの外にある同梱のWASIサンドボックスで動き、その出力はルールを通ってから世界を変えます。"
+            "Blenderのソースは画面用のGLBに書き出され、ヘッドレスのテストがこれらをまとめて検証します。",
+        ),
+        nodes=[
+            ("areas", 0, 10, 190, 72, ("Area documents", "content/areas · JSON"), ("エリア定義", "content/areas・JSON"), "", 2),
+            ("rules", 270, 10, 190, 72, ("Rules core", "plain data · no nodes or I/O"), ("ルール層", "素のデータ・ノード／I/Oなし"), "key", 1),
+            ("session", 540, 10, 190, 72, ("Session & notebook", "preview → Apply · Undo"), ("セッション・ノート", "プレビュー→適用・取り消し"), "key", 3),
+            ("save", 810, 10, 190, 72, ("Saves", "RootwardVoxelLab · JSON"), ("セーブ", "RootwardVoxelLab・JSON"), "", None),
+            ("scenes", 0, 165, 190, 72, ("Scenes & UI", "3D view · build mode"), ("画面・UI", "3D表示・建築モード"), "", None),
+            ("sandbox", 540, 165, 190, 72, ("Sandbox host", "copied, pinned WASI runner"), ("サンドボックス", "固定版のWASI実行環境"), "key", 4),
+            ("guest", 810, 165, 190, 72, ("CPython guest", "WASI · read-only stdlib"), ("CPythonゲスト", "WASI・読み取り専用の標準ライブラリ"), "", None),
+            ("art", 0, 320, 190, 72, ("Blender → GLB", "scripts/world-art.sh"), ("Blender → GLB", "scripts/world-art.sh"), "", 5),
+            ("checks", 270, 320, 190, 72, ("Headless checks", "45 scripts · 2,136 checks"), ("ヘッドレス検証", "45本・2,136件"), "", None),
+        ],
+        edges=[
+            ("M190 46 H266", ("loads", "読み込み"), 228, 38, False),
+            ("M460 46 H536", ("step", "1手進める"), 498, 38, False),
+            ("M730 46 H806", ("saves", "保存"), 768, 38, False),
+            ("M190 201 H500 V120 H600 V86", ("commands", "操作"), 552, 114, False),
+            ("M635 82 V161", ("spell job", "呪文の実行"), 700, 124, False),
+            ("M730 186 H806", ("run", "実行"), 768, 178, False),
+            ("M806 222 H730", ("bolts", "結果"), 768, 236, False),
+            ("M95 316 V241", ("GLB", "GLB"), 95, 282, False),
+            ("M365 316 V86", ("tests", "検証"), 392, 262, True),
+        ],
+    ),
 }
 
 LIQ_JA = '{%- assign ja = false -%}{%- if include.lang == "ja" -%}{%- assign ja = true -%}{%- endif -%}'

@@ -54,8 +54,31 @@ items:
     image_alt: Rootward title art — the wordmark over an underground brass-elevator foundry lit by lanterns.
     image_alt_ja: Rootwardのタイトル画像。ランタンに照らされた地下の真鍮製エレベーター工房の上にロゴが配置されています。
 
-  - id: aios
+  - id: voxel-rootward
     item: 2
+    from: "2026.10"
+    to: "2026.10"
+    group: games
+    tier: sheet
+    name: Rootward Voxel
+    year: 2026
+    status: active
+    repo: https://github.com/TylerFreemont0712/Rootward-Voxel
+    summary: >-
+      A standalone Godot game in which you learn Python by changing a fantasy town.
+      Your first program runs in a sandbox and the town answers it: Test code
+      ghost-types the output above the character before anything is applied.
+    summary_ja: >-
+      Pythonを書いて幻想的な町を少しずつ変えながら学ぶ、単独のGodot製ゲームです。最初のプログラムはサンドボックスで実行され、適用する前に「テスト」を押すと出力がキャラクターの上に表示されます。
+    stack: [Godot 4.7, GDScript, CPython (WASI), Blender, GLB]
+    spec: 29k LOC · 2,136 checks · 66 reviews
+    spec_ja: 約2.9万行 · 検査2,136件 · 設計レビュー66件
+    image: /assets/program-images/voxel-loft.webp
+    image_alt: Rootward Voxel's loft. The first Python program runs in Field Notes, the output tape reads Hello, Mira!, and the ghost print hovers above the traveller in the room.
+    image_alt_ja: Rootward Voxelのロフト。Field Notesで最初のPythonプログラムが動き、出力テープに「Hello, Mira!」が表示され、部屋の中の主人公の上にゴーストの表示が重なっています。
+
+  - id: aios
+    item: 3
     from: "2026.07"
     to: "2026.09"
     group: ai
@@ -78,7 +101,7 @@ items:
     image_alt_ja: AIOSのチャット画面。ローカルの1.7Bモデルが自前のSearXNG経由でweb_searchを呼び出し、取得した結果を表示したうえで毎秒135.4トークンで回答しています。
 
   - id: llama-launcher
-    item: 3
+    item: 4
     from: "2026.05"
     to: "2026.06"
     group: ai
@@ -98,7 +121,7 @@ items:
     spec_ja: 約2,500行 · 53項目 · サーバ3種
 
   - id: llm-council
-    item: 4
+    item: 5
     from: ""
     to: ""
     group: ai
@@ -118,7 +141,7 @@ items:
     spec_ja: ソース非公開
 
   - id: command-center
-    item: 5
+    item: 6
     from: "2026.06"
     to: "2026.06"
     group: ai
@@ -138,7 +161,7 @@ items:
     spec_ja: 約4,800行 · 試作
 
   - id: ty-work-hub
-    item: 6
+    item: 7
     from: "2026.08"
     to: "2026.09"
     group: apps
@@ -161,7 +184,7 @@ items:
     image_alt_ja: Ty Work Hubの「Today」画面（デモデータ）。タスク数、次の作業キュー、作業タイマー、今後の締切、直近7日間の作業時間グラフが表示されています。
 
   - id: localsync
-    item: 7
+    item: 8
     from: "2026.03"
     to: "2026.05"
     group: apps
@@ -182,7 +205,7 @@ items:
     spec_ja: 約2.1万行 · テーブル14 · ツール18種
 
   - id: laichat
-    item: 8
+    item: 9
     from: "2026.04"
     to: "2026.04"
     group: lab
@@ -202,7 +225,7 @@ items:
     spec_ja: ""
 
   - id: ytdownload
-    item: 9
+    item: 10
     from: "2025.12"
     to: "2026.02"
     group: lab
@@ -218,7 +241,7 @@ items:
     spec_ja: ""
 
   - id: personal-dashboard
-    item: 10
+    item: 11
     from: "2026.02"
     to: "2026.02"
     group: lab
@@ -234,7 +257,7 @@ items:
     spec_ja: ""
 
   - id: snake
-    item: 11
+    item: 12
     from: "2025.12"
     to: "2025.12"
     group: lab
