@@ -8,7 +8,7 @@ permalink: /ja/projects/
 dwg: TF-002
 sheet: "02"
 description: >-
-  Tyler Freemontの開発実績。呪文が本物のコードとして動くGodot製ローグライト「Rootward」、コードで採点するモデル評価基盤を備えた自作AI環境「AIOS」、根拠に基づいてローカルLLMが下書きするデスクトップアプリ「Ty Work Hub」ほか。
+  Tyler Freemontの開発実績。呪文が本物のコードとして動くGodot製ローグライト「Rootward」、Pythonを書いて町を変えながら学ぶGodot製ゲーム「Rootward Voxel」、コードで採点するモデル評価基盤を備えた自作AI環境「AIOS」、根拠に基づいてローカルLLMが下書きするデスクトップアプリ「Ty Work Hub」ほか。
 ---
 {%- assign items = site.data.projects.items -%}
 {%- assign sheets = items | where: "tier", "sheet" -%}
@@ -18,7 +18,7 @@ description: >-
     <div class="ps-crumb"><span class="t-label">図番 TF-002 · 第02葉 · 全{{ items.size }}点</span></div>
     <h1 class="ps-title">開発実績</h1>
     <p class="ps-tag">
-      GitHub上の作品のうち、見ていただく価値のあるものをすべて掲載しています。数値は記憶ではなくコードから計測したものです。3件は詳細図（ケーススタディ）を用意し、それ以外は使用技術と現在の状態を一覧にしています。
+      GitHub上の作品のうち、見ていただく価値のあるものをすべて掲載しています。数値は記憶ではなくコードから計測したものです。4件は詳細図（ケーススタディ）を用意し、それ以外は使用技術と現在の状態を一覧にしています。
     </p>
   </div>
   <table class="tb">
@@ -40,7 +40,7 @@ description: >-
     <span class="view-ref">ケーススタディ {{ sheets.size }}件</span>
   </header>
   <div class="details">
-    {%- assign letters = "A,B,C" | split: "," -%}
+    {%- assign letters = "A,B,C,D" | split: "," -%}
     {%- for it in sheets %}
     <a class="detail" href="{{ '/ja/projects/' | append: it.id | append: '/' | relative_url }}">
       <span class="detail-label"><span><b>詳細図{{ letters[forloop.index0] }}</b> · 品番 {{ it.item }}</span><span>{{ it.spec_ja }}</span></span>
