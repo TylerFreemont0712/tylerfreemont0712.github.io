@@ -96,7 +96,7 @@ description: >-
       <p>
         Python、TypeScript、C++、C#。CI付きのクロスプラットフォーム・デスクトップアプリ、Nodeのサービス、そして<strong>楽天モバイル様・ダイキン様</strong>向けに<strong>{{ p.figures.neighbors_nodes }}ノード規模</strong>の障害検知・自動復旧を担ったネットワーク自動化。
       </p>
-      <p class="evidence">実績：<a href="{{ '/ja/projects/ty-work-hub/' | relative_url }}">Ty Work Hub</a> · <a href="{{ '/ja/experience' | relative_url }}">Neighbors</a></p>
+      <p class="evidence">実績：<a href="{{ '/ja/projects/dayframe/' | relative_url }}">DayFrame</a> · <a href="{{ '/ja/experience' | relative_url }}">Neighbors</a></p>
     </article>
     <article>
       <div class="scope-n">

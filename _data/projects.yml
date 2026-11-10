@@ -160,28 +160,28 @@ items:
     spec: 4.8k LOC · prototype
     spec_ja: 約4,800行 · 試作
 
-  - id: ty-work-hub
+  - id: dayframe
     item: 7
-    from: "2026.08"
-    to: "2026.09"
+    from: "2026.11"
+    to: "2026.11"
     group: apps
     tier: sheet
-    name: Ty Work Hub
+    name: DayFrame
     year: 2026
     status: active
-    repo: https://github.com/TylerFreemont0712/ty-work-hub
+    repo: https://github.com/TylerFreemont0712/DayFrame
     summary: >-
-      A Windows and Linux desktop workspace that puts tickets, Git and SVN, time
-      tracking and notes in one window, with a local LLM that drafts only from
-      evidence it is handed.
+      A private desktop planner for Windows and Linux: Kanban, a nested Map,
+      Calendar, Tickets, a Git-aware Code page and a timer, all over one set of
+      records on your own machine, with optional LAN sync.
     summary_ja: >-
-      チケット、Git／SVN、作業時間、ノートを1つの画面にまとめたWindows／Linux向けデスクトップアプリ。ローカルLLMは渡された根拠だけをもとに下書きを作成します。
-    stack: [Python 3.12, PyQt6, Git, SVN, llama.cpp, GitHub Actions]
-    spec: 15k LOC · 521 asserts · Win + Linux CI
-    spec_ja: 約1.5万行 · アサーション521件 · Win/Linux CI
-    image: /assets/program-images/tywork-today.webp
-    image_alt: The Today workspace in Ty Work Hub, with demo data — task counts, a next-moves queue, a work timer, upcoming deadlines and a seven-day chart of logged time.
-    image_alt_ja: Ty Work Hubの「Today」画面（デモデータ）。タスク数、次の作業キュー、作業タイマー、今後の締切、直近7日間の作業時間グラフが表示されています。
+      Windows／Linux向けの個人用デスクトッププランナー。カンバン、入れ子のマップ、カレンダー、チケット、Git対応のCodeページ、タイマーを、自分のマシン上の1組のデータで支え、LAN内の同期は任意です。
+    stack: [Python 3.12–3.14, PySide6, SQLite, Git, GitHub Actions]
+    spec: 16.6k LOC · 161 tests · Win + Linux CI
+    spec_ja: 約1.66万行 · テスト161件 · Win/Linux CI
+    image: /assets/program-images/dayframe-home.webp
+    image_alt: DayFrame's Home dashboard with demo data — a focus timer beside four figures, priority tasks, a week strip, the day's agenda and countdown tiles.
+    image_alt_ja: DayFrameのHome画面（デモデータ）。4つの数字の横にあるフォーカスタイマー、優先タスク、ウィークストリップ、その日の予定、カウントダウンタイルが表示されています。
 
   - id: localsync
     item: 8
