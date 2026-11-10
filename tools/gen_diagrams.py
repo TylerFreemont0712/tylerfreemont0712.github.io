@@ -88,35 +88,35 @@ DIAGRAMS = {
             ("M905 165 V124 H700 V86", ("plays", "自動対戦"), 802, 116, True),
         ],
     ),
-    "ty-work-hub": dict(
+    "dayframe": dict(
         h=392,
-        title=("Ty Work Hub architecture", "Ty Work Hubの構成図"),
+        title=("DayFrame architecture", "DayFrameの構成図"),
         desc=(
-            "The UI shell drives Backlog sync, the Git and SVN services and the timer. The local LLM client gets the "
-            "ticket and its history, the verified patch diff and the existing Obsidian note, and sends a schema-bound "
-            "request to a llama.cpp server. Drafts come back to the UI for review before anything is written.",
-            "UIはBacklog同期、Git／SVNサービス、タイマーを操作します。ローカルLLMクライアントはチケットと履歴、検証済みのパッチ差分、"
-            "既存のObsidianノートを受け取り、スキーマで制約したリクエストをllama.cppサーバへ送ります。下書きは書き込み前にUIで確認します。",
+            "The UI pages call a pure rules core and send every write to the Store as a command. The Store commits the "
+            "change and its sync record to SQLite in one transaction. The sync client pushes the outbox to an optional "
+            "private hub over pinned TLS. The Code page runs the git command line in the background and never forces.",
+            "UIの各ページは純粋なルール層を呼び出し、すべての書き込みを命令としてStoreに送ります。Storeは変更と同期記録を"
+            "1つのトランザクションでSQLiteにコミットします。同期クライアントは、証明書を固定したTLSでアウトボックスを任意の"
+            "プライベートハブへ送ります。Codeページはgitコマンドをバックグラウンドで実行し、強制的な操作は行いません。",
         ),
         nodes=[
-            ("ui", 0, 156, 180, 80, ("UI shell", "9 workspaces · virtual tables"), ("UI", "9画面・仮想テーブル"), "key", 1),
-            ("backlog", 290, 10, 190, 72, ("Backlog sync", "QThread · offline cache"), ("Backlog同期", "QThread・オフライン対応"), "", None),
-            ("scm", 290, 160, 190, 72, ("Git / SVN", "hash-checked commits"), ("Git／SVN", "ハッシュ照合コミット"), "key", 2),
-            ("timer", 290, 310, 190, 72, ("Timer engine", "schedule applied on read"), ("タイマー", "読み出し時に勤務表を適用"), "", 4),
-            ("llm", 580, 160, 190, 72, ("Local LLM client", "strict JSON schema"), ("ローカルLLM", "厳格なJSONスキーマ"), "key", 3),
-            ("vault", 580, 310, 190, 72, ("Obsidian vault", "managed sections · backup"), ("Obsidian", "管理領域・バックアップ"), "ext", None),
-            ("api", 850, 10, 150, 72, ("Backlog API", "REST v2"), ("Backlog API", "REST v2"), "ext", None),
-            ("server", 850, 160, 150, 72, ("llama.cpp", "OpenAI-compatible"), ("llama.cpp", "OpenAI互換API"), "ext", None),
+            ("ui", 0, 156, 180, 80, ("UI pages", "Qt Widgets · one module each"), ("UI", "Qt Widgets・ページごとに1モジュール"), "key", 1),
+            ("core", 290, 10, 190, 72, ("Core rules", "no Qt · no SQLite"), ("ルール層", "Qt・SQLite非依存"), "", None),
+            ("store", 290, 160, 190, 72, ("Store", "command = one transaction"), ("Store", "命令＝1トランザクション"), "key", 2),
+            ("code", 290, 310, 190, 72, ("Code page", "changesets · never forces"), ("Codeページ", "チェンジセット・強制操作なし"), "", 4),
+            ("db", 580, 10, 190, 72, ("SQLite", "WAL · schema 6"), ("SQLite", "WAL・スキーマ6"), "", None),
+            ("sync", 580, 160, 190, 72, ("Sync client", "outbox · field merge"), ("同期クライアント", "アウトボックス・項目単位マージ"), "key", 3),
+            ("git", 580, 310, 190, 72, ("git CLI", "no prompts · ff-only"), ("git CLI", "プロンプトなし・ff-only"), "ext", None),
+            ("hub", 850, 160, 150, 72, ("Private hub", "optional · TLS"), ("プライベートハブ", "任意・TLS"), "ext", None),
         ],
         edges=[
-            ("M180 178 H232 V46 H286", ("refresh", "更新"), 232, 110, False),
-            ("M180 196 H286", ("stage · commit", "ステージ・コミット"), 233, 188, False),
-            ("M180 214 H232 V346 H286", ("start · stop", "開始・停止"), 232, 282, False),
-            ("M480 30 H846", ("tickets · comments", "チケット・コメント"), 665, 22, False),
-            ("M480 62 H528 V180 H576", ("ticket + history", "チケット＋履歴"), 528, 120, False),
-            ("M480 196 H576", ("verified diff", "検証済み差分"), 528, 188, False),
-            ("M675 310 V236", ("note", "ノート"), 675, 274, False),
-            ("M770 196 H846", ("schema", "スキーマ"), 808, 188, False),
+            ("M180 178 H232 V46 H286", ("validate", "検証"), 232, 110, False),
+            ("M180 196 H286", ("command", "命令"), 233, 188, False),
+            ("M180 214 H232 V346 H286", ("stage · commit", "ステージ・コミット"), 232, 282, False),
+            ("M480 178 H528 V46 H576", ("transaction", "トランザクション"), 528, 110, False),
+            ("M480 196 H576", ("outbox", "アウトボックス"), 528, 188, False),
+            ("M480 346 H576", ("argv · bounded", "上限付き実行"), 528, 338, False),
+            ("M770 196 H846", ("changes", "変更"), 808, 188, False),
         ],
     ),
     "voxel-rootward": dict(

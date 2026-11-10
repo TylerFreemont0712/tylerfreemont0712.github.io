@@ -8,7 +8,7 @@ permalink: /ja/projects/
 dwg: TF-002
 sheet: "02"
 description: >-
-  Tyler Freemontの開発実績。呪文が本物のコードとして動くGodot製ローグライト「Rootward」、Pythonを書いて町を変えながら学ぶGodot製ゲーム「Rootward Voxel」、コードで採点するモデル評価基盤を備えた自作AI環境「AIOS」、根拠に基づいてローカルLLMが下書きするデスクトップアプリ「Ty Work Hub」ほか。
+  Tyler Freemontの開発実績。呪文が本物のコードとして動くGodot製ローグライト「Rootward」、Pythonを書いて町を変えながら学ぶGodot製ゲーム「Rootward Voxel」、コードで採点するモデル評価基盤を備えた自作AI環境「AIOS」、カンバン・マップ・Git対応のCodeページを備えた個人用デスクトッププランナー「DayFrame」ほか。
 ---
 {%- assign items = site.data.projects.items -%}
 {%- assign sheets = items | where: "tier", "sheet" -%}

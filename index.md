@@ -108,7 +108,7 @@ description: >-
         auto-recovery across <strong>{{ p.figures.neighbors_nodes }} nodes</strong>
         for Rakuten Mobile and Daikin.
       </p>
-      <p class="evidence">Evidence: <a href="{{ '/projects/ty-work-hub/' | relative_url }}">Ty Work Hub</a> · <a href="{{ '/experience' | relative_url }}">Neighbors</a></p>
+      <p class="evidence">Evidence: <a href="{{ '/projects/dayframe/' | relative_url }}">DayFrame</a> · <a href="{{ '/experience' | relative_url }}">Neighbors</a></p>
     </article>
     <article>
       <div class="scope-n">

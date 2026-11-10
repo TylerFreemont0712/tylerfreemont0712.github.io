@@ -11,8 +11,8 @@ description: >-
   Projects by Tyler Freemont: Rootward, a Godot roguelite whose spells are real
   code run in a sandbox; Rootward Voxel, a Godot game where you learn Python by
   changing a town; AIOS, a self-hosted AI workspace with a judge-free model
-  benchmark; Ty Work Hub, a cross-platform desktop workspace with grounded local
-  LLM drafts; and the smaller work behind them.
+  benchmark; DayFrame, a private cross-platform desktop planner with Kanban, a Map and a
+  Git-aware Code page; and the smaller work behind them.
 ---
 {%- assign items = site.data.projects.items -%}
 {%- assign sheets = items | where: "tier", "sheet" -%}

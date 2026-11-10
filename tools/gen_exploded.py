@@ -25,8 +25,8 @@ LAYERS = [
     ("cross", "Agents",    "tool-calling · RAG · multi-agent",
               "エージェント", "ツール呼び出し・RAG・マルチエージェント",
               "/projects/aios/", "/ja/projects/aios/"),
-    ("lines", "Products",  "AIOS · Rootward · Work Hub",
-              "プロダクト", "AIOS・Rootward・Work Hub",
+    ("lines", "Products",  "AIOS · Rootward · DayFrame",
+              "プロダクト", "AIOS・Rootward・DayFrame",
               "/projects/", "/ja/projects/"),
 ]
 
